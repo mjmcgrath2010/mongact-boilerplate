@@ -20,7 +20,7 @@ let envConfig;
 // and fallback to an empty object if it does error out
 try {
   // eslint-disable-next-line
-  envConfig = require(`./'${config.env}`);
+  envConfig = require(`./${config.env}`);
   // just making sure the require actually
   // got something back :)
   envConfig = envConfig || {};
