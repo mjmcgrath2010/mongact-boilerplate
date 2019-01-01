@@ -1,6 +1,6 @@
 {
   "name": "mongact-boilerplate",
-  "version": "1.0",
+  "version": "0.0.1",
   "description": "React Boilerplate with Mongo DB backend OOB",
   "repository": {
     "type": "git",
