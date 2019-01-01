@@ -18,8 +18,13 @@ exports.params = (req, res, next, id) => {
     );
 };
 
-exports.get = (req, res, next) => {
-  next();
+exports.get = (req, res) => {
+  User.find({}, (err, docs) => {
+    if (err) {
+      return res.send(JSON.stringify(err));
+    }
+    return res.send(docs);
+  });
 };
 
 exports.getOne = (req, res, next) => {
