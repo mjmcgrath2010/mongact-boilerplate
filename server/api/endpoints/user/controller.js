@@ -1,21 +1,12 @@
 const User = require('./model');
 
 exports.params = (req, res, next, id) => {
-  User.findById(id)
-    .exec()
-    .then(
-      user => {
-        if (!user) {
-          next(new Error('No user with that id'));
-        } else {
-          req.user = user;
-          next();
-        }
-      },
-      err => {
-        next(err);
-      },
-    );
+  User.find({ _id: id }, (err, doc) => {
+    if (err) {
+      return res.send(err);
+    }
+    return res.send(doc);
+  });
 };
 
 exports.get = (req, res) => {
@@ -27,8 +18,11 @@ exports.get = (req, res) => {
   });
 };
 
-exports.getOne = (req, res, next) => {
-  next();
+exports.getOne = (req, res) => {
+  if (req.user) {
+    return res.send(req.user);
+  }
+  return res.send([]);
 };
 
 exports.post = (req, res, next) => {
