@@ -26,6 +26,7 @@ exports.getOne = (req, res) => {
 };
 
 exports.post = (req, res, next) => {
+  res.send(req.body);
   next();
 };
 

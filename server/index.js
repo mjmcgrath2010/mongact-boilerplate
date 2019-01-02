@@ -6,6 +6,7 @@ const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
+const serverSetup = require('./middlewares/serverMiddleware');
 const dbConnection = require('./middlewares/mongoose');
 const db = require('mongoose').connection;
 const isDev = process.env.NODE_ENV !== 'production';
@@ -18,6 +19,8 @@ const app = express();
 const api = require('./api/index');
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
+serverSetup(app);
+
 app.use(dbConnection, (req, res, next) => {
   db.once('open', () => {
     next();
