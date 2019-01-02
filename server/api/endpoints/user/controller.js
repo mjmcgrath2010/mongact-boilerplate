@@ -26,8 +26,14 @@ exports.getOne = (req, res) => {
 };
 
 exports.post = (req, res, next) => {
-  res.send(req.body);
-  next();
+  const { username, password } = req.body;
+
+  User.create({ username, password }, (err, doc) => {
+    if (err) {
+      return next(err);
+    }
+    return res.send(doc);
+  });
 };
 
 exports.update = (req, res, next) => {
