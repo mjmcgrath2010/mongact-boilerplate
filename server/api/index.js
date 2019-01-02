@@ -1,13 +1,10 @@
 const router = require('express').Router();
-const db = require('mongoose').connection;
-const database = require('./services/mongoose');
 const endpoints = require('./endpoints');
 
-router.use(database);
+router.use('/endpoints', endpoints);
 
-db.once('open', () => {
-  // Set up API routes
-  router.use('/endpoints', endpoints);
+router.use('/', (req, res) => {
+  res.send('Hello');
 });
 
 module.exports = router;

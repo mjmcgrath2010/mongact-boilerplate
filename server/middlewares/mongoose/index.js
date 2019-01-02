@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const config = require('../../config');
-const dbHost = config && config.db && config.db.url;
+const serverConfig = require('../../config');
+const dbHost = serverConfig && serverConfig.db && serverConfig.db.url;
 
 module.exports = (req, res, next) =>
   mongoose

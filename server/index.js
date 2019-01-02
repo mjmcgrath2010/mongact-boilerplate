@@ -6,6 +6,8 @@ const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
+const dbConnection = require('./middlewares/mongoose');
+const db = require('mongoose').connection;
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
@@ -16,6 +18,12 @@ const app = express();
 const api = require('./api/index');
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
+app.use(dbConnection, (req, res, next) => {
+  db.once('open', () => {
+    next();
+  });
+});
+
 app.use('/api', api);
 
 // In production we need to pass these values in instead of relying on webpack
