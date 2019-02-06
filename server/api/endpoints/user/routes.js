@@ -1,18 +1,10 @@
 const router = require('express').Router();
 const controller = require('./controller');
+const { isAuthenticated } = require('../utils');
 
 // setup boilerplate route just to satisfy a request
 // for building
 router.param('id', controller.params);
-
-const isAuthenticated = (req, res, next) => {
-  if (req.user) {
-    return next();
-  }
-  return res.status(401).json({
-    error: 'User not authenticated',
-  });
-};
 
 router
   .route('/')
