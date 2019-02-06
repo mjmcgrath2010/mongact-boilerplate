@@ -26,9 +26,9 @@ exports.getOne = (req, res) => {
 };
 
 exports.post = (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, admin } = req.body;
 
-  User.create({ username, password }, (err, doc) => {
+  User.create({ username, password, admin }, (err, doc) => {
     if (err) {
       return next(err);
     }

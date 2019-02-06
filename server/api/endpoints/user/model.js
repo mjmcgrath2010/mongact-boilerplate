@@ -12,6 +12,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  admin: {
+    type: Boolean,
+  },
 });
 
 UserSchema.pre('save', function preSave(next) {
@@ -44,6 +47,9 @@ UserSchema.pre('save', function preSave(next) {
 UserSchema.methods = {
   validPassword(password) {
     return bcrypt.compareSync(password, this.password);
+  },
+  isAdmin() {
+    return !!this.admin;
   },
 };
 
