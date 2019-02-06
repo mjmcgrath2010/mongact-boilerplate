@@ -42,17 +42,8 @@ UserSchema.pre('save', function preSave(next) {
 });
 
 UserSchema.methods = {
-  // Methods
-  user: this,
-
   validPassword(password) {
-    bcrypt.compare(password, this.password, (err, isMatch) => {
-      if (err) {
-        return false;
-      }
-
-      return isMatch;
-    });
+    return bcrypt.compareSync(password, this.password);
   },
 };
 

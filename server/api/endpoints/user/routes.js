@@ -5,9 +5,18 @@ const controller = require('./controller');
 // for building
 router.param('id', controller.params);
 
+const isAuthenticated = (req, res, next) => {
+  if (req.user) {
+    return next();
+  }
+  return res.status(401).json({
+    error: 'User not authenticated',
+  });
+};
+
 router
   .route('/')
-  .get(controller.get)
+  .get(isAuthenticated, controller.get)
   .post(controller.post);
 
 router
