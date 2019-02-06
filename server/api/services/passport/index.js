@@ -20,7 +20,6 @@ module.exports = () => {
           return done(null, false);
         }
         if (!user.validPassword(password)) {
-          console.log(user.validPassword(password));
           return done(null, false);
         }
         return done(null, user);
