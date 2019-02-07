@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const controller = require('./controller');
-const { isAuthenticated, isAdmin } = require('../utils');
+const { isAuthenticated } = require('../utils');
 
 // setup boilerplate route just to satisfy a request
 // for building
@@ -8,8 +8,8 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(isAuthenticated, isAdmin, controller.get)
-  .post(controller.post);
+  .get(isAuthenticated, controller.get)
+  .post(isAuthenticated, controller.post);
 
 router
   .route('/:id')

@@ -26,14 +26,13 @@ exports.getOne = (req, res) => {
 };
 
 exports.post = (req, res, next) => {
-  const { Postname, password, admin } = req.body;
-
-  Post.create({ Postname, password, admin }, (err, doc) => {
-    if (err) {
-      return next(err);
-    }
-    return res.send(doc);
-  });
+  const { title, content, categories } = req.body;
+  const { user } = req;
+  const { _id } = user;
+  Post.create(
+    { title, content, categories, author: _id },
+    (err, doc) => (err ? next(err) : res.send(doc)),
+  );
 };
 
 exports.update = (req, res, next) => {
