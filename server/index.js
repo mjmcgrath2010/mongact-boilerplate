@@ -10,10 +10,7 @@ const serverSetup = require('./middlewares/serverMiddleware');
 const dbConnection = require('./middlewares/mongoose');
 const db = require('mongoose').connection;
 const isDev = process.env.NODE_ENV !== 'production';
-const ngrok =
-  (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
-    ? require('ngrok')
-    : false;
+const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const { resolve } = require('path');
 const app = express();
 const api = require('./api/index');

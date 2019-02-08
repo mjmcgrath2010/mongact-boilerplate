@@ -1,7 +1,7 @@
-const User = require('./model');
+const Post = require('./model');
 
 exports.params = (req, res, next, id) => {
-  User.find({ _id: id }, (err, doc) => {
+  Post.find({ _id: id }, (err, doc) => {
     if (err) {
       return res.send(err);
     }
@@ -10,7 +10,7 @@ exports.params = (req, res, next, id) => {
 };
 
 exports.get = (req, res) => {
-  User.find({}, (err, docs) => {
+  Post.find({}, (err, docs) => {
     if (err) {
       return res.send(JSON.stringify(err));
     }
@@ -19,21 +19,20 @@ exports.get = (req, res) => {
 };
 
 exports.getOne = (req, res) => {
-  if (req.user) {
-    return res.send(req.user);
+  if (req.Post) {
+    return res.send(req.Post);
   }
   return res.send([]);
 };
 
 exports.post = (req, res, next) => {
-  const { username, password, admin } = req.body;
-
-  User.create({ username, password, admin }, (err, doc) => {
-    if (err) {
-      return next(err);
-    }
-    return res.send(doc);
-  });
+  const { title, content, categories } = req.body;
+  const { user } = req;
+  const { _id } = user;
+  Post.create(
+    { title, content, categories, author: _id },
+    (err, doc) => (err ? next(err) : res.send(doc)),
+  );
 };
 
 exports.update = (req, res, next) => {
