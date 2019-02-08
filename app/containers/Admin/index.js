@@ -16,28 +16,26 @@ import makeSelectAdmin from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import NavBar from '../../components/NavBar';
-import Input from '../../components/ui/Input';
+import Form from '../../components/ui/Form';
+
+const fields = [
+  {
+    name: 'email',
+    label: 'Email',
+  },
+  {
+    name: 'password',
+    label: 'Password',
+  },
+];
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
-  state = {
-    email: '',
-  };
-
-  handleChange = name => ({ target }) => {
-    this.setState({ [name]: target.value });
-  };
-
   render() {
     return (
       <div>
         <NavBar viewName="Admin" />
-        <Input
-          name="email"
-          label="Email"
-          onChange={this.handleChange('email')}
-          value={this.state.email}
-        />
+        <Form fields={fields} />
       </div>
     );
   }
