@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const controller = require('./controller');
-const { isAuthenticated } = require('../utils');
+const { isAdmin } = require('../utils');
 
 // setup boilerplate route just to satisfy a request
 // for building
@@ -8,13 +8,13 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(isAuthenticated, controller.get)
-  .post(isAuthenticated, controller.post);
+  .get(controller.get)
+  .post(isAdmin, controller.post);
 
 router
   .route('/:id')
   .get(controller.getOne)
-  .put(controller.update)
-  .delete(controller.delete);
+  .put(isAdmin, controller.update)
+  .delete(isAdmin, controller.delete);
 
 module.exports = router;

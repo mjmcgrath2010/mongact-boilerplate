@@ -29,10 +29,7 @@ exports.post = (req, res, next) => {
   const { title, content, categories } = req.body;
   const { user } = req;
   const { _id } = user;
-  Post.create(
-    { title, content, categories, author: _id },
-    (err, doc) => (err ? next(err) : res.send(doc)),
-  );
+  Post.create({ title, content, categories, author: _id }, (err, doc) => (err ? next(err) : res.send(doc)));
 };
 
 exports.update = (req, res, next) => {
