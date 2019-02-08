@@ -16,18 +16,6 @@ import makeSelectAdmin from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import NavBar from '../../components/NavBar';
-import Form from '../../components/ui/Form';
-
-const fields = [
-  {
-    name: 'email',
-    label: 'Email',
-  },
-  {
-    name: 'password',
-    label: 'Password',
-  },
-];
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -35,7 +23,6 @@ export class Admin extends React.PureComponent {
     return (
       <div>
         <NavBar viewName="Admin" />
-        <Form fields={fields} />
       </div>
     );
   }

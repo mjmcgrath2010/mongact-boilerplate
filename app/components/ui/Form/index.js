@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '../Input';
+import Button from '../Button';
 
 // import Button from '../Button';
 // import styled from 'styled-components';
@@ -20,12 +21,12 @@ class Form extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
-    console.log('Submit:', this.state);
+    this.props.onSubmit(this.state);
   };
 
-  renderInputs = fields => {
-    const inputs = fields.map(field => (
-      <div>
+  renderInputs = fields =>
+    fields.map(field => (
+      <div key={field.name}>
         <Input
           name={field.name}
           label={field.label}
@@ -34,16 +35,13 @@ class Form extends React.Component {
         />
       </div>
     ));
-    return inputs;
-  };
 
   render() {
     const { fields } = this.props;
-    const Inputs = this.renderInputs(fields);
     return (
       <form onSubmit={this.submitForm}>
-        {Inputs}
-        <button type="submit">SUBMIT</button>
+        {this.renderInputs(fields)}
+        <Button type="submit" text="Hello" onClick={this.submitForm} />
       </form>
     );
   }
@@ -51,6 +49,7 @@ class Form extends React.Component {
 
 Form.propTypes = {
   fields: PropTypes.array,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Form;
