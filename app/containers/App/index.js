@@ -15,7 +15,7 @@ import Admin from 'containers/Admin/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Login from 'containers/Login/Loadable';
 
-import GlobalStyle from '../../global-styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 export default function App() {
   return (
@@ -26,7 +26,7 @@ export default function App() {
         <Route exact path="/login" component={Login} />
         <Route component={NotFoundPage} />
       </Switch>
-      <GlobalStyle />
+      <CssBaseline />
     </div>
   );
 }
