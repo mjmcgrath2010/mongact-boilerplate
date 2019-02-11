@@ -24,13 +24,13 @@ const fields = [
 const LoginForm = () => (
   <div>
     <Form
+      header="Login"
       submitText="Login"
       otherText="Create Account"
       onOther={() => console.log('Navigating to create account')}
       onSubmit={state => console.log(state)}
       fields={fields}
     />
-    ;
   </div>
 );
 

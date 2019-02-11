@@ -10,6 +10,17 @@ import styled from 'styled-components';
 import Input from '../Input';
 import Button from '../Button';
 
+const FormContainer = styled.div`
+  border: 2px solid #dbdbdb;
+  width: 90%;
+  padding: 1em;
+  border-radius: 5px;
+  display: block;
+  position: relative;
+  margin: 0.5em auto;
+  text-align: center;
+`;
+
 const FormWrapper = styled.form`
   width: 80%;
   margin: 0 auto;
@@ -24,7 +35,7 @@ const ButtonGroup = styled.div`
 
 const ButtonWrapper = styled.div`
   flex: 1;
-  padding: 0 2em;
+  padding: 1em 2em 0.5em;
 `;
 
 class Form extends React.Component {
@@ -96,12 +107,17 @@ class Form extends React.Component {
   };
 
   render() {
-    const { fields, ...rest } = this.props;
+    const { fields, header, ...rest } = this.props;
     return (
-      <FormWrapper onSubmit={this.submitForm}>
-        {this.renderInputs(fields)}
-        {this.renderActionButtons(rest)}
-      </FormWrapper>
+      <FormContainer>
+        <div>
+          <h2>{header}</h2>
+        </div>
+        <FormWrapper onSubmit={this.submitForm}>
+          {this.renderInputs(fields)}
+          {this.renderActionButtons(rest)}
+        </FormWrapper>
+      </FormContainer>
     );
   }
 }
@@ -112,6 +128,7 @@ Form.propTypes = {
   onOther: PropTypes.func,
   otherText: PropTypes.string,
   submitText: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
 };
 
 export default Form;
