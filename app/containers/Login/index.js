@@ -22,7 +22,10 @@ export class Login extends React.PureComponent {
   render() {
     return (
       <div>
-        <LoginForm />
+        <LoginForm
+          onSubmit={val => console.log(val)}
+          createAccount={() => console.log('creating account')}
+        />
       </div>
     );
   }

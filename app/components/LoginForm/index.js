@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Form from '../ui/Form';
-// import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 const fields = [
@@ -21,19 +21,25 @@ const fields = [
 ];
 
 /* eslint-disable react/prefer-stateless-function */
-const LoginForm = () => (
-  <div>
-    <Form
-      header="Login"
-      submitText="Login"
-      otherText="Create Account"
-      onOther={() => console.log('Navigating to create account')}
-      onSubmit={state => console.log(state)}
-      fields={fields}
-    />
-  </div>
-);
+const LoginForm = props => {
+  const { onSubmit, createAccount } = props;
+  return (
+    <div>
+      <Form
+        header="Login"
+        submitText="Login"
+        otherText="Create Account"
+        onOther={createAccount}
+        onSubmit={onSubmit}
+        fields={fields}
+      />
+    </div>
+  );
+};
 
-LoginForm.propTypes = {};
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  createAccount: PropTypes.func.isRequired,
+};
 
 export default LoginForm;

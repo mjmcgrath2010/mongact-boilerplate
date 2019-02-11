@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 function Input(props) {
   const { name, helperText, label, onChange, value } = props;
   return (
-    <FormControl fullWidth variant="filled">
+    <FormControl fullWidth>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <MUIInput
         value={value}
