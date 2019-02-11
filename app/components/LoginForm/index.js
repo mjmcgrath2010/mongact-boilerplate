@@ -23,7 +23,14 @@ const fields = [
 /* eslint-disable react/prefer-stateless-function */
 const LoginForm = () => (
   <div>
-    <Form onSubmit={state => console.log(state)} fields={fields} />;
+    <Form
+      submitText="Login"
+      otherText="Create Account"
+      onOther={() => console.log('Navigating to create account')}
+      onSubmit={state => console.log(state)}
+      fields={fields}
+    />
+    ;
   </div>
 );
 

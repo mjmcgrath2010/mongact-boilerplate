@@ -6,39 +6,25 @@
 
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import ButtonBase from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 
-const styles = theme => ({
-  root: {
-    margin: theme.spacing.unit * 2,
-    padding: '.5em 1em',
-    background: '#1892BF',
-    borderRadius: '5px',
-    color: '#FFF',
-    boxShadow: '2px 3px 4px #00000052',
-  },
-  center: {
-    textAlign: 'center',
-    justifyContent: 'center',
-    margin: '0 auto',
-    position: 'relative',
-    display: 'block',
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
-  },
+const styles = () => ({
+  root: {},
 });
 
 function Button(props) {
-  const { classes, text, size, variant, onClick, type } = props;
+  const { classes, text, size, variant, onClick, type, color } = props;
   return (
     <ButtonBase
+      fullWidth
+      variant={variant || ''}
       onClick={onClick}
       size={size || 'small'}
       type={type || ''}
-      className={variant ? [classes.root, classes[variant]] : classes.root}
+      className={classes.root}
       centerRipple
+      color={color}
     >
       {text}
     </ButtonBase>
@@ -52,6 +38,7 @@ Button.propTypes = {
   variant: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   type: PropTypes.string,
+  color: PropTypes.string,
 };
 
 export default withStyles(styles)(Button);
