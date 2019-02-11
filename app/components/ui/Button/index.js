@@ -10,13 +10,20 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import PropTypes from 'prop-types';
 
 const styles = theme => ({
-  primary: {
+  root: {
     margin: theme.spacing.unit * 2,
     padding: '.5em 1em',
     background: '#1892BF',
     borderRadius: '5px',
     color: '#FFF',
     boxShadow: '2px 3px 4px #00000052',
+  },
+  center: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    margin: '0 auto',
+    position: 'relative',
+    display: 'block',
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
@@ -30,11 +37,7 @@ function Button(props) {
       onClick={onClick}
       size={size || 'small'}
       type={type || ''}
-      className={
-        variant
-          ? { root: classes.primary, [variant]: classes[variant] }
-          : classes.primary
-      }
+      className={variant ? [classes.root, classes[variant]] : classes.root}
       centerRipple
     >
       {text}

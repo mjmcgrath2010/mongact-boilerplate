@@ -14,6 +14,9 @@ import Button from '../Button';
 
 const FormWrapper = styled.form`
   width: 80%;
+  margin: 0 auto;
+  display: block;
+  position: relative;
 `;
 
 class Form extends React.Component {
@@ -46,7 +49,13 @@ class Form extends React.Component {
     return (
       <FormWrapper onSubmit={this.submitForm}>
         {this.renderInputs(fields)}
-        <Button type="submit" text="Hello" onClick={this.submitForm} />
+        <Button
+          variant="center"
+          type="submit"
+          text="Login"
+          size="large"
+          onClick={this.submitForm}
+        />
       </FormWrapper>
     );
   }
