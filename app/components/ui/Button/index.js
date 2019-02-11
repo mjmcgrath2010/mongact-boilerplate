@@ -28,10 +28,13 @@ function Button(props) {
   return (
     <ButtonBase
       onClick={onClick}
-      variant={variant || 'outlined'}
       size={size || 'small'}
       type={type || ''}
-      className={classes.primary}
+      className={
+        variant
+          ? { root: classes.primary, [variant]: classes[variant] }
+          : classes.primary
+      }
       centerRipple
     >
       {text}

@@ -6,11 +6,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Input from '../Input';
 import Button from '../Button';
 
 // import Button from '../Button';
-// import styled from 'styled-components';
+
+const FormWrapper = styled.form`
+  width: 80%;
+`;
 
 class Form extends React.Component {
   state = {};
@@ -32,6 +36,7 @@ class Form extends React.Component {
           label={field.label}
           onChange={this.handleChange(field.name)}
           value={this.state[field.name] || ''}
+          fullwidth="true"
         />
       </div>
     ));
@@ -39,10 +44,10 @@ class Form extends React.Component {
   render() {
     const { fields } = this.props;
     return (
-      <form onSubmit={this.submitForm}>
+      <FormWrapper onSubmit={this.submitForm}>
         {this.renderInputs(fields)}
         <Button type="submit" text="Hello" onClick={this.submitForm} />
-      </form>
+      </FormWrapper>
     );
   }
 }

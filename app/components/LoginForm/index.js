@@ -22,7 +22,9 @@ const fields = [
 
 /* eslint-disable react/prefer-stateless-function */
 const LoginForm = () => (
-  <Form onSubmit={state => console.log(state)} fields={fields} />
+  <div>
+    <Form onSubmit={state => console.log(state)} fields={fields} />;
+  </div>
 );
 
 LoginForm.propTypes = {};
