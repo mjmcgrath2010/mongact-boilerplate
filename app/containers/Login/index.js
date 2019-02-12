@@ -26,7 +26,10 @@ export class Login extends React.PureComponent {
   componentDidMount() {}
 
   componentWillUpdate(nextProps) {
-    if (nextProps.login.location !== window.location.href) {
+    if (
+      nextProps.login.location &&
+      nextProps.login.location !== window.location.href
+    ) {
       this.props.dispatch(push(nextProps.login.location));
     }
   }
