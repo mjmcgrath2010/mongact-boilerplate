@@ -48,6 +48,6 @@ export default function configureStore(initialState = {}, history) {
     });
   }
 
-  persistStore(store);
+  persistStore(store, { blacklist: ['router'] });
   return store;
 }
