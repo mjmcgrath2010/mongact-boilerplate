@@ -28,11 +28,17 @@ export class Login extends React.PureComponent {
   componentWillUpdate(nextProps) {
     if (
       nextProps.login.location &&
-      nextProps.login.location !== window.location.href
+      nextProps.login.location !== window.location.origin
     ) {
       this.props.dispatch(push(nextProps.login.location));
     }
   }
+
+  createAccount = () => {
+    const { dispatch } = this.props;
+
+    dispatch(push('/create-account'));
+  };
 
   render() {
     const { loginUser } = this.props;
@@ -40,7 +46,7 @@ export class Login extends React.PureComponent {
       <div>
         <LoginForm
           onSubmit={val => loginUser(val)}
-          createAccount={() => console.log('creating account')}
+          createAccount={this.createAccount}
         />
       </div>
     );
