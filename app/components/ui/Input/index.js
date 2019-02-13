@@ -17,12 +17,7 @@ function Input(props) {
   return (
     <FormControl fullWidth>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <MUIInput
-        value={value}
-        onChange={val => onChange(val)}
-        id={name}
-        aria-describedby={`${name}-helper-text`}
-      />
+      <MUIInput value={value} onChange={val => onChange(val)} id={name} aria-describedby={`${name}-helper-text`} />
       <FormHelperText id={`${name}-helper-text`}>{helperText}</FormHelperText>
     </FormControl>
   );

@@ -69,13 +69,7 @@ class Form extends React.Component {
       return (
         <ButtonGroup>
           <ButtonWrapper>
-            <Button
-              color="secondary"
-              variant="outlined"
-              text={otherText}
-              size="large"
-              onClick={onOther}
-            />
+            <Button color="secondary" variant="outlined" text={otherText} size="large" onClick={onOther} />
           </ButtonWrapper>
           <ButtonWrapper>
             <Button

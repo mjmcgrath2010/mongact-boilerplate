@@ -1,4 +1,11 @@
 exports.post = (req, res) => {
-  const { username, password } = req.body;
-  res.json([{ username, password }]);
+  if (req.user) {
+    const token = req.user.auth();
+    const user = {
+      username: req.user.username,
+      token,
+    };
+    return res.json(user);
+  }
+  return res.send(400);
 };

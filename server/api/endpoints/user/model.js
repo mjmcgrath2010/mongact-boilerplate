@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new mongoose.Schema({
@@ -47,6 +48,9 @@ UserSchema.pre('save', function preSave(next) {
 UserSchema.methods = {
   validPassword(password) {
     return bcrypt.compareSync(password, this.password);
+  },
+  auth() {
+    return jwt.sign({ id: this._id }, 'secret', { expiresIn: 60 * 24 * 30 });
   },
   isAdmin() {
     return !!this.admin;

@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const passport = require('passport');
+const controller = require('./controller');
 
 router.route('/').post(
   passport.authenticate('local', {
     usernameField: 'email',
-    successRedirect: '/admin',
-    failureRedirect: '/login',
   }),
+  controller.post
 );
 
 module.exports = router;
