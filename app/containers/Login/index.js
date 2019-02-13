@@ -23,13 +23,24 @@ import { loginRequest } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.PureComponent {
-  componentDidMount() {}
+  state = {
+    loggedIn: false,
+  };
 
   componentWillUpdate(nextProps) {
-    if (nextProps.login.user && nextProps.login.user.token) {
-      this.props.dispatch(push(nextProps.login.location));
+    if (
+      nextProps.login.user &&
+      nextProps.login.user.token &&
+      !this.state.loggedIn
+    ) {
+      this.login();
     }
   }
+
+  login = () => {
+    const { dispatch } = this.props;
+    dispatch(push('/admin'));
+  };
 
   createAccount = () => {
     const { dispatch } = this.props;
