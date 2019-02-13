@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { LOGIN_REQUEST } from './constants';
 import request from '../../utils/request';
-import { loginRedirect } from './actions';
+import { handleLogin } from './actions';
 
 // Individual exports for testing
 export function* loginSaga(data) {
@@ -17,7 +17,7 @@ export function* loginSaga(data) {
     },
   });
   try {
-    yield put(loginRedirect(login));
+    yield put(handleLogin(login));
   } catch (e) {
     console.log(e);
   }

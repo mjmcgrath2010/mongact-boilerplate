@@ -26,7 +26,7 @@ export class Login extends React.PureComponent {
   componentDidMount() {}
 
   componentWillUpdate(nextProps) {
-    if (nextProps.login.location && nextProps.login.location !== window.location.origin) {
+    if (nextProps.login.user && nextProps.login.user.token) {
       this.props.dispatch(push(nextProps.login.location));
     }
   }
@@ -41,7 +41,10 @@ export class Login extends React.PureComponent {
     const { loginUser } = this.props;
     return (
       <div>
-        <LoginForm onSubmit={val => loginUser(val)} createAccount={this.createAccount} />
+        <LoginForm
+          onSubmit={val => loginUser(val)}
+          createAccount={this.createAccount}
+        />
       </div>
     );
   }
@@ -66,9 +69,16 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 const withReducer = injectReducer({ key: 'login', reducer });
 const withSaga = injectSaga({ key: 'login', saga });
 
-export default compose(withReducer, withSaga, withConnect)(Login);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(Login);

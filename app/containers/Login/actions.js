@@ -4,7 +4,7 @@
  *
  */
 
-import { LOGIN_REQUEST, LOGIN_REDIRECT } from './constants';
+import { LOGIN_SUCCESS, LOGIN_REQUEST } from './constants';
 
 export function loginRequest(data) {
   return {
@@ -13,13 +13,9 @@ export function loginRequest(data) {
   };
 }
 
-export function loginRedirect(url) {
-  const pathArry = url.split('/');
-  const path = url.replace(`${pathArry[0]}//${pathArry[2]}`, '');
-  const isAuthed = pathArry[3] === 'admin';
+export function handleLogin(user) {
   return {
-    type: LOGIN_REDIRECT,
-    url: path,
-    isAuthed,
+    type: LOGIN_SUCCESS,
+    user,
   };
 }
