@@ -27,10 +27,11 @@ export class Admin extends React.PureComponent {
   componentDidMount() {
     const { auth, dispatch } = this.props;
     const token = auth.user && auth.user.token;
-    const isAuthed = checkAuth(token);
-    if (!isAuthed) {
-      dispatch(push('/login'));
-    }
+    checkAuth(token).then(val => {
+      if (!val) {
+        dispatch(push('/login'));
+      }
+    });
   }
 
   componentWillUpdate(nextProps) {
