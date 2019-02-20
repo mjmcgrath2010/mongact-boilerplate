@@ -7,7 +7,12 @@
 import { fromJS } from 'immutable';
 import { LOGIN_SUCCESS, LOGIN_REQUEST } from './constants';
 
-export const initialState = fromJS({});
+export const initialState = fromJS({
+  user: {
+    username: null,
+    token: null,
+  },
+});
 
 function loginReducer(state = initialState, action) {
   switch (action.type) {

@@ -20,6 +20,7 @@ import LoginForm from '../../components/LoginForm';
 
 // Actions
 import { loginRequest } from './actions';
+import { checkAuth } from '../../utils/auth';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.PureComponent {
@@ -38,8 +39,12 @@ export class Login extends React.PureComponent {
   }
 
   login = () => {
-    const { dispatch } = this.props;
-    dispatch(push('/admin'));
+    const { dispatch, login } = this.props;
+    const token = login.user && login.user.token;
+    const isAuthed = checkAuth(token);
+    if (isAuthed) {
+      dispatch(push('/admin'));
+    }
   };
 
   createAccount = () => {
