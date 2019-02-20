@@ -6,7 +6,11 @@ router.route('/').post(
   passport.authenticate('local', {
     usernameField: 'email',
   }),
-  controller.post
+  controller.post,
 );
+
+router
+  .route('/check-token')
+  .post(passport.authenticate('jwt', { session: false }), controller.checkAuth);
 
 module.exports = router;

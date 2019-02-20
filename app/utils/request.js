@@ -11,7 +11,6 @@ function parseJSON(response) {
   }
 
   if (response.redirected) {
-    console.log(response);
     return response.url;
   }
   return response.json();
@@ -43,7 +42,6 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  console.log(url, options);
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);
