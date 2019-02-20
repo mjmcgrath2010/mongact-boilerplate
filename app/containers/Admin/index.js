@@ -27,7 +27,12 @@ export class Admin extends React.PureComponent {
   componentDidMount() {
     const { auth, dispatch } = this.props;
     const token = auth.user && auth.user.token;
-    checkAuth(token).then(val => {
+
+    if (!token) {
+      return dispatch(push('/login'));
+    }
+
+    return checkAuth(token).then(val => {
       if (!val) {
         dispatch(push('/login'));
       }
@@ -41,15 +46,9 @@ export class Admin extends React.PureComponent {
   }
 
   handleAuth = () => {
-    const { dispatch, auth } = this.props;
-    const token = auth.user && auth.user.token;
-
-    checkAuth(token).then(val => {
-      if (val) {
-        dispatch(handleLogout());
-        dispatch(push('/login'));
-      }
-    });
+    const { dispatch } = this.props;
+    dispatch(handleLogout());
+    dispatch(push('/login'));
   };
 
   render() {
