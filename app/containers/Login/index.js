@@ -24,27 +24,29 @@ import { checkAuth } from '../../utils/auth';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.PureComponent {
-  state = {
-    loggedIn: false,
-  };
+  state = {};
 
   componentWillUpdate(nextProps) {
-    if (
-      nextProps.login.user &&
-      nextProps.login.user.token &&
-      !this.state.loggedIn
-    ) {
-      this.login();
+    const { login } = nextProps;
+    const { user } = login;
+    if (user && user.token) {
+      this.login(user.token);
     }
   }
 
-  login = () => {
+  login = tken => {
     const { dispatch, login } = this.props;
-    const token = login.user && login.user.token;
-    const isAuthed = checkAuth(token);
-    if (isAuthed) {
-      dispatch(push('/admin'));
+    const token = tken || (login.user && login.user.token);
+
+    if (!token) {
+      return;
     }
+
+    checkAuth(token).then(val => {
+      if (val) {
+        dispatch(push('/admin'));
+      }
+    });
   };
 
   createAccount = () => {

@@ -5,12 +5,12 @@
  */
 
 import { fromJS } from 'immutable';
-import { LOGIN_SUCCESS, LOGIN_REQUEST } from './constants';
+import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGOUT_REQUEST } from './constants';
 
 export const initialState = fromJS({
   user: {
-    username: null,
-    token: null,
+    username: undefined,
+    token: undefined,
   },
 });
 
@@ -20,6 +20,8 @@ function loginReducer(state = initialState, action) {
       return state;
     case LOGIN_SUCCESS:
       return state.set('user', action.user);
+    case LOGOUT_REQUEST:
+      return state.set('user', {});
     default:
       return state;
   }

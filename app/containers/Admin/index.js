@@ -19,10 +19,11 @@ import saga from './saga';
 import NavBar from '../../components/NavBar';
 import { checkAuth } from '../../utils/auth';
 import makeSelectLogin from '../Login/selectors';
+import { LOGOUT_REQUEST } from '../Login/constants';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     const { auth, dispatch } = this.props;
     const token = auth.user && auth.user.token;
     const isAuthed = checkAuth(token);
@@ -31,10 +32,32 @@ export class Admin extends React.PureComponent {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    if (!nextProps.auth.user.token) {
+      this.handleAuth();
+    }
+  }
+
+  handleAuth = () => {
+    const { dispatch, auth } = this.props;
+    const token = auth.user && auth.user.token;
+
+    checkAuth(token).then(val => {
+      if (val) {
+        dispatch(push('/login'));
+      }
+    });
+  };
+
   render() {
+    const { dispatch, auth } = this.props;
     return (
       <div>
-        <NavBar viewName="Admin" />
+        <NavBar
+          loggedIn={!!auth.user.token}
+          onLogout={() => dispatch({ type: LOGOUT_REQUEST })}
+          viewName="Admin"
+        />
       </div>
     );
   }

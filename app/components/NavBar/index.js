@@ -28,18 +28,24 @@ const styles = {
 };
 
 function NavBar(props) {
-  const { classes, viewName } = props;
+  const { classes, viewName, onLogout, loggedIn } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             {viewName}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button onClick={onLogout} color="inherit">
+            {loggedIn ? 'LOGOUT' : 'LOGIN'}
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -49,6 +55,8 @@ function NavBar(props) {
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   viewName: PropTypes.string,
+  onLogout: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(NavBar);
