@@ -17,5 +17,5 @@ exports.checkAuth = (req, res) => {
     };
     return res.json(user);
   }
-  return res.send(400);
+  return res.json({ error: 'Not able to find the user' });
 };
