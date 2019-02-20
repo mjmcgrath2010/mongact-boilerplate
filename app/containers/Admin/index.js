@@ -20,6 +20,7 @@ import NavBar from '../../components/NavBar';
 import { checkAuth } from '../../utils/auth';
 import makeSelectLogin from '../Login/selectors';
 import { LOGOUT_REQUEST } from '../Login/constants';
+import { handleLogout } from '../Login/actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -44,6 +45,7 @@ export class Admin extends React.PureComponent {
 
     checkAuth(token).then(val => {
       if (val) {
+        dispatch(handleLogout());
         dispatch(push('/login'));
       }
     });

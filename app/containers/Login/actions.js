@@ -4,7 +4,7 @@
  *
  */
 
-import { LOGIN_SUCCESS, LOGIN_REQUEST } from './constants';
+import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGOUT_SUCCESS } from './constants';
 
 export function loginRequest(data) {
   return {
@@ -17,5 +17,11 @@ export function handleLogin(user) {
   return {
     type: LOGIN_SUCCESS,
     user,
+  };
+}
+
+export function handleLogout() {
+  return {
+    type: LOGOUT_SUCCESS,
   };
 }
