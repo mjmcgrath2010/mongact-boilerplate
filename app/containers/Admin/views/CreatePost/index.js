@@ -5,8 +5,7 @@
  */
 
 import React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // ES6
+import TextEditor from '../../../../components/TextEditor';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
@@ -24,7 +23,7 @@ class CreatePost extends React.Component {
     return (
       <div>
         <h1>Create a post</h1>
-        <ReactQuill value={this.state.text} onChange={this.handleChange} />
+        <TextEditor handleChange={this.handleChange} value={this.state.text} />
       </div>
     );
   }
