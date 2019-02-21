@@ -63,7 +63,7 @@ export class Admin extends React.PureComponent {
       <div>
         <NavBar
           userLinks={adminNavRoutes.userRoutes}
-          adminLinks={adminNavRoutes.adminRoutes}
+          adminLinks={auth.user.admin ? adminNavRoutes.adminRoutes : []}
           loggedIn={!!auth.user.token}
           onLogout={() => dispatch({ type: LOGOUT_REQUEST })}
           viewName="Admin"
