@@ -23,6 +23,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Icon from '@material-ui/core/Icon';
 import { push } from 'connected-react-router/immutable';
 
 const drawerWidth = 240;
@@ -106,6 +107,14 @@ class NavBar extends React.Component {
         return <InboxIcon />;
       case 'mail':
         return <MailIcon />;
+      case 'users':
+        return <Icon>account_box</Icon>;
+      case 'invite':
+        return <Icon>add_box</Icon>;
+      case 'posts':
+        return <Icon>file_copy</Icon>;
+      case 'new-post':
+        return <Icon>create</Icon>;
       default:
         return <MailIcon />;
     }

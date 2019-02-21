@@ -2,24 +2,24 @@ const adminRoutes = {
   userRoutes: [
     {
       text: 'Posts',
-      icon: 'mail',
+      icon: 'posts',
       path: '/admin/posts',
     },
     {
       text: 'New Post',
-      icon: 'mail',
+      icon: 'new-post',
       path: '/admin/posts/create',
     },
   ],
   adminRoutes: [
     {
       text: 'Users',
-      icon: 'inbox',
+      icon: 'users',
       path: '/admin/users',
     },
     {
       text: 'Invite User',
-      icon: 'inbox',
+      icon: 'invite',
       path: '/admin/invite-user',
     },
   ],
