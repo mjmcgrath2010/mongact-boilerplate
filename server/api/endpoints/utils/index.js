@@ -2,14 +2,16 @@ const passport = require('passport');
 
 module.exports = {
   auth: (req, res, next) => {
-    passport.authenticate('local', {
-      usernameField: 'email',
-    });
-    next();
+    passport.authenticate(
+      'local',
+      {
+        usernameField: 'email',
+      },
+      next(),
+    );
   },
   isAuthenticated: (req, res, next) => {
-    passport.authenticate('jwt', { session: false });
-    next();
+    passport.authenticate('jwt', { session: false }, next());
   },
   isAdmin: (req, res, next) => {
     if (req.user && req.user.admin) {
