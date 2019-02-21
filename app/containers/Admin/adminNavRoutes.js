@@ -12,6 +12,11 @@ const adminRoutes = {
       icon: 'inbox',
       path: '/admin/users',
     },
+    {
+      text: 'Invite User',
+      icon: 'inbox',
+      path: '/admin/invite-user',
+    },
   ],
 };
 

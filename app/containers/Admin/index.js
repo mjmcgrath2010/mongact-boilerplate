@@ -26,6 +26,7 @@ import { requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
 import Posts from './views/Posts';
 import Users from './views/Users';
+import InviteUser from './views/InviteUser';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -77,6 +78,7 @@ export class Admin extends React.PureComponent {
           path="/admin/users"
           render={() => <Users users={admin.users} />}
         />
+        <Route path="/admin/invite-user" render={() => <InviteUser />} />
       </div>
     );
   }
