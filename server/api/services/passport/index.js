@@ -4,6 +4,15 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const User = require('../../endpoints/user/model');
 
+exports.init = () => {
+  passport.serializeUser((user, done) => {
+    done(null, user);
+  });
+  passport.deserializeUser((user, done) => {
+    done(null, user);
+  });
+};
+
 exports.local = () => {
   passport.use(
     new LocalStrategy((username, password, done) => {

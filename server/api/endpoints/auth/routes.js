@@ -1,17 +1,9 @@
 const router = require('express').Router();
-const passport = require('passport');
 const controller = require('./controller');
+const { auth, isAuthenticated } = require('../utils/index');
 
-router.route('/').post(
-  passport.authenticate('local', {
-    usernameField: 'email',
-    session: false,
-  }),
-  controller.post,
-);
+router.route('/').post(auth, controller.post);
 
-router
-  .route('/check-token')
-  .post(passport.authenticate('jwt', { session: false }), controller.checkAuth);
+router.route('/check-token').post(isAuthenticated, controller.checkAuth);
 
 module.exports = router;
