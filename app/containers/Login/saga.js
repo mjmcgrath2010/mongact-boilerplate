@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { LOGIN_REQUEST } from './constants';
 import request from '../../utils/request';
 import { handleLogin } from './actions';
@@ -25,5 +25,5 @@ export function* loginSaga(data) {
 
 export default function* rootSaga() {
   // if necessary, start multiple sagas at once with `all`
-  yield [takeLatest(LOGIN_REQUEST, loginSaga)];
+  yield all([takeLatest(LOGIN_REQUEST, loginSaga)]);
 }

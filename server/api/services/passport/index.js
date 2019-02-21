@@ -26,18 +26,20 @@ exports.local = () => {
         }
         return done(null, user);
       });
-    })
+    }),
   );
 };
 
 exports.jwt = () => {
   const opts = {};
-  console.log(ExtractJwt.fromBodyField('token'));
-  opts.jwtFromRequest = ExtractJwt.fromBodyField('token');
+  opts.jwtFromRequest = ExtractJwt.fromExtractors([
+    ExtractJwt.fromBodyField('token'),
+    ExtractJwt.fromHeader('X-Token'),
+  ]);
   opts.secretOrKey = 'secret';
   passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      User.findOne({ id: jwt_payload.sub }, (err, user) => {
+    new JwtStrategy(opts, (jwtPayload, done) => {
+      User.findOne({ id: jwtPayload.sub }, (err, user) => {
         if (err) {
           return done(err, false);
         }
@@ -47,6 +49,6 @@ exports.jwt = () => {
         return done(null, false);
         // or you could create a new account
       });
-    })
+    }),
   );
 };

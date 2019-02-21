@@ -21,11 +21,12 @@ import { checkAuth } from '../../utils/auth';
 import makeSelectLogin from '../Login/selectors';
 import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
+import { requestUserData } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
   componentDidMount() {
-    const { auth, dispatch } = this.props;
+    const { auth, dispatch, fetchUserData } = this.props;
     const token = auth.user && auth.user.token;
 
     if (!token) {
@@ -34,8 +35,9 @@ export class Admin extends React.PureComponent {
 
     return checkAuth(token).then(val => {
       if (!val) {
-        dispatch(push('/login'));
+        return dispatch(push('/login'));
       }
+      return fetchUserData();
     });
   }
 
@@ -68,6 +70,7 @@ export class Admin extends React.PureComponent {
 Admin.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  fetchUserData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -78,6 +81,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    fetchUserData: () => dispatch(requestUserData()),
   };
 }
 
