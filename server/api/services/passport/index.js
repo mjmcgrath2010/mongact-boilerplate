@@ -31,6 +31,12 @@ exports.local = () => {
 };
 
 exports.jwt = () => {
+  passport.serializeUser((user, done) => {
+    done(null, user);
+  });
+  passport.deserializeUser((user, done) => {
+    done(null, user);
+  });
   const opts = {};
   opts.jwtFromRequest = ExtractJwt.fromExtractors([
     ExtractJwt.fromBodyField('token'),
