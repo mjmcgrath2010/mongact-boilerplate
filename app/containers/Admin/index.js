@@ -76,7 +76,11 @@ export class Admin extends React.PureComponent {
           path="/admin/posts"
           render={() => <Posts posts={admin.posts} />}
         />
-        <Route exact path="/admin/posts/create" render={() => <CreatePost />} />
+        <Route
+          exact
+          path="/admin/posts/create"
+          render={() => <CreatePost dispatch={dispatch} />}
+        />
         <Route
           exact
           path="/admin/users"
