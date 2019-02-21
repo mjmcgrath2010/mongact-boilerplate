@@ -113,6 +113,7 @@ class NavBar extends React.Component {
 
   handleNavigation = path => {
     const { dispatch } = this.props;
+    this.setState({ open: false });
     dispatch(push(path));
   };
 

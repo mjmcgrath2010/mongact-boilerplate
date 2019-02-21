@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'connected-react-router/immutable';
+import { Route } from 'react-router-dom';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -23,6 +24,8 @@ import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
 import { requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
+import Posts from '../../components/Posts';
+import Users from '../../components/Users';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -65,6 +68,19 @@ export class Admin extends React.PureComponent {
           onLogout={() => dispatch({ type: LOGOUT_REQUEST })}
           viewName="Admin"
           dispatch={dispatch}
+        />
+        <Route path="/admin/posts" component={Posts} />
+        <Route
+          path="/admin/users"
+          render={() => (
+            <Users
+              users={[
+                { username: 'Mike' },
+                { username: 'Mike' },
+                { username: 'Mike' },
+              ]}
+            />
+          )}
         />
       </div>
     );
