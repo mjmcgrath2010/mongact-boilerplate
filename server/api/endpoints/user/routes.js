@@ -11,8 +11,12 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(controller.get)
-  .post(passport.authenticate('jwt', { session: false }), isAdmin, controller.post);
+  .get(passport.authenticate('jwt', { session: false }), controller.get)
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    isAdmin,
+    controller.post,
+  );
 
 router
   .route('/:id')

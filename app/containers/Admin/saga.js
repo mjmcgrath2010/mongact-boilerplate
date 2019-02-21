@@ -7,10 +7,8 @@ import { userDataReceived } from './actions';
 export function* get(url) {
   const auth = yield select(makeSelectLogin());
   return yield call(request, url, {
-    method: 'GET',
     headers: {
-      'X-Token': auth.user.token,
-      'Content-Type': 'application/json',
+      access_token: auth.user.token,
     },
   });
 }

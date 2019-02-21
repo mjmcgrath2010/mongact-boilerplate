@@ -34,7 +34,7 @@ exports.jwt = () => {
   const opts = {};
   opts.jwtFromRequest = ExtractJwt.fromExtractors([
     ExtractJwt.fromBodyField('token'),
-    ExtractJwt.fromHeader('X-Token'),
+    ExtractJwt.fromHeader('access_token'),
   ]);
   opts.secretOrKey = 'secret';
   passport.use(
