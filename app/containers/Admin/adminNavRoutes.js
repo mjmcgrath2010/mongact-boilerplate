@@ -5,6 +5,11 @@ const adminRoutes = {
       icon: 'mail',
       path: '/admin/posts',
     },
+    {
+      text: 'New Post',
+      icon: 'mail',
+      path: '/admin/posts/create',
+    },
   ],
   adminRoutes: [
     {

@@ -15,7 +15,6 @@ class Posts extends React.PureComponent {
     const { posts } = this.props;
     return (
       <div>
-        <h1>Hello, I am the posts component!</h1>
         <DataTable rows={posts} />
       </div>
     );

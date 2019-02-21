@@ -27,6 +27,7 @@ import adminNavRoutes from './adminNavRoutes';
 import Posts from './views/Posts';
 import Users from './views/Users';
 import InviteUser from './views/InviteUser';
+import CreatePost from './views/CreatePost';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -71,14 +72,17 @@ export class Admin extends React.PureComponent {
           dispatch={dispatch}
         />
         <Route
+          exact
           path="/admin/posts"
           render={() => <Posts posts={admin.posts} />}
         />
+        <Route exact path="/admin/posts/create" render={() => <CreatePost />} />
         <Route
+          exact
           path="/admin/users"
           render={() => <Users users={admin.users} />}
         />
-        <Route path="/admin/invite-user" render={() => <InviteUser />} />
+        <Route exact path="/admin/invite-user" render={() => <InviteUser />} />
       </div>
     );
   }
