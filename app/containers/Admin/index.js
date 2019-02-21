@@ -24,8 +24,8 @@ import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
 import { requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
-import Posts from '../../components/Posts';
-import Users from '../../components/Users';
+import Posts from './views/Posts';
+import Users from './views/Users';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -69,7 +69,10 @@ export class Admin extends React.PureComponent {
           viewName="Admin"
           dispatch={dispatch}
         />
-        <Route path="/admin/posts" component={Posts} />
+        <Route
+          path="/admin/posts"
+          render={() => <Posts posts={admin.posts} />}
+        />
         <Route
           path="/admin/users"
           render={() => <Users users={admin.users} />}
