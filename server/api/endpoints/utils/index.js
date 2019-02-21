@@ -1,11 +1,15 @@
+const passport = require('passport');
+
 module.exports = {
-  isAuthenticated: (req, res, next) => {
-    if (req.user) {
-      return next();
-    }
-    return res.status(401).json({
-      error: 'User not authenticated',
+  auth: (req, res, next) => {
+    passport.authenticate('local', {
+      usernameField: 'email',
     });
+    next();
+  },
+  isAuthenticated: (req, res, next) => {
+    passport.authenticate('jwt', { session: false });
+    next();
   },
   isAdmin: (req, res, next) => {
     if (req.user && req.user.admin) {

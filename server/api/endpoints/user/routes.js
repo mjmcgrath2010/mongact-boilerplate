@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const passport = require('passport');
 
 const controller = require('./controller');
-const { isAdmin } = require('../utils');
+const { isAdmin, isAuthenticated } = require('../utils');
 
 // setup boilerplate route just to satisfy a request
 // for building
@@ -11,12 +10,8 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(passport.authenticate('jwt', { session: false }), controller.get)
-  .post(
-    passport.authenticate('jwt', { session: false }),
-    isAdmin,
-    controller.post,
-  );
+  .get(isAuthenticated, controller.get)
+  .post(isAuthenticated, isAdmin, controller.post);
 
 router
   .route('/:id')
