@@ -99,6 +99,59 @@ class NavBar extends React.Component {
     this.setState({ open: false });
   };
 
+  renderIcon = name => {
+    switch (name) {
+      case 'inbox':
+        return <InboxIcon />;
+      case 'mail':
+        return <MailIcon />;
+      default:
+        return <MailIcon />;
+    }
+  };
+
+  renderUserLinks = () => {
+    const { userLinks } = this.props;
+
+    if (userLinks.length) {
+      return (
+        <div>
+          <Divider />
+          <List>
+            {[userLinks].map(link => (
+              <ListItem button key={link.text}>
+                <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
+                <ListItemText primary={link.text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  renderAdminLinks = () => {
+    const { adminLinks } = this.props;
+
+    if (adminLinks.length) {
+      return (
+        <div>
+          <Divider />
+          <List>
+            {[adminLinks].map(link => (
+              <ListItem button key={link.text}>
+                <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
+                <ListItemText primary={link.text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      );
+    }
+    return null;
+  };
+
   render() {
     const { classes, theme, viewName, onLogout, loggedIn } = this.props;
     const { open } = this.state;
@@ -132,6 +185,9 @@ class NavBar extends React.Component {
           }}
         >
           <div className={classes.drawerHeader}>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              Menu
+            </Typography>
             <IconButton onClick={this.handleDrawerClose}>
               {theme.direction === 'ltr' ? (
                 <ChevronLeftIcon />
@@ -140,28 +196,8 @@ class NavBar extends React.Component {
               )}
             </IconButton>
           </div>
-          <Divider />
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+          {this.renderUserLinks()}
+          {this.renderAdminLinks()}
         </Drawer>
       </div>
     );
@@ -174,6 +210,8 @@ NavBar.propTypes = {
   viewName: PropTypes.string,
   onLogout: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  userLinks: PropTypes.array.isRequired,
+  adminLinks: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(NavBar);

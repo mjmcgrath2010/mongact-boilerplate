@@ -22,6 +22,7 @@ import makeSelectLogin from '../Login/selectors';
 import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
 import { requestUserData } from './actions';
+import adminNavRoutes from './adminNavRoutes';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -58,6 +59,8 @@ export class Admin extends React.PureComponent {
     return (
       <div>
         <NavBar
+          userLinks={adminNavRoutes.userRoutes}
+          adminLinks={adminNavRoutes.adminRoutes}
           loggedIn={!!auth.user.token}
           onLogout={() => dispatch({ type: LOGOUT_REQUEST })}
           viewName="Admin"
