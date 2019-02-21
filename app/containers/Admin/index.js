@@ -58,7 +58,7 @@ export class Admin extends React.PureComponent {
   };
 
   render() {
-    const { dispatch, auth } = this.props;
+    const { dispatch, auth, admin } = this.props;
     return (
       <div>
         <NavBar
@@ -72,15 +72,7 @@ export class Admin extends React.PureComponent {
         <Route path="/admin/posts" component={Posts} />
         <Route
           path="/admin/users"
-          render={() => (
-            <Users
-              users={[
-                { username: 'Mike' },
-                { username: 'Mike' },
-                { username: 'Mike' },
-              ]}
-            />
-          )}
+          render={() => <Users users={admin.users} />}
         />
       </div>
     );
@@ -91,6 +83,7 @@ Admin.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   fetchUserData: PropTypes.func.isRequired,
+  admin: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
