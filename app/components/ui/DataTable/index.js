@@ -14,10 +14,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    width: '85%',
+    margin: '1em auto',
+    position: 'relative',
+    display: 'block',
     overflowX: 'auto',
   },
   table: {
