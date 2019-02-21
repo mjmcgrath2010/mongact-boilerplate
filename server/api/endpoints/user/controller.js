@@ -5,7 +5,9 @@ exports.params = (req, res, next, id) => {
     if (err) {
       return res.send(err);
     }
-    return res.send(doc);
+    req.id = id;
+    req.user = doc;
+    return next();
   });
 };
 
@@ -40,6 +42,18 @@ exports.update = (req, res, next) => {
   next();
 };
 
-exports.delete = (req, res, next) => {
-  next();
-};
+exports.delete = (req, res) =>
+  User.findById({ _id: req.id }, (err, user) => {
+    if (err) {
+      return res.json(err);
+    }
+    if (user) {
+      return user.remove(error => {
+        if (err) {
+          return res.json(error);
+        }
+        return res.send(200);
+      });
+    }
+    return res.send(401);
+  });

@@ -10,8 +10,8 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(isAuthenticated, controller.get)
-  .post(isAuthenticated, isAdmin, controller.post);
+  .get(isAuthenticated, isAdmin, controller.get)
+  .post(controller.post);
 
 router
   .route('/:id')

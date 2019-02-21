@@ -9,12 +9,12 @@ router.param('id', controller.params);
 router
   .route('/')
   .get(controller.get)
-  .post(isAuthenticated, isAdmin, controller.post);
+  .post(isAuthenticated, controller.post);
 
 router
   .route('/:id')
   .get(controller.getOne)
-  .put(isAdmin, controller.update)
-  .delete(isAdmin, controller.delete);
+  .put(isAuthenticated, controller.update)
+  .delete(isAuthenticated, isAdmin, controller.delete);
 
 module.exports = router;

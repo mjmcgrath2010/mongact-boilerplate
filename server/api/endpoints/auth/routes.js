@@ -5,6 +5,7 @@ const controller = require('./controller');
 router.route('/').post(
   passport.authenticate('local', {
     usernameField: 'email',
+    session: false,
   }),
   controller.post,
 );

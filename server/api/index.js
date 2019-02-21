@@ -1,9 +1,17 @@
 const router = require('express').Router();
+const passport = require('passport');
 const endpoints = require('./endpoints');
-const passport = require('./services/passport');
+const passportServices = require('./services/passport');
 
-passport.local();
-passport.jwt();
+passportServices.local();
+passportServices.jwt();
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 router.use('/endpoints', endpoints);
 

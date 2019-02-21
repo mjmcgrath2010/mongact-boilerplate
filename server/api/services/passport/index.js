@@ -5,13 +5,6 @@ const { ExtractJwt } = require('passport-jwt');
 const User = require('../../endpoints/user/model');
 
 exports.local = () => {
-  passport.serializeUser((user, done) => {
-    done(null, user);
-  });
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-  });
-
   passport.use(
     new LocalStrategy((username, password, done) => {
       User.findOne({ username }, (err, user) => {
@@ -31,12 +24,6 @@ exports.local = () => {
 };
 
 exports.jwt = () => {
-  passport.serializeUser((user, done) => {
-    done(null, user);
-  });
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-  });
   const opts = {};
   opts.jwtFromRequest = ExtractJwt.fromExtractors([
     ExtractJwt.fromBodyField('token'),
@@ -45,7 +32,7 @@ exports.jwt = () => {
   opts.secretOrKey = 'secret';
   passport.use(
     new JwtStrategy(opts, (jwtPayload, done) => {
-      User.findOne({ id: jwtPayload.sub }, (err, user) => {
+      User.findOne({ _id: jwtPayload.id }, (err, user) => {
         if (err) {
           return done(err, false);
         }
