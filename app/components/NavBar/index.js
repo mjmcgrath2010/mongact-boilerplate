@@ -23,6 +23,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { push } from 'connected-react-router/immutable';
 
 const drawerWidth = 240;
 
@@ -110,6 +111,11 @@ class NavBar extends React.Component {
     }
   };
 
+  handleNavigation = path => {
+    const { dispatch } = this.props;
+    dispatch(push(path));
+  };
+
   renderUserLinks = () => {
     const { userLinks } = this.props;
 
@@ -118,8 +124,12 @@ class NavBar extends React.Component {
         <div>
           <Divider />
           <List>
-            {[userLinks].map(link => (
-              <ListItem button key={link.text}>
+            {userLinks.map(link => (
+              <ListItem
+                onClick={() => this.handleNavigation(link.path)}
+                button
+                key={link.text}
+              >
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -139,8 +149,12 @@ class NavBar extends React.Component {
         <div>
           <Divider />
           <List>
-            {[adminLinks].map(link => (
-              <ListItem button key={link.text}>
+            {adminLinks.map(link => (
+              <ListItem
+                onClick={() => this.handleNavigation(link.path)}
+                button
+                key={link.text}
+              >
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -212,6 +226,7 @@ NavBar.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   userLinks: PropTypes.array.isRequired,
   adminLinks: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(NavBar);

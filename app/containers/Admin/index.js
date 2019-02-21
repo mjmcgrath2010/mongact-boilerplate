@@ -64,6 +64,7 @@ export class Admin extends React.PureComponent {
           loggedIn={!!auth.user.token}
           onLogout={() => dispatch({ type: LOGOUT_REQUEST })}
           viewName="Admin"
+          dispatch={dispatch}
         />
       </div>
     );
