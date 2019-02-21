@@ -6,21 +6,24 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import DataTable from '../ui/DataTable';
 // import styled from 'styled-components';
 
 /* eslint-disable react/prefer-stateless-function */
 class Users extends React.PureComponent {
   renderUserTable = () => {
     const { users } = this.props;
-
-    if (users && users.length) {
-      return users.map(user => (
-        <div>
-          <li>{user.username}</li>
-        </div>
-      ));
-    }
-    return null;
+    return (
+      <DataTable
+        rows={users}
+        headers={[
+          { text: 'ID' },
+          { text: 'Username' },
+          { text: 'Password' },
+          { text: 'is Admin' },
+        ]}
+      />
+    );
   };
 
   render() {

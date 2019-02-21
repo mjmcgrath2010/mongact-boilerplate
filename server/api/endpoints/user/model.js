@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
   },
   admin: {
     type: Boolean,
+    default: false,
   },
 });
 
@@ -50,7 +51,8 @@ UserSchema.methods = {
     return bcrypt.compareSync(password, this.password);
   },
   auth() {
-    return jwt.sign({ id: this._id }, 'secret', { expiresIn: 60 * 24 * 30 });
+    const { _id } = this;
+    return jwt.sign({ id: _id }, 'secret', { expiresIn: 60 * 24 * 30 });
   },
   isAdmin() {
     return !!this.admin;

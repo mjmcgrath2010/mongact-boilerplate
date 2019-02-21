@@ -1,7 +1,7 @@
 const User = require('./model');
 
 exports.params = (req, res, next, id) => {
-  User.find({ _id: id }, (err, doc) => {
+  User.find({ _id: id }, 'username isAdmin', (err, doc) => {
     if (err) {
       return res.send(err);
     }
@@ -10,7 +10,7 @@ exports.params = (req, res, next, id) => {
 };
 
 exports.get = (req, res) => {
-  User.find({}, (err, docs) => {
+  User.find({}, 'username admin', (err, docs) => {
     if (err) {
       return res.send(JSON.stringify(err));
     }
