@@ -14,10 +14,29 @@ export function* get(url) {
 }
 
 export function* fetchUserData() {
-  const users = yield call(get, '/api/endpoints/user');
+  const auth = yield select(makeSelectLogin());
+  let data = {};
+  if (auth.user.admin) {
+    const [users, posts] = yield all([
+      call(get, '/api/endpoints/user'),
+      call(get, '/api/endpoints/post'),
+    ]);
+    data = {
+      users,
+      posts,
+    };
+  } else {
+    const [posts] = yield all([
+      call(get, '/api/endpoints/user'),
+      call(get, '/api/endpoints/post'),
+    ]);
+    data = {
+      posts,
+    };
+  }
 
   try {
-    yield put(userDataReceived(users));
+    yield put(userDataReceived(data));
   } catch (e) {
     console.error(e);
   }

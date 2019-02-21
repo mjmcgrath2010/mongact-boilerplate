@@ -13,17 +13,7 @@ import DataTable from '../ui/DataTable';
 class Users extends React.PureComponent {
   renderUserTable = () => {
     const { users } = this.props;
-    return (
-      <DataTable
-        rows={users}
-        headers={[
-          { text: 'ID' },
-          { text: 'Username' },
-          { text: 'Password' },
-          { text: 'is Admin' },
-        ]}
-      />
-    );
+    return <DataTable rows={users} />;
   };
 
   render() {
