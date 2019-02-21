@@ -27,12 +27,7 @@ class Users extends React.PureComponent {
   };
 
   render() {
-    return (
-      <div>
-        <h1>Hello, I am the Users component!</h1>
-        {this.renderUserTable()}
-      </div>
-    );
+    return <div>{this.renderUserTable()}</div>;
   }
 }
 

@@ -31,7 +31,10 @@ const createHeader = props => {
   if (headers.length) {
     return headers.map(header => (
       <TableCell align="center" key={header}>
-        {header.toUpperCase()}
+        {header
+          .toUpperCase()
+          .replace('_', ' ')
+          .trim()}
       </TableCell>
     ));
   }
@@ -41,7 +44,7 @@ const createHeader = props => {
 const createRow = data => {
   const array = Object.keys(data);
   return array.map(key => (
-    <TableCell key={Math.random()} align="right">
+    <TableCell key={Math.random()} align="center">
       {data[key].toString()}
     </TableCell>
   ));
