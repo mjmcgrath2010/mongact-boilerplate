@@ -31,6 +31,7 @@ import CreatePost from './views/CreatePost';
 import EditPost from './views/EditPost';
 import Categories from './views/Categories';
 import { makeSelectLocation } from '../App/selectors';
+import Dialog from '../../components/ui/Dialog';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -69,16 +70,17 @@ export class Admin extends React.PureComponent {
   render() {
     const { dispatch, auth, admin, location } = this.props;
     const FlashMessages = () => {
-      if (admin.successMessage || admin.errorMessage) {
+      if (admin.successMessage) {
         setTimeout(() => {
           dispatch(clearMessages());
         }, 5000);
-      }
-      if (admin.successMessage) {
-        return <div>{admin.successMessage}</div>;
+        return <Dialog variant="success" message={admin.successMessage} />;
       }
       if (admin.errorMessage) {
-        return <div>{admin.errorMessage}</div>;
+        setTimeout(() => {
+          dispatch(clearMessages());
+        }, 5000);
+        return <Dialog variant="error" message={admin.errorMessage} />;
       }
       return null;
     };

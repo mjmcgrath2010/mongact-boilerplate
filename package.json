@@ -66,6 +66,7 @@
     "bcrypt": "^3.0.3",
     "body-parser": "1.18.3",
     "chalk": "2.4.1",
+    "classnames": "^2.2.6",
     "compression": "1.7.3",
     "connected-react-router": "4.5.0",
     "cors": "2.8.5",
