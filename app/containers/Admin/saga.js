@@ -1,7 +1,11 @@
 import { takeEvery, call, put, select, all } from 'redux-saga/effects';
 import request from '../../utils/request';
 import makeSelectLogin from '../Login/selectors';
-import { FETCH_USER_DATA, CREATE_POST_REQUEST, POST_CREATED } from './constants';
+import {
+  FETCH_USER_DATA,
+  CREATE_POST_REQUEST,
+  POST_CREATED,
+} from './constants';
 import { userDataReceived, newPostCreated } from './actions';
 
 export function* get(url) {
@@ -29,13 +33,21 @@ export function* fetchUserData() {
   const auth = yield select(makeSelectLogin());
   let data = {};
   if (auth.user.admin) {
-    const [users, posts] = yield all([call(get, '/api/endpoints/user'), call(get, '/api/endpoints/post')]);
+    const [users, posts, categories] = yield all([
+      call(get, '/api/endpoints/user'),
+      call(get, '/api/endpoints/post'),
+      call(get, '/api/endpoints/category'),
+    ]);
     data = {
       users,
       posts,
+      categories,
     };
   } else {
-    const [posts] = yield all([call(get, '/api/endpoints/user'), call(get, '/api/endpoints/post')]);
+    const [posts] = yield all([
+      call(get, '/api/endpoints/user'),
+      call(get, '/api/endpoints/post'),
+    ]);
     data = {
       posts,
     };
@@ -49,7 +61,9 @@ export function* fetchUserData() {
 }
 
 export function* createPost(action) {
-  const [newPost] = yield all([call(post, '/api/endpoints/post', action.payload)]);
+  const [newPost] = yield all([
+    call(post, '/api/endpoints/post', action.payload),
+  ]);
   try {
     yield put(newPostCreated(newPost));
   } catch (e) {
