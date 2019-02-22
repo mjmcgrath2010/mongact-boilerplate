@@ -54,7 +54,7 @@ export class Login extends React.PureComponent {
     checkAuth(token).then(val => {
       if (val && location.state) {
         dispatch(push(location.state));
-      } else {
+      } else if (val) {
         dispatch(push('/login'));
       }
     });

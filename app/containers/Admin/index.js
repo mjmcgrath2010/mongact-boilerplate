@@ -91,7 +91,7 @@ export class Admin extends React.PureComponent {
         <Route
           exact
           path="/admin/posts/edit/:id"
-          render={() => <EditPost location={location} />}
+          render={() => <EditPost location={location} dispatch={dispatch} />}
         />
         <Route
           exact

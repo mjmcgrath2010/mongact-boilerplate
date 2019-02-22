@@ -4,7 +4,17 @@
  *
  */
 
-import { DEFAULT_ACTION, FETCH_USER_DATA, USER_DATA_RECEIVED, CREATE_POST_REQUEST, POST_CREATED } from './constants';
+import {
+  DEFAULT_ACTION,
+  FETCH_USER_DATA,
+  USER_DATA_RECEIVED,
+  CREATE_POST_REQUEST,
+  POST_CREATED,
+  UPDATE_POST,
+  DELETE_POST,
+  POST_UPDATED,
+  POST_DELETED,
+} from './constants';
 
 export function defaultAction() {
   return {
@@ -28,6 +38,34 @@ export function userDataReceived(data) {
 export function createPost(payload) {
   return {
     type: CREATE_POST_REQUEST,
+    payload,
+  };
+}
+
+export function updatePost(payload) {
+  return {
+    type: UPDATE_POST,
+    payload,
+  };
+}
+
+export function postUpdated(payload) {
+  return {
+    type: POST_UPDATED,
+    payload,
+  };
+}
+
+export function deletePost(id) {
+  return {
+    type: DELETE_POST,
+    id,
+  };
+}
+
+export function postDeleted(payload) {
+  return {
+    type: POST_DELETED,
     payload,
   };
 }

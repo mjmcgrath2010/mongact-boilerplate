@@ -29,7 +29,13 @@ function DataTable(props) {
   };
   return (
     <Paper className={classes.root}>
-      <MUIDataTable title={title} data={data} columns={columns} options={opts || options} />
+      <MUIDataTable
+        onRowsDelete={rows => console.log(rows)}
+        title={title}
+        data={data}
+        columns={columns}
+        options={opts || options}
+      />
     </Paper>
   );
 }
