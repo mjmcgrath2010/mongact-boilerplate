@@ -11,17 +11,6 @@ return next();
 });
 };
 
-exports.getMe = (req, res) => {
-const { _id } = req.user;
-const query = {{ properCase name }}.find({ author: _id });
-query.exec((err, docs) => {
-if (err) {
-return res.json({ error: err });
-}
-return res.json(docs);
-});
-};
-
 exports.getAll = (req, res) => {
 const query = {{ properCase name }}.find({});
 query.exec((err, docs) => {
@@ -40,12 +29,14 @@ return res.send([]);
 };
 
 exports.post = (req, res, next) => {
+const { {{#each fields}} {{this}}, {{/each}} } = req.body
 const { _id } = req.user;
-{{ properCase name }}.create({ author: _id }, (err, doc) => (err ? next(err) : res.send(doc)));
+{{ properCase name }}.create({ author: _id, {{#each fields}} {{this}}, {{/each}} }, (err, doc) => (err ? next(err) : res.send(doc)));
 };
 
 exports.update = (req, res) => {
-{{ properCase name }}.updateOne({ _id: req.id }, { }, (err, doc) => {
+const { {{#each fields}} {{this}}, {{/each}} } = req.body
+{{ properCase name }}.updateOne({ _id: req.id }, { {{#each fields}} {{this}}, {{/each}} }, (err, doc) => {
 if (err) {
 return res.status(404).json({ error: err });
 }
@@ -63,7 +54,7 @@ return {{ lowerCase name }}.remove(error => {
 if (err) {
 return res.json(error);
 }
-return res.json({ message: `Removed {{ properCase name }} ${req.id}` });
+return res.json({ message: `Deleted {{ properCase name }} ${req.id}` });
 });
 }
 return res.send(401);

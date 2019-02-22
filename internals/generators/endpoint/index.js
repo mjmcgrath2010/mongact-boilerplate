@@ -23,11 +23,21 @@ module.exports = {
       default: 'Button',
       validate: () => true,
     },
+    {
+      type: 'input',
+      name: 'fields',
+      message:
+        'What fields should this endpoint contain? (enter comma separated list)',
+      default: 'name, description',
+    },
   ],
   actions: () => {
     // Generate index.js and index.test.js
 
     const actions = [
+      {
+        type: 'toArray',
+      },
       {
         type: 'add',
         path: '../../server/api/endpoints/{{lowerCase name}}/model.js',
