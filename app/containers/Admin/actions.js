@@ -72,7 +72,6 @@ export function postDeleted(payload) {
 }
 
 export function newPostCreated(payload) {
-  console.log(payload);
   return {
     type: POST_CREATED,
     payload,

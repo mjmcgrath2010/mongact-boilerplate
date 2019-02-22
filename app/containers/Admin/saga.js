@@ -77,7 +77,7 @@ export function* fetchUserData() {
     };
   } else {
     const [posts, categories] = yield all([
-      call(get, '/api/endpoints/user'),
+      call(get, '/api/endpoints/post'),
       call(get, '/api/endpoints/category'),
     ]);
     data = {
