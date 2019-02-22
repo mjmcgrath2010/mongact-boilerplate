@@ -30,6 +30,7 @@ import InviteUser from './views/InviteUser';
 import CreatePost from './views/CreatePost';
 import EditPost from './views/EditPost';
 import Categories from './views/Categories';
+import { makeSelectLocation } from '../App/selectors';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -62,7 +63,7 @@ export class Admin extends React.PureComponent {
   };
 
   render() {
-    const { dispatch, auth, admin } = this.props;
+    const { dispatch, auth, admin, location } = this.props;
     return (
       <div>
         <NavBar
@@ -83,7 +84,11 @@ export class Admin extends React.PureComponent {
           path="/admin/posts/create"
           render={() => <CreatePost dispatch={dispatch} />}
         />
-        <Route exact path="/admin/posts/:id/edit" render={() => <EditPost />} />
+        <Route
+          exact
+          path="/admin/posts/:id"
+          render={() => <EditPost location={location} />}
+        />
         <Route
           exact
           path="/admin/users"
@@ -107,11 +112,13 @@ Admin.propTypes = {
   auth: PropTypes.object.isRequired,
   fetchUserData: PropTypes.func.isRequired,
   admin: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   admin: makeSelectAdmin(),
   auth: makeSelectLogin(),
+  location: makeSelectLocation(),
 });
 
 function mapDispatchToProps(dispatch) {

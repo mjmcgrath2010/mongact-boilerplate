@@ -17,27 +17,39 @@ import DataTable from '../../../../components/ui/DataTable';
 class Posts extends React.PureComponent {
   handleNavigation = (type, id) => () => {
     const { dispatch } = this.props;
-    dispatch(push(`/admin/posts/${id}/${type}`));
+    dispatch(push({ pathname: `/admin/posts/${id}`, state: id }));
   };
 
   render() {
     const { posts } = this.props;
     const data = [];
-    posts.map(post =>
-      data.push([
-        post.title,
-        post.categories,
-        <IconButton color="primary" onClick={this.handleNavigation('edit', post._id)}>
+    posts.map(post => {
+      const { _id, title, categories } = post;
+      return data.push([
+        title,
+        categories,
+        <IconButton
+          color="primary"
+          onClick={this.handleNavigation('edit', _id)}
+        >
           <Icon>edit</Icon>
         </IconButton>,
-        <IconButton color="primary" onClick={this.handleNavigation('view', post._id)}>
+        <IconButton
+          color="primary"
+          onClick={this.handleNavigation('view', _id)}
+        >
           <Icon>remove_red_eye</Icon>
         </IconButton>,
-      ])
-    );
+      ]);
+    });
+
     return (
       <div>
-        <DataTable title="Posts" data={data} columns={['Title', 'Categories', 'Edit', 'View']} />
+        <DataTable
+          title="Posts"
+          data={data}
+          columns={['Title', 'Categories', 'Edit', 'View']}
+        />
       </div>
     );
   }
