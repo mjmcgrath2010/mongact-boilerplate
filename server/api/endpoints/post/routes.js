@@ -8,8 +8,10 @@ router.param('id', controller.params);
 
 router
   .route('/')
-  .get(controller.get)
+  .get(controller.getAll)
   .post(tokenAuth, controller.post);
+
+router.route('/me').get(controller.getMe);
 
 router
   .route('/:id')
