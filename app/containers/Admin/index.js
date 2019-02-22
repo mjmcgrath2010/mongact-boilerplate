@@ -39,12 +39,16 @@ export class Admin extends React.PureComponent {
     const token = auth.user && auth.user.token;
 
     if (!token) {
-      return dispatch(push('/login'));
+      return dispatch(
+        push({ pathname: '/login', state: window.location.pathname }),
+      );
     }
 
     return checkAuth(token).then(val => {
       if (!val) {
-        return dispatch(push('/login'));
+        return dispatch(
+          push({ pathname: '/login', state: window.location.pathname }),
+        );
       }
       return fetchUserData();
     });
@@ -59,7 +63,7 @@ export class Admin extends React.PureComponent {
   handleAuth = () => {
     const { dispatch } = this.props;
     dispatch(handleLogout());
-    dispatch(push('/login'));
+    dispatch(push({ pathname: '/login', state: window.location.pathname }));
   };
 
   render() {

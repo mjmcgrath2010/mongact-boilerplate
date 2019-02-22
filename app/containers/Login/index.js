@@ -13,6 +13,7 @@ import { push } from 'connected-react-router/immutable';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import styled from 'styled-components';
 import makeSelectLogin from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -21,6 +22,14 @@ import LoginForm from '../../components/LoginForm';
 // Actions
 import { loginRequest } from './actions';
 import { checkAuth } from '../../utils/auth';
+import { makeSelectLocation } from '../App/selectors';
+
+const LoginWrapper = styled.div`
+  width: 50%;
+  display: block;
+  margin: 10% auto 2em;
+  position: relative;
+`;
 
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.PureComponent {
@@ -35,7 +44,7 @@ export class Login extends React.PureComponent {
   }
 
   login = tken => {
-    const { dispatch, login } = this.props;
+    const { dispatch, login, location } = this.props;
     const token = tken || (login.user && login.user.token);
 
     if (!token) {
@@ -43,8 +52,10 @@ export class Login extends React.PureComponent {
     }
 
     checkAuth(token).then(val => {
-      if (val) {
-        dispatch(push('/admin'));
+      if (val && location.state) {
+        dispatch(push(location.state));
+      } else {
+        dispatch(push('/login'));
       }
     });
   };
@@ -58,9 +69,12 @@ export class Login extends React.PureComponent {
   render() {
     const { loginUser } = this.props;
     return (
-      <div>
-        <LoginForm onSubmit={val => loginUser(val)} createAccount={this.createAccount} />
-      </div>
+      <LoginWrapper>
+        <LoginForm
+          onSubmit={val => loginUser(val)}
+          createAccount={this.createAccount}
+        />
+      </LoginWrapper>
     );
   }
 }
@@ -69,10 +83,12 @@ Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   login: PropTypes.object,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   login: makeSelectLogin(),
+  location: makeSelectLocation(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -86,7 +102,7 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'login', reducer });
@@ -95,5 +111,5 @@ const withSaga = injectSaga({ key: 'login', saga });
 export default compose(
   withReducer,
   withSaga,
-  withConnect
+  withConnect,
 )(Login);

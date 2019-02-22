@@ -13,11 +13,17 @@ import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 function Input(props) {
-  const { name, helperText, label, onChange, value } = props;
+  const { name, helperText, label, onChange, value, type } = props;
   return (
     <FormControl fullWidth>
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <MUIInput value={value} onChange={val => onChange(val)} id={name} aria-describedby={`${name}-helper-text`} />
+      <MUIInput
+        type={type || 'text'}
+        value={value}
+        onChange={val => onChange(val)}
+        id={name}
+        aria-describedby={`${name}-helper-text`}
+      />
       <FormHelperText id={`${name}-helper-text`}>{helperText}</FormHelperText>
     </FormControl>
   );
@@ -29,6 +35,7 @@ Input.propTypes = {
   helperText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 export default Input;
