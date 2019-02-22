@@ -10,10 +10,12 @@ const { exec } = require('child_process');
 const componentGenerator = require('./component/index.js');
 const containerGenerator = require('./container/index.js');
 const languageGenerator = require('./language/index.js');
+const endpointGenerator = require('./endpoint/index.js');
 
 module.exports = plop => {
   plop.setGenerator('component', componentGenerator);
   plop.setGenerator('container', containerGenerator);
+  plop.setGenerator('endpoint', endpointGenerator);
   plop.setGenerator('language', languageGenerator);
   plop.addHelper('directory', comp => {
     try {
@@ -28,9 +30,11 @@ module.exports = plop => {
   });
   plop.addHelper('curly', (object, open) => (open ? '{' : '}'));
   plop.setActionType('prettify', (answers, config) => {
+    const pathName =
+      answers.type === 'Endpoint' ? '/../../app/' : '/../../server/';
     const folderPath = `${path.join(
       __dirname,
-      '/../../app/',
+      pathName,
       config.path,
       plop.getHelper('properCase')(answers.name),
       '**.js',

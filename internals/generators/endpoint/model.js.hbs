@@ -1,0 +1,11 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const {{ properCase name }}Schema = new mongoose.Schema({
+author: {
+type: Schema.Types.ObjectId,
+ref: 'user',
+},
+});
+
+module.exports = mongoose.model('post', PostSchema);
