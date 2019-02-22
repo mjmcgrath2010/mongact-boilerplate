@@ -29,12 +29,7 @@ class InviteUser extends React.PureComponent {
   render() {
     return (
       <div>
-        <Form
-          fields={fields}
-          onSubmit={this.handleInvite}
-          submitText="INVITE"
-          header="Add new user"
-        />
+        <Form fields={fields} onSubmit={this.handleInvite} submitText="INVITE" header="Add new user" />
       </div>
     );
   }

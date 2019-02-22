@@ -28,6 +28,7 @@ import Posts from './views/Posts';
 import Users from './views/Users';
 import InviteUser from './views/InviteUser';
 import CreatePost from './views/CreatePost';
+import EditPost from './views/EditPost';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -71,21 +72,10 @@ export class Admin extends React.PureComponent {
           viewName="Admin"
           dispatch={dispatch}
         />
-        <Route
-          exact
-          path="/admin/posts"
-          render={() => <Posts posts={admin.posts} />}
-        />
-        <Route
-          exact
-          path="/admin/posts/create"
-          render={() => <CreatePost dispatch={dispatch} />}
-        />
-        <Route
-          exact
-          path="/admin/users"
-          render={() => <Users users={admin.users} />}
-        />
+        <Route exact path="/admin/posts" render={() => <Posts dispatch={dispatch} posts={admin.posts} />} />
+        <Route exact path="/admin/posts/create" render={() => <CreatePost dispatch={dispatch} />} />
+        <Route exact path="/admin/posts/:id/edit" render={() => <EditPost />} />
+        <Route exact path="/admin/users" render={() => <Users users={admin.users} />} />
         <Route exact path="/admin/invite-user" render={() => <InviteUser />} />
       </div>
     );
@@ -113,7 +103,7 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 );
 
 const withReducer = injectReducer({ key: 'admin', reducer });
@@ -122,5 +112,5 @@ const withSaga = injectSaga({ key: 'admin', saga });
 export default compose(
   withReducer,
   withSaga,
-  withConnect,
+  withConnect
 )(Admin);

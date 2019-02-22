@@ -11,14 +11,12 @@ exports.params = (req, res, next, id) => {
 
 exports.get = (req, res) => {
   const query = Post.find({});
-  query
-    .select({ _id: 1, title: 1, categories: 1, content: 1, author: 1 })
-    .exec((err, docs) => {
-      if (err) {
-        return res.json({ error: err });
-      }
-      return res.json(docs);
-    });
+  query.select({ _id: 1, title: 1, categories: 1, content: 1, author: 1 }).exec((err, docs) => {
+    if (err) {
+      return res.json({ error: err });
+    }
+    return res.json(docs);
+  });
 };
 
 exports.getOne = (req, res) => {
@@ -31,10 +29,7 @@ exports.getOne = (req, res) => {
 exports.post = (req, res, next) => {
   const { title, content, categories } = req.body;
   const { _id } = req.user;
-  Post.create(
-    { title, content, categories, author: _id },
-    (err, doc) => (err ? next(err) : res.send(doc)),
-  );
+  Post.create({ title, content, categories, author: _id }, (err, doc) => (err ? next(err) : res.send(doc)));
 };
 
 exports.update = (req, res, next) => {

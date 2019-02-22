@@ -7,11 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import MUIDataTable from 'mui-datatables';
 import Paper from '@material-ui/core/Paper';
 
 const styles = () => ({
@@ -22,65 +18,28 @@ const styles = () => ({
     display: 'block',
     overflowX: 'auto',
   },
-  table: {
-    minWidth: 700,
-  },
 });
-
-const createHeader = props => {
-  const { rows } = props;
-  const headers = Object.keys(rows[0]);
-  if (headers.length) {
-    return headers.map(header => (
-      <TableCell align="center" key={header}>
-        {header
-          .toUpperCase()
-          .replace('_', ' ')
-          .trim()}
-      </TableCell>
-    ));
-  }
-  return null;
-};
-
-const createRow = data => {
-  const array = Object.keys(data);
-  return array.map(key => (
-    <TableCell key={Math.random()} align="center">
-      {data[key].toString()}
-    </TableCell>
-  ));
-};
-
-const createRows = props => {
-  const { rows } = props;
-  if (rows.length) {
-    return rows.map(row => (
-      <TableRow key={Math.random()}>{createRow(row)}</TableRow>
-    ));
-  }
-  return null;
-};
 
 // import styled from 'styled-components';
 
 function DataTable(props) {
-  const { classes } = props;
-
+  const { classes, data, columns, opts, title } = props;
+  const options = {
+    filterType: 'checkbox',
+  };
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>{createHeader(props)}</TableRow>
-        </TableHead>
-        <TableBody>{createRows(props)}</TableBody>
-      </Table>
+      <MUIDataTable title={title} data={data} columns={columns} options={opts || options} />
     </Paper>
   );
 }
 
 DataTable.propTypes = {
   classes: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  opts: PropTypes.object,
+  title: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(DataTable);

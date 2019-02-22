@@ -28,7 +28,7 @@ exports.local = () => {
         }
         return done(null, user);
       });
-    }),
+    })
   );
 };
 
@@ -51,6 +51,6 @@ exports.jwt = () => {
         return done(null, false);
         // or you could create a new account
       });
-    }),
+    })
   );
 };

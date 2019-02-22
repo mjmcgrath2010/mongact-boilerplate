@@ -59,10 +59,7 @@ export class Login extends React.PureComponent {
     const { loginUser } = this.props;
     return (
       <div>
-        <LoginForm
-          onSubmit={val => loginUser(val)}
-          createAccount={this.createAccount}
-        />
+        <LoginForm onSubmit={val => loginUser(val)} createAccount={this.createAccount} />
       </div>
     );
   }
@@ -89,7 +86,7 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 );
 
 const withReducer = injectReducer({ key: 'login', reducer });
@@ -98,5 +95,5 @@ const withSaga = injectSaga({ key: 'login', saga });
 export default compose(
   withReducer,
   withSaga,
-  withConnect,
+  withConnect
 )(Login);

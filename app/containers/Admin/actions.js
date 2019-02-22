@@ -4,13 +4,7 @@
  *
  */
 
-import {
-  DEFAULT_ACTION,
-  FETCH_USER_DATA,
-  USER_DATA_RECEIVED,
-  CREATE_POST_REQUEST,
-  POST_CREATED,
-} from './constants';
+import { DEFAULT_ACTION, FETCH_USER_DATA, USER_DATA_RECEIVED, CREATE_POST_REQUEST, POST_CREATED } from './constants';
 
 export function defaultAction() {
   return {

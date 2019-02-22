@@ -135,11 +135,7 @@ class NavBar extends React.Component {
           <Divider />
           <List>
             {userLinks.map(link => (
-              <ListItem
-                onClick={() => this.handleNavigation(link.path)}
-                button
-                key={link.text}
-              >
+              <ListItem onClick={() => this.handleNavigation(link.path)} button key={link.text}>
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -160,11 +156,7 @@ class NavBar extends React.Component {
           <Divider />
           <List>
             {adminLinks.map(link => (
-              <ListItem
-                onClick={() => this.handleNavigation(link.path)}
-                button
-                key={link.text}
-              >
+              <ListItem onClick={() => this.handleNavigation(link.path)} button key={link.text}>
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -213,11 +205,7 @@ class NavBar extends React.Component {
               Menu
             </Typography>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           {this.renderUserLinks()}

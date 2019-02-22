@@ -42,7 +42,7 @@ class CreatePost extends React.Component {
       createPost({
         content: this.state.content,
         title: this.state.title,
-      }),
+      })
     );
   };
 
@@ -51,17 +51,9 @@ class CreatePost extends React.Component {
       <div>
         <HeaderWrapper>
           <Typography variant="title">Create a new Post</Typography>
-          <Input
-            name="title"
-            label="Title"
-            onChange={this.handleChange('title')}
-            value={this.state.title}
-          />
+          <Input name="title" label="Title" onChange={this.handleChange('title')} value={this.state.title} />
         </HeaderWrapper>
-        <TextEditor
-          handleChange={this.handleEditorChange}
-          value={this.state.content}
-        />
+        <TextEditor handleChange={this.handleEditorChange} value={this.state.content} />
         <Button text="Save" onClick={this.handleSave} />
       </div>
     );
