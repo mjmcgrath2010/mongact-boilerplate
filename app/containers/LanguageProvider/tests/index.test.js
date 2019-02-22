@@ -23,7 +23,7 @@ describe('<LanguageProvider />', () => {
     const renderedComponent = shallow(
       <LanguageProvider messages={messages} locale="en">
         {children}
-      </LanguageProvider>,
+      </LanguageProvider>
     );
     expect(renderedComponent.contains(children)).toBe(true);
   });
@@ -42,12 +42,8 @@ describe('<ConnectedLanguageProvider />', () => {
         <ConnectedLanguageProvider messages={translationMessages}>
           <FormattedMessage {...messages.someMessage} />
         </ConnectedLanguageProvider>
-      </Provider>,
+      </Provider>
     );
-    expect(
-      renderedComponent.contains(
-        <FormattedMessage {...messages.someMessage} />,
-      ),
-    ).toBe(true);
+    expect(renderedComponent.contains(<FormattedMessage {...messages.someMessage} />)).toBe(true);
   });
 });

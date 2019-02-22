@@ -15,7 +15,11 @@ const selectAdminDomain = state => state.get('admin', initialState);
  * Default selector used by Admin
  */
 
-const makeSelectAdmin = () => createSelector(selectAdminDomain, substate => substate.toJS());
+const makeSelectAdmin = () =>
+  createSelector(
+    selectAdminDomain,
+    substate => substate.toJS()
+  );
 
 export default makeSelectAdmin;
 export { selectAdminDomain };

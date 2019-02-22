@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const endpoints = require('./endpoints');
-const initPassport = require('./services/passport');
+const passportServices = require('./services/passport');
 
-initPassport();
+passportServices.local();
+passportServices.jwt();
+passportServices.init();
 
 router.use('/endpoints', endpoints);
 

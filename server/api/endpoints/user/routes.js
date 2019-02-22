@@ -1,14 +1,16 @@
 const router = require('express').Router();
+
 const controller = require('./controller');
-const { isAuthenticated, isAdmin } = require('../utils');
+const { isAdmin, tokenAuth } = require('../utils/auth');
 
 // setup boilerplate route just to satisfy a request
 // for building
+
 router.param('id', controller.params);
 
 router
   .route('/')
-  .get(isAuthenticated, isAdmin, controller.get)
+  .get(tokenAuth, isAdmin, controller.get)
   .post(controller.post);
 
 router
