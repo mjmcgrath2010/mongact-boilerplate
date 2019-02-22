@@ -32,6 +32,7 @@ export function* post(url, body) {
 export function* fetchUserData() {
   const auth = yield select(makeSelectLogin());
   let data = {};
+
   if (auth.user.admin) {
     const [users, posts, categories] = yield all([
       call(get, '/api/endpoints/user'),
@@ -44,12 +45,13 @@ export function* fetchUserData() {
       categories,
     };
   } else {
-    const [posts] = yield all([
+    const [posts, categories] = yield all([
       call(get, '/api/endpoints/user'),
-      call(get, '/api/endpoints/post'),
+      call(get, '/api/endpoints/category'),
     ]);
     data = {
       posts,
+      categories,
     };
   }
 

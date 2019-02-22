@@ -115,6 +115,8 @@ class NavBar extends React.Component {
         return <Icon>file_copy</Icon>;
       case 'new-post':
         return <Icon>create</Icon>;
+      case 'categories':
+        return <Icon>filter_list</Icon>;
       default:
         return <MailIcon />;
     }
@@ -135,7 +137,11 @@ class NavBar extends React.Component {
           <Divider />
           <List>
             {userLinks.map(link => (
-              <ListItem onClick={() => this.handleNavigation(link.path)} button key={link.text}>
+              <ListItem
+                onClick={() => this.handleNavigation(link.path)}
+                button
+                key={link.text}
+              >
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -156,7 +162,11 @@ class NavBar extends React.Component {
           <Divider />
           <List>
             {adminLinks.map(link => (
-              <ListItem onClick={() => this.handleNavigation(link.path)} button key={link.text}>
+              <ListItem
+                onClick={() => this.handleNavigation(link.path)}
+                button
+                key={link.text}
+              >
                 <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
                 <ListItemText primary={link.text} />
               </ListItem>
@@ -173,7 +183,7 @@ class NavBar extends React.Component {
     const { open } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar>
             <IconButton
               onClick={this.handleDrawerOpen}
@@ -205,7 +215,11 @@ class NavBar extends React.Component {
               Menu
             </Typography>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {theme.direction === 'ltr' ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
             </IconButton>
           </div>
           {this.renderUserLinks()}

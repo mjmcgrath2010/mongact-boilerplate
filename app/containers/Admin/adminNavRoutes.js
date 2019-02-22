@@ -10,6 +10,11 @@ const adminRoutes = {
       icon: 'new-post',
       path: '/admin/posts/create',
     },
+    {
+      text: 'Categories',
+      icon: 'categories',
+      path: '/admin/categories',
+    },
   ],
   adminRoutes: [
     {
