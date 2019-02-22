@@ -1,0 +1,61 @@
+const {{ properCase name }} = require('./model');
+
+exports.params = (req, res, next, id) => {
+{{ properCase name }}.find({ _id: id }, (err, doc) => {
+if (err) {
+return res.send(err);
+}
+req.{{ lowerCase name }} = doc;
+req.id = id;
+return next();
+});
+};
+
+exports.getAll = (req, res) => {
+const query = {{ properCase name }}.find({});
+query.exec((err, docs) => {
+if (err) {
+return res.json({ error: err });
+}
+return res.json(docs);
+});
+};
+
+exports.getOne = (req, res) => {
+if (req.{{ lowerCase name }}) {
+return res.json(req.{{ lowerCase name }});
+}
+return res.send([]);
+};
+
+exports.post = (req, res, next) => {
+const { {{#each fields}} {{this}}, {{/each}} } = req.body
+const { _id } = req.user;
+{{ properCase name }}.create({ author: _id, {{#each fields}} {{this}}, {{/each}} }, (err, doc) => (err ? next(err) : res.send(doc)));
+};
+
+exports.update = (req, res) => {
+const { {{#each fields}} {{this}}, {{/each}} } = req.body
+{{ properCase name }}.updateOne({ _id: req.id }, { {{#each fields}} {{this}}, {{/each}} }, (err, doc) => {
+if (err) {
+return res.status(404).json({ error: err });
+}
+return res.json(doc);
+});
+};
+
+exports.delete = (req, res) =>
+{{ properCase name }}.findById({ _id: req.id }, (err, {{ lowerCase name }}) => {
+if (err) {
+return res.json(err);
+}
+if ({{ lowerCase name }}) {
+return {{ lowerCase name }}.remove(error => {
+if (err) {
+return res.json(error);
+}
+return res.json({ message: `Deleted {{ properCase name }} ${req.id}` });
+});
+}
+return res.send(401);
+});
