@@ -39,15 +39,14 @@ class CreatePost extends React.Component {
   state = {
     content: '',
     title: '',
-    hasChanges: false,
   };
 
   handleEditorChange = value => {
-    this.setState({ content: value, hasChanges: true });
+    this.setState({ content: value });
   };
 
   handleChange = name => ({ target }) => {
-    this.setState({ [name]: target.value, hasChanges: true });
+    this.setState({ [name]: target.value });
   };
 
   handleSave = () => {
@@ -68,7 +67,6 @@ class CreatePost extends React.Component {
   };
 
   render() {
-    const { hasChanges } = this.state;
     return (
       <div>
         <Wrapper>
@@ -98,9 +96,9 @@ class CreatePost extends React.Component {
           <ButtonContainer>
             <Button
               color="primary"
-              variant={hasChanges ? 'outlined' : 'disabled'}
+              variant="outlined"
               text="Save"
-              onClick={hasChanges ? this.handleSave : null}
+              onClick={this.handleSave}
             />
           </ButtonContainer>
         </Footer>
