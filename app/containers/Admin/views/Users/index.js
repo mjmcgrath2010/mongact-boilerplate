@@ -13,7 +13,10 @@ import DataTable from '../../../../components/ui/DataTable';
 class Users extends React.PureComponent {
   renderUserTable = () => {
     const { users } = this.props;
-    return <DataTable rows={users} />;
+    const headers = ['Username', 'Admin'];
+    const data = [];
+    users.map(user => data.push([user.username, user.admin.toString()]));
+    return <DataTable title="Users" columns={headers} data={data} />;
   };
 
   render() {
