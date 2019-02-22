@@ -17,7 +17,7 @@ import DataTable from '../../../../components/ui/DataTable';
 class Posts extends React.PureComponent {
   handleNavigation = (type, id) => () => {
     const { dispatch } = this.props;
-    dispatch(push({ pathname: `/admin/posts/${id}`, state: id }));
+    dispatch(push({ pathname: `/admin/posts/edit/${id}`, state: id }));
   };
 
   render() {
