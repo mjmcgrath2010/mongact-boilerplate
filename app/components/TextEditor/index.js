@@ -13,7 +13,7 @@ import styled from 'styled-components';
 const EditorWrapper = styled.div`
   display: block;
   position: relative;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -21,7 +21,12 @@ const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
     ['link', 'image'],
     ['clean'],
   ],
@@ -50,7 +55,7 @@ class TextEditor extends React.Component {
         <ReactQuill
           modules={modules}
           formats={formats}
-          style={{ height: '60vh' }}
+          style={{ height: '400px' }}
           value={value}
           onChange={handleChange}
         />
