@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select, all } from 'redux-saga/effects';
+import { push } from 'connected-react-router/immutable';
 import request from '../../utils/request';
 import makeSelectLogin from '../Login/selectors';
 import {
@@ -133,7 +134,11 @@ export function* deletePost(action) {
   const { id } = action;
   const deletedPost = yield call(remove, `/api/endpoints/post/${id}`);
   try {
-    yield put(postDeleted(deletedPost));
+    yield all([
+      put(postDeleted(deletedPost)),
+      put({ type: FETCH_USER_DATA }),
+      put(push('/admin/posts')),
+    ]);
   } catch (e) {
     console.error(e);
   }

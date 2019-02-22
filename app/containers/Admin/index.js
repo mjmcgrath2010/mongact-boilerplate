@@ -22,7 +22,7 @@ import { checkAuth } from '../../utils/auth';
 import makeSelectLogin from '../Login/selectors';
 import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
-import { requestUserData } from './actions';
+import { clearMessages, requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
 import Posts from './views/Posts';
 import Users from './views/Users';
@@ -68,6 +68,20 @@ export class Admin extends React.PureComponent {
 
   render() {
     const { dispatch, auth, admin, location } = this.props;
+    const FlashMessages = () => {
+      if (admin.successMessage || admin.errorMessage) {
+        setTimeout(() => {
+          dispatch(clearMessages());
+        }, 5000);
+      }
+      if (admin.successMessage) {
+        return <div>{admin.successMessage}</div>;
+      }
+      if (admin.errorMessage) {
+        return <div>{admin.errorMessage}</div>;
+      }
+      return null;
+    };
     return (
       <div>
         <NavBar
@@ -78,6 +92,7 @@ export class Admin extends React.PureComponent {
           viewName="Admin"
           dispatch={dispatch}
         />
+        <FlashMessages />
         <Route
           exact
           path="/admin/posts"

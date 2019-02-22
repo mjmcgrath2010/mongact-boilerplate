@@ -14,6 +14,7 @@ import {
   DELETE_POST,
   POST_UPDATED,
   POST_DELETED,
+  CLEAR_MESSAGES,
 } from './constants';
 
 export function defaultAction() {
@@ -75,5 +76,11 @@ export function newPostCreated(payload) {
   return {
     type: POST_CREATED,
     payload,
+  };
+}
+
+export function clearMessages() {
+  return {
+    type: CLEAR_MESSAGES,
   };
 }
