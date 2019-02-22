@@ -6,6 +6,8 @@
 
 'use strict';
 
+const componentExists = require('../utils/componentExists');
+
 module.exports = {
   description: 'Create a new endpoint',
   prompts: [
@@ -21,7 +23,15 @@ module.exports = {
       name: 'name',
       message: 'What should it be called?',
       default: 'Button',
-      validate: () => true,
+      validate: value => {
+        if (/.+/.test(value)) {
+          return componentExists(value)
+            ? 'A component or container with this name already exists'
+            : true;
+        }
+
+        return 'The name is required';
+      },
     },
     {
       type: 'input',
