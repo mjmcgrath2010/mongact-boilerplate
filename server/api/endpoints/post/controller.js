@@ -24,7 +24,7 @@ exports.getMe = (req, res) => {
 
 exports.getAll = (req, res) => {
   const query = Post.find({});
-  query.exec((err, docs) => {
+  query.populate('author').exec((err, docs) => {
     if (err) {
       return res.json({ error: err });
     }
