@@ -13,6 +13,7 @@ import {
   POST_UPDATED,
   USER_CREATED,
   USER_DATA_RECEIVED,
+  USER_DELETED,
 } from './constants';
 
 export const initialState = fromJS({
@@ -38,6 +39,8 @@ function adminReducer(state = initialState, action) {
       return state.set('successMessage', 'Post successfully deleted!');
     case POST_CREATED:
       return state.set('successMessage', 'Post successfully created!');
+    case USER_DELETED:
+      return state.set('successMessage', 'User successfully deleted!');
     case USER_CREATED:
       return state.set('successMessage', 'User successfully created!');
     case CLEAR_MESSAGES:

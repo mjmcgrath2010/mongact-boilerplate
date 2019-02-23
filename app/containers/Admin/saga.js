@@ -17,6 +17,7 @@ import {
   DELETE_POST,
   CREATE_USER,
   POST_DELETED,
+  DELETE_USER,
 } from './constants';
 import {
   userDataReceived,
@@ -24,6 +25,7 @@ import {
   postUpdated,
   postDeleted,
   userCreated,
+  userDeleted,
 } from './actions';
 
 export function* get(url) {
@@ -169,6 +171,17 @@ export function* createUser(action) {
   }
 }
 
+export function* deleteUser(action) {
+  const { id } = action;
+  const deletedUser = yield call(remove, `/api/endpoints/user/${id}`);
+
+  try {
+    yield put(userDeleted(deletedUser));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 // Individual exports for testing
 export default function* adminSaga() {
   // See example in containers/HomePage/saga.js
@@ -180,5 +193,6 @@ export default function* adminSaga() {
     takeEvery(UPDATE_POST, updatePost),
     takeEvery(DELETE_POST, deletePost),
     takeLatest(CREATE_USER, createUser),
+    takeLatest(DELETE_USER, deleteUser),
   ]);
 }

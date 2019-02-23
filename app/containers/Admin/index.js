@@ -113,7 +113,7 @@ export class Admin extends React.PureComponent {
         <Route
           exact
           path="/admin/users"
-          render={() => <Users users={admin.users} />}
+          render={() => <Users dispatch={dispatch} users={admin.users} />}
         />
         <Route
           exact
