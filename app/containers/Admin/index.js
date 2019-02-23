@@ -22,7 +22,7 @@ import { checkAuth } from '../../utils/auth';
 import makeSelectLogin from '../Login/selectors';
 import { LOGOUT_REQUEST } from '../Login/constants';
 import { handleLogout } from '../Login/actions';
-import { requestUserData } from './actions';
+import { clearMessages, requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
 import Posts from './views/Posts';
 import Users from './views/Users';
@@ -30,6 +30,8 @@ import InviteUser from './views/InviteUser';
 import CreatePost from './views/CreatePost';
 import EditPost from './views/EditPost';
 import Categories from './views/Categories';
+import { makeSelectLocation } from '../App/selectors';
+import Dialog from '../../components/ui/Dialog';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Admin extends React.PureComponent {
@@ -38,12 +40,16 @@ export class Admin extends React.PureComponent {
     const token = auth.user && auth.user.token;
 
     if (!token) {
-      return dispatch(push('/login'));
+      return dispatch(
+        push({ pathname: '/login', state: window.location.pathname }),
+      );
     }
 
     return checkAuth(token).then(val => {
       if (!val) {
-        return dispatch(push('/login'));
+        return dispatch(
+          push({ pathname: '/login', state: window.location.pathname }),
+        );
       }
       return fetchUserData();
     });
@@ -58,11 +64,26 @@ export class Admin extends React.PureComponent {
   handleAuth = () => {
     const { dispatch } = this.props;
     dispatch(handleLogout());
-    dispatch(push('/login'));
+    dispatch(push({ pathname: '/login', state: window.location.pathname }));
   };
 
   render() {
-    const { dispatch, auth, admin } = this.props;
+    const { dispatch, auth, admin, location } = this.props;
+    const FlashMessages = () => {
+      if (admin.successMessage) {
+        setTimeout(() => {
+          dispatch(clearMessages());
+        }, 5000);
+        return <Dialog variant="success" message={admin.successMessage} />;
+      }
+      if (admin.errorMessage) {
+        setTimeout(() => {
+          dispatch(clearMessages());
+        }, 5000);
+        return <Dialog variant="error" message={admin.errorMessage} />;
+      }
+      return null;
+    };
     return (
       <div>
         <NavBar
@@ -73,6 +94,7 @@ export class Admin extends React.PureComponent {
           viewName="Admin"
           dispatch={dispatch}
         />
+        <FlashMessages />
         <Route
           exact
           path="/admin/posts"
@@ -83,7 +105,11 @@ export class Admin extends React.PureComponent {
           path="/admin/posts/create"
           render={() => <CreatePost dispatch={dispatch} />}
         />
-        <Route exact path="/admin/posts/:id/edit" render={() => <EditPost />} />
+        <Route
+          exact
+          path="/admin/posts/edit/:id"
+          render={() => <EditPost location={location} dispatch={dispatch} />}
+        />
         <Route
           exact
           path="/admin/users"
@@ -107,11 +133,13 @@ Admin.propTypes = {
   auth: PropTypes.object.isRequired,
   fetchUserData: PropTypes.func.isRequired,
   admin: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   admin: makeSelectAdmin(),
   auth: makeSelectLogin(),
+  location: makeSelectLocation(),
 });
 
 function mapDispatchToProps(dispatch) {
