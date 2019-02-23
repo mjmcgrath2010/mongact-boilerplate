@@ -25,6 +25,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Icon from '@material-ui/core/Icon';
 import { push } from 'connected-react-router/immutable';
+import Collapse from '@material-ui/core/es/Collapse/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -40,6 +43,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -93,6 +99,25 @@ class NavBar extends React.Component {
     open: false,
   };
 
+  componentDidMount() {
+    const { userLinks, adminLinks } = this.props;
+    [userLinks, adminLinks].map(links => {
+      if (links.length) {
+        return this.setUpNestedLinks(links);
+      }
+      return false;
+    });
+  }
+
+  setUpNestedLinks = links =>
+    links.map(link => {
+      if (link.children) {
+        const prop = `${link.text}Open`;
+        return this.setState({ [prop]: false });
+      }
+      return false;
+    });
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -128,6 +153,10 @@ class NavBar extends React.Component {
     dispatch(push(path));
   };
 
+  handleNestedLinkClick = prop => () => {
+    this.setState(state => ({ [prop]: !state[prop] }));
+  };
+
   renderUserLinks = () => {
     const { userLinks } = this.props;
 
@@ -135,23 +164,64 @@ class NavBar extends React.Component {
       return (
         <div>
           <Divider />
-          <List>
-            {userLinks.map(link => (
-              <ListItem
-                onClick={() => this.handleNavigation(link.path)}
-                button
-                key={link.text}
-              >
-                <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
-                <ListItemText primary={link.text} />
-              </ListItem>
-            ))}
-          </List>
+          <List>{this.renderLinks(userLinks)}</List>
         </div>
       );
     }
     return null;
   };
+
+  renderChildLinks = links => {
+    const { classes } = this.props;
+    return links.map(link => (
+      <ListItem
+        className={classes.nested}
+        onClick={() => this.handleNavigation(link.path)}
+        button
+        key={link.text}
+      >
+        <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
+        <ListItemText inset primary={link.text} />
+      </ListItem>
+    ));
+  };
+
+  renderLinks = links =>
+    links.map(link => {
+      if (link.children && link.children.length) {
+        return (
+          <div key={link.text}>
+            <ListItem
+              button
+              onClick={this.handleNestedLinkClick(`${link.text}Open`)}
+            >
+              <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
+              <ListItemText primary={link.text} />
+              {this.state[`${link.text}Open`] ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse
+              in={this.state[`${link.text}Open`]}
+              timeout="auto"
+              unmountOnExit
+            >
+              <List component="div" disablePadding>
+                {this.renderChildLinks(link.children)}
+              </List>
+            </Collapse>
+          </div>
+        );
+      }
+      return (
+        <ListItem
+          onClick={() => this.handleNavigation(link.path)}
+          button
+          key={link.text}
+        >
+          <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
+          <ListItemText primary={link.text} />
+        </ListItem>
+      );
+    });
 
   renderAdminLinks = () => {
     const { adminLinks } = this.props;
@@ -160,18 +230,7 @@ class NavBar extends React.Component {
       return (
         <div>
           <Divider />
-          <List>
-            {adminLinks.map(link => (
-              <ListItem
-                onClick={() => this.handleNavigation(link.path)}
-                button
-                key={link.text}
-              >
-                <ListItemIcon>{this.renderIcon(link.icon)}</ListItemIcon>
-                <ListItemText primary={link.text} />
-              </ListItem>
-            ))}
-          </List>
+          <List>{this.renderLinks(adminLinks)}</List>
         </div>
       );
     }
