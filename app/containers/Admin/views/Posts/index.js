@@ -31,7 +31,7 @@ class Posts extends React.PureComponent {
     const data = [];
     const columns = [
       {
-        name: 'ID',
+        name: 'id',
         options: {
           filter: false,
           sort: false,

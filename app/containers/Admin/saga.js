@@ -16,6 +16,7 @@ import {
   UPDATE_POST,
   DELETE_POST,
   CREATE_USER,
+  POST_DELETED,
 } from './constants';
 import {
   userDataReceived,
@@ -175,6 +176,7 @@ export default function* adminSaga() {
     takeEvery(FETCH_USER_DATA, fetchUserData),
     takeEvery(CREATE_POST, createPost),
     takeEvery(POST_CREATED, fetchPostData),
+    takeEvery(POST_DELETED, fetchPostData),
     takeEvery(UPDATE_POST, updatePost),
     takeEvery(DELETE_POST, deletePost),
     takeLatest(CREATE_USER, createUser),
