@@ -9,10 +9,10 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/es/Typography/Typography';
 import PropTypes from 'prop-types';
 import { push } from 'connected-react-router/immutable';
-import TextEditor from '../../../../components/TextEditor';
-import Input from '../../../../components/ui/Input';
-import { createPost } from '../../actions';
-import Button from '../../../../components/ui/Button';
+import TextEditor from '../../../../../components/TextEditor';
+import Input from '../../../../../components/ui/Input';
+import { createPost } from '../../../actions';
+import Button from '../../../../../components/ui/Button';
 
 const Wrapper = styled.div`
   width: 80%;
