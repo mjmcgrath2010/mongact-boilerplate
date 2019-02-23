@@ -23,9 +23,17 @@ const styles = () => ({
 // import styled from 'styled-components';
 
 function DataTable(props) {
-  const { classes, data, columns, opts, title } = props;
+  const { classes, data, columns, opts, title, deleteRowHandler } = props;
   const options = {
+    print: false,
+    download: false,
     filterType: 'checkbox',
+    onRowsDelete: array => {
+      if (array.data) {
+        return array.data.map(row => deleteRowHandler(data[row.index][0]));
+      }
+      return false;
+    },
   };
   return (
     <Paper className={classes.root}>
@@ -34,7 +42,7 @@ function DataTable(props) {
         title={title}
         data={data}
         columns={columns}
-        options={opts || options}
+        options={Object.assign(options, opts)}
       />
     </Paper>
   );
@@ -46,6 +54,7 @@ DataTable.propTypes = {
   columns: PropTypes.array.isRequired,
   opts: PropTypes.object,
   title: PropTypes.string.isRequired,
+  deleteRowHandler: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(DataTable);

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import DataTable from '../../../../components/ui/DataTable';
+import DataTable from '../../../../components/DataTable';
 // import styled from 'styled-components';
 
 /* eslint-disable react/prefer-stateless-function */
