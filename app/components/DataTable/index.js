@@ -27,6 +27,7 @@ function DataTable(props) {
   const options = {
     print: false,
     download: false,
+    filter: !!data.length,
     filterType: 'checkbox',
     onRowsDelete: array => {
       if (array.data) {

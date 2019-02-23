@@ -29,6 +29,37 @@ class Posts extends React.PureComponent {
   render() {
     const { posts } = this.props;
     const data = [];
+    const columns = [
+      {
+        name: 'ID',
+        options: {
+          filter: false,
+          sort: false,
+          display: false,
+        },
+      },
+      {
+        name: 'Title',
+        options: {
+          filter: true,
+          sort: false,
+        },
+      },
+      {
+        name: 'Categories',
+        options: {
+          filter: true,
+          sort: false,
+        },
+      },
+      {
+        name: 'Edit',
+        options: {
+          filter: true,
+          sort: false,
+        },
+      },
+    ];
     posts.map(post => {
       const { _id, title, categories } = post;
       return data.push([
@@ -41,12 +72,6 @@ class Posts extends React.PureComponent {
         >
           <Icon>edit</Icon>
         </IconButton>,
-        <IconButton
-          color="primary"
-          onClick={this.handleNavigation('view', _id)}
-        >
-          <Icon>remove_red_eye</Icon>
-        </IconButton>,
       ]);
     });
 
@@ -56,7 +81,7 @@ class Posts extends React.PureComponent {
           deleteRowHandler={this.deleteRow}
           title="Posts"
           data={data}
-          columns={['ID', 'Title', 'Categories', 'Edit', 'View']}
+          columns={columns}
         />
       </div>
     );
