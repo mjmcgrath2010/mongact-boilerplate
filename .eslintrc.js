@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
+const prettierOptions = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'));
 
 module.exports = {
   parser: 'babel-eslint',
@@ -79,6 +77,12 @@ module.exports = {
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
   },
+  overrides: [
+    {
+      files: ['docs/*.js'],
+      excludedFiles: 'docs/*.js',
+    },
+  ],
   settings: {
     'import/resolver': {
       webpack: {
