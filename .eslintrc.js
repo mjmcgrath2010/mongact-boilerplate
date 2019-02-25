@@ -80,7 +80,7 @@ module.exports = {
   overrides: [
     {
       files: ['docs/*.js'],
-      excludedFiles: 'docs/*.js',
+      excludedFiles: '*.js, *.json',
     },
   ],
   settings: {
