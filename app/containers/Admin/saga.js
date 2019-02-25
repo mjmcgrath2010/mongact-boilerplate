@@ -1,19 +1,31 @@
-import { takeEvery, call, put, select, all } from 'redux-saga/effects';
+import {
+  takeEvery,
+  call,
+  put,
+  select,
+  all,
+  takeLatest,
+} from 'redux-saga/effects';
 import { push } from 'connected-react-router/immutable';
 import request from '../../utils/request';
 import makeSelectLogin from '../Login/selectors';
 import {
   FETCH_USER_DATA,
-  CREATE_POST_REQUEST,
+  CREATE_POST,
   POST_CREATED,
   UPDATE_POST,
   DELETE_POST,
+  CREATE_USER,
+  POST_DELETED,
+  DELETE_USER,
 } from './constants';
 import {
   userDataReceived,
   newPostCreated,
   postUpdated,
   postDeleted,
+  userCreated,
+  userDeleted,
 } from './actions';
 
 export function* get(url) {
@@ -144,14 +156,43 @@ export function* deletePost(action) {
   }
 }
 
+export function* createUser(action) {
+  const { username, password, admin } = action.payload;
+  const user = yield call(post, '/api/endpoints/user', {
+    username,
+    password,
+    admin,
+  });
+
+  try {
+    yield put(userCreated(user));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* deleteUser(action) {
+  const { id } = action;
+  const deletedUser = yield call(remove, `/api/endpoints/user/${id}`);
+
+  try {
+    yield put(userDeleted(deletedUser));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 // Individual exports for testing
 export default function* adminSaga() {
   // See example in containers/HomePage/saga.js
   yield all([
     takeEvery(FETCH_USER_DATA, fetchUserData),
-    takeEvery(CREATE_POST_REQUEST, createPost),
+    takeEvery(CREATE_POST, createPost),
     takeEvery(POST_CREATED, fetchPostData),
+    takeEvery(POST_DELETED, fetchPostData),
     takeEvery(UPDATE_POST, updatePost),
     takeEvery(DELETE_POST, deletePost),
+    takeLatest(CREATE_USER, createUser),
+    takeLatest(DELETE_USER, deleteUser),
   ]);
 }

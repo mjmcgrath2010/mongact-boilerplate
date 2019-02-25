@@ -52,7 +52,7 @@ exports.delete = (req, res) =>
         if (err) {
           return res.json(error);
         }
-        return res.send(200);
+        return res.json({ message: 'User removed' });
       });
     }
     return res.send(401);

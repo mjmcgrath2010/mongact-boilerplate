@@ -8,13 +8,19 @@ import {
   DEFAULT_ACTION,
   FETCH_USER_DATA,
   USER_DATA_RECEIVED,
-  CREATE_POST_REQUEST,
+  CREATE_POST,
   POST_CREATED,
   UPDATE_POST,
   DELETE_POST,
   POST_UPDATED,
   POST_DELETED,
   CLEAR_MESSAGES,
+  CREATE_USER,
+  USER_CREATED,
+  UPDATE_USER,
+  DELETE_USER,
+  USER_DELETED,
+  USER_UPDATED,
 } from './constants';
 
 export function defaultAction() {
@@ -36,9 +42,51 @@ export function userDataReceived(data) {
   };
 }
 
+export function createUser(payload) {
+  return {
+    type: CREATE_USER,
+    payload,
+  };
+}
+
+export function userCreated(payload) {
+  return {
+    type: USER_CREATED,
+    payload,
+  };
+}
+
+export function updateUser(payload) {
+  return {
+    type: UPDATE_USER,
+    payload,
+  };
+}
+
+export function userUpdated(payload) {
+  return {
+    type: USER_UPDATED,
+    payload,
+  };
+}
+
+export function deleteUser(id) {
+  return {
+    type: DELETE_USER,
+    id,
+  };
+}
+
+export function userDeleted(payload) {
+  return {
+    type: USER_DELETED,
+    payload,
+  };
+}
+
 export function createPost(payload) {
   return {
-    type: CREATE_POST_REQUEST,
+    type: CREATE_POST,
     payload,
   };
 }

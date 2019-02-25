@@ -26,9 +26,9 @@ import { clearMessages, requestUserData } from './actions';
 import adminNavRoutes from './adminNavRoutes';
 import Posts from './views/Posts';
 import Users from './views/Users';
-import InviteUser from './views/InviteUser';
-import CreatePost from './views/CreatePost';
-import EditPost from './views/EditPost';
+import InviteUser from './views/Users/InviteUser';
+import CreatePost from './views/Posts/CreatePost';
+import EditPost from './views/Posts/EditPost';
 import Categories from './views/Categories';
 import { makeSelectLocation } from '../App/selectors';
 import Dialog from '../../components/ui/Dialog';
@@ -113,9 +113,13 @@ export class Admin extends React.PureComponent {
         <Route
           exact
           path="/admin/users"
-          render={() => <Users users={admin.users} />}
+          render={() => <Users dispatch={dispatch} users={admin.users} />}
         />
-        <Route exact path="/admin/invite-user" render={() => <InviteUser />} />
+        <Route
+          exact
+          path="/admin/invite-user"
+          render={() => <InviteUser dispatch={dispatch} />}
+        />
         <Route
           exact
           path="/admin/categories"

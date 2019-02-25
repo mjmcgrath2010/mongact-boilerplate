@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/es/IconButton/IconButton';
 import PropTypes from 'prop-types';
 import { push } from 'connected-react-router/immutable';
 import Icon from '@material-ui/core/es/Icon/Icon';
-import DataTable from '../../../../components/ui/DataTable';
+import DataTable from '../../../../components/DataTable';
 
 // import styled from 'styled-components';
 
