@@ -1,7 +1,7 @@
 {
-  "name": "example",
-  "version": "0.1.0",
-  "description": "apiDoc basic example",
-  "title": "Custom apiDoc browser title",
+  "name": "Mongact Boilerplate",
+  "version": "0.0.0",
+  "description": "API Documentation for the Mongact Boilerplate",
+  "title": "Mongact Boilerplate Docs",
   "url": "/api/endpoints"
 }

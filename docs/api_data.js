@@ -2,63 +2,6 @@ define({
   api: [
     {
       type: 'get',
-      url: '/user',
-      title: 'Get Users information',
-      name: 'GetUsers',
-      permission: [
-        {
-          name: 'admin',
-        },
-      ],
-      group: 'Admin',
-      header: {
-        fields: {
-          Headers: [
-            {
-              group: 'Headers',
-              type: 'String',
-              optional: false,
-              field: 'X-Token',
-              description: '<p>API Acess Token.</p>',
-            },
-          ],
-        },
-      },
-      success: {
-        examples: [
-          {
-            title: 'Success-Response:',
-            content:
-              ' HTTP/1.1 200 OK\n[\n {\n   "_id": "12345tefwq234dfwavr431rt4g",\n   "username": "joe@example.com",\n },\n {\n   "_id": "12345tefwq2rewwe34dfwavr431rt4g",\n   "username": "john@example.com",\n }\n ....\n]',
-            type: 'json',
-          },
-        ],
-      },
-      error: {
-        fields: {
-          'Error 4xx': [
-            {
-              group: 'Error 4xx',
-              optional: false,
-              field: 'Error',
-              description: '<p>The user is not an admin.</p>',
-            },
-          ],
-        },
-        examples: [
-          {
-            title: 'Error-Response:',
-            content: 'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
-            type: 'json',
-          },
-        ],
-      },
-      version: '0.0.0',
-      filename: 'server/api/endpoints/user/routes.js',
-      groupTitle: 'Admin',
-    },
-    {
-      type: 'get',
       url: '/user/:id',
       title: 'Get User information',
       name: 'GetUser',
@@ -123,6 +66,63 @@ define({
           {
             title: 'Error-Response:',
             content: 'HTTP/1.1 404 Not Found\n{\n  "error": "User Not Found"\n}',
+            type: 'json',
+          },
+        ],
+      },
+      version: '0.0.0',
+      filename: 'server/api/endpoints/user/routes.js',
+      groupTitle: 'User',
+    },
+    {
+      type: 'get',
+      url: '/user',
+      title: 'Get Users information',
+      name: 'GetUsers',
+      group: 'User',
+      permission: [
+        {
+          name: 'Admin',
+        },
+      ],
+      header: {
+        fields: {
+          Headers: [
+            {
+              group: 'Headers',
+              type: 'String',
+              optional: false,
+              field: 'X-Token',
+              description: '<p>API Acess Token.</p>',
+            },
+          ],
+        },
+      },
+      success: {
+        examples: [
+          {
+            title: 'Success-Response:',
+            content:
+              ' HTTP/1.1 200 OK\n[\n {\n   "_id": "12345tefwq234dfwavr431rt4g",\n   "username": "joe@example.com",\n },\n {\n   "_id": "12345tefwq2rewwe34dfwavr431rt4g",\n   "username": "john@example.com",\n }\n ....\n]',
+            type: 'json',
+          },
+        ],
+      },
+      error: {
+        fields: {
+          'Error 4xx': [
+            {
+              group: 'Error 4xx',
+              optional: false,
+              field: 'Error',
+              description: '<p>The user is not an admin.</p>',
+            },
+          ],
+        },
+        examples: [
+          {
+            title: 'Error-Response:',
+            content: 'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
             type: 'json',
           },
         ],
@@ -214,11 +214,16 @@ define({
           name: 'User',
         },
       ],
-      description:
-        '<p>This function has same errors like POST /user, but errors not defined again, they were included with &quot;apiUse&quot;</p>',
       parameter: {
         fields: {
           Parameter: [
+            {
+              group: 'Parameter',
+              type: 'String',
+              optional: false,
+              field: 'token',
+              description: '<p>Access Token of the User.</p>',
+            },
             {
               group: 'Parameter',
               type: 'id',
@@ -229,6 +234,8 @@ define({
           ],
         },
       },
+      description:
+        '<p>This function has same errors like POST /user, but errors not defined again, they were included with &quot;apiUse&quot;</p>',
       error: {
         fields: {
           'Error 4xx': [

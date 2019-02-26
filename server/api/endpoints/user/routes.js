@@ -19,40 +19,27 @@ router
 module.exports = router;
 
 // //////////////////////////////////////////////
-//               GET REQUEST                   //
+//               PUT REQUEST                   //
 // //////////////////////////////////////////////
 
 /**
- * @api {get} /user Get Users information
- * @apiName GetUsers
- * @apiPermission admin
- * @apiGroup Admin
+ * @api {put} /user/:id Change a new User
+ * @apiName PutUser
+ * @apiGroup User
+ * @apiPermission User
+ * @apiParam {String} token Access Token of the User.
  *
- * @apiHeader (Headers) {String} X-Token API Acess Token.
+ * @apiDescription This function has same errors like POST /user, but errors not defined again, they were included with "apiUse"
  *
+ * @apiParam {id} id ID of the User.
  *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *    [
- *     {
- *       "_id": "12345tefwq234dfwavr431rt4g",
- *       "username": "joe@example.com",
- *     },
- *     {
- *       "_id": "12345tefwq2rewwe34dfwavr431rt4g",
- *       "username": "john@example.com",
- *     }
- *     ....
- *    ]
- *
- * @apiError Error The user is not an admin.
+ * @apiError 404 The id of the User was not found.
  *
  * @apiErrorExample Error-Response:
- *     HTTP/1.1 401 Not Found
+ *     HTTP/1.1 404 Not Found
  *     {
- *       "error": "User is not Admin."
+ *       "error": "User Not Found"
  *     }
- *
  */
 
 // //////////////////////////////////////////////
@@ -121,24 +108,38 @@ module.exports = router;
  */
 
 // //////////////////////////////////////////////
-//               PUT REQUEST                   //
+//               GET REQUEST                   //
 // //////////////////////////////////////////////
 
 /**
- * @api {put} /user/:id Change a new User
- * @apiName PutUser
+ * @api {get} /user Get Users information
+ * @apiName GetUsers
  * @apiGroup User
- * @apiPermission User
+ * @apiPermission Admin
  *
- * @apiDescription This function has same errors like POST /user, but errors not defined again, they were included with "apiUse"
+ * @apiHeader (Headers) {String} X-Token API Acess Token.
  *
- * @apiParam {id} id ID of the User.
  *
- * @apiError 404 The id of the User was not found.
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    [
+ *     {
+ *       "_id": "12345tefwq234dfwavr431rt4g",
+ *       "username": "joe@example.com",
+ *     },
+ *     {
+ *       "_id": "12345tefwq2rewwe34dfwavr431rt4g",
+ *       "username": "john@example.com",
+ *     }
+ *     ....
+ *    ]
+ *
+ * @apiError Error The user is not an admin.
  *
  * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
+ *     HTTP/1.1 401 Not Found
  *     {
- *       "error": "User Not Found"
+ *       "error": "User is not Admin."
  *     }
+ *
  */
