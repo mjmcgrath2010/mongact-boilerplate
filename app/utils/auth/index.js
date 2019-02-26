@@ -4,7 +4,7 @@ export const checkAuth = token => {
   if (!token) {
     return false;
   }
-  const auth = request('/api/endpoints/auth/check-token', {
+  const auth = request('/auth/check-token', {
     method: 'POST',
     body: JSON.stringify({
       token,

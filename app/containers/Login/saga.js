@@ -1,20 +1,14 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { LOGIN_REQUEST } from './constants';
-import request from '../../utils/request';
 import { handleLogin } from './actions';
+import Api from '../../api';
 
 // Individual exports for testing
 export function* loginSaga(data) {
   // See example in containers/HomePage/saga.js
-  const login = yield call(request, '/api/endpoints/auth', {
-    method: 'POST',
-    body: JSON.stringify({
-      username: data.user.email,
-      password: data.user.password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const login = yield call(Api.post, '/auth', {
+    username: data.user.email,
+    password: data.user.password,
   });
   try {
     yield put(handleLogin(login));

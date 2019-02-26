@@ -7,7 +7,6 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import { push } from 'connected-react-router/immutable';
-import request from '../../utils/request';
 import makeSelectLogin from '../Login/selectors';
 import {
   FETCH_USER_DATA,
@@ -27,50 +26,7 @@ import {
   userCreated,
   userDeleted,
 } from './actions';
-
-export function* get(url) {
-  const auth = yield select(makeSelectLogin());
-  return yield call(request, url, {
-    headers: {
-      access_token: auth.user.token,
-    },
-  });
-}
-
-export function* post(url, body) {
-  const auth = yield select(makeSelectLogin());
-  return yield call(request, url, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: {
-      access_token: auth.user.token,
-      'Content-Type': 'application/json',
-    },
-  });
-}
-
-export function* update(url, body) {
-  const auth = yield select(makeSelectLogin());
-  return yield call(request, url, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    headers: {
-      access_token: auth.user.token,
-      'Content-Type': 'application/json',
-    },
-  });
-}
-
-export function* remove(url) {
-  const auth = yield select(makeSelectLogin());
-  return yield call(request, url, {
-    method: 'DELETE',
-    headers: {
-      access_token: auth.user.token,
-      'Content-Type': 'application/json',
-    },
-  });
-}
+import Api from '../../api';
 
 export function* fetchUserData() {
   const auth = yield select(makeSelectLogin());
@@ -78,9 +34,9 @@ export function* fetchUserData() {
 
   if (auth.user.admin) {
     const [users, posts, categories] = yield all([
-      call(get, '/api/endpoints/user'),
-      call(get, '/api/endpoints/post'),
-      call(get, '/api/endpoints/category'),
+      call(Api.get, '/user'),
+      call(Api.get, '/post'),
+      call(Api.get, '/category'),
     ]);
     data = {
       users,
@@ -89,8 +45,8 @@ export function* fetchUserData() {
     };
   } else {
     const [posts, categories] = yield all([
-      call(get, '/api/endpoints/post'),
-      call(get, '/api/endpoints/category'),
+      call(Api.get, '/post'),
+      call(Api.get, '/category'),
     ]);
     data = {
       posts,
@@ -106,9 +62,7 @@ export function* fetchUserData() {
 }
 
 export function* createPost(action) {
-  const [newPost] = yield all([
-    call(post, '/api/endpoints/post', action.payload),
-  ]);
+  const [newPost] = yield all([call(Api.post, '/post', action.payload)]);
   try {
     yield put(newPostCreated(newPost));
   } catch (e) {
@@ -117,7 +71,7 @@ export function* createPost(action) {
 }
 
 export function* fetchPostData() {
-  const posts = yield call(get, '/api/endpoints/post');
+  const posts = yield call(Api.get, '/post');
   const data = {
     posts,
   };
@@ -131,7 +85,7 @@ export function* fetchPostData() {
 
 export function* updatePost(action) {
   const { id, title, content } = action.payload;
-  const updatedPost = yield call(update, `/api/endpoints/post/${id}`, {
+  const updatedPost = yield call(Api.update, `/post/${id}`, {
     title,
     content,
   });
@@ -144,7 +98,7 @@ export function* updatePost(action) {
 
 export function* deletePost(action) {
   const { id } = action;
-  const deletedPost = yield call(remove, `/api/endpoints/post/${id}`);
+  const deletedPost = yield call(Api.delete, `/post/${id}`);
   try {
     yield all([
       put(postDeleted(deletedPost)),
@@ -158,7 +112,7 @@ export function* deletePost(action) {
 
 export function* createUser(action) {
   const { username, password, admin } = action.payload;
-  const user = yield call(post, '/api/endpoints/user', {
+  const user = yield call(Api.post, '/user', {
     username,
     password,
     admin,
@@ -173,7 +127,7 @@ export function* createUser(action) {
 
 export function* deleteUser(action) {
   const { id } = action;
-  const deletedUser = yield call(remove, `/api/endpoints/user/${id}`);
+  const deletedUser = yield call(Api.delete, `/user/${id}`);
 
   try {
     yield put(userDeleted(deletedUser));

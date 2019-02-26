@@ -42,7 +42,7 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  return fetch(`/api/endpoints${url}`, options)
     .then(checkStatus)
     .then(parseJSON);
 }
