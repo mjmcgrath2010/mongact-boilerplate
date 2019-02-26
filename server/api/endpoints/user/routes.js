@@ -27,11 +27,20 @@ module.exports = router;
  * @apiName PutUser
  * @apiGroup User
  * @apiPermission User
+ *
  * @apiParam {String} token Access Token of the User.
  *
  * @apiDescription This function has same errors like POST /user, but errors not defined again, they were included with "apiUse"
  *
  * @apiParam {id} id ID of the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "_id": "12345tefwq234dfwavr431rt4g",
+ *       "updated": "true",
+ *     }
+ *
  *
  * @apiError 404 The id of the User was not found.
  *
@@ -83,8 +92,8 @@ module.exports = router;
 /**
  * @api {get} /user/:id Get User information
  * @apiName GetUser
- * @apiPermission admin
  * @apiGroup User
+ * @apiPermission User
  *
  * @apiHeader (Headers) {String} X-Token API Acess Token.
  *
