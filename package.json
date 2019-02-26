@@ -6,10 +6,6 @@
     "type": "git",
     "url": "git://github.com/react-boilerplate/react-boilerplate.git"
   },
-  "apidoc": {
-    "title": "My App API DOCS",
-    "url" : "https://api.github.com/v1"
-  },
   "engines": {
     "npm": ">=5",
     "node": ">=8.10.0"
