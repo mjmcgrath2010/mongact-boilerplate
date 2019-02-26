@@ -12,6 +12,7 @@ import request from '../../../../../utils/request';
 import Input from '../../../../../components/ui/Input';
 import { deletePost, updatePost } from '../../../actions';
 import Button from '../../../../../components/ui/Button';
+
 // import styled from 'styled-components';
 
 const Wrapper = styled.div`
