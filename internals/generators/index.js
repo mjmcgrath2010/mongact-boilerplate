@@ -31,6 +31,9 @@ module.exports = plop => {
   plop.addHelper('curly', (object, open) => (open ? '{' : '}'));
   plop.setActionType('toArray', answers => {
     const array = answers.fields.split(',');
+
+    // eslint-disable-next-line no-return-assign
+    array.map((item, idx) => (array[idx] = item.trim()));
     // eslint-disable-next-line no-param-reassign
     answers.fields = array;
     return answers.fields;

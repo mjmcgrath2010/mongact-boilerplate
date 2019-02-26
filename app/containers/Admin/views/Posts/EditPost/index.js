@@ -12,6 +12,7 @@ import request from '../../../../../utils/request';
 import Input from '../../../../../components/ui/Input';
 import { deletePost, updatePost } from '../../../actions';
 import Button from '../../../../../components/ui/Button';
+
 // import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -48,7 +49,7 @@ class EditPost extends React.Component {
       location.state ||
       window.location.pathname.replace('/admin/posts/edit', '');
     this.setState({ id });
-    request(`/api/endpoints/post/${id}`, { method: 'GET' }).then(post =>
+    request(`/post/${id}`, { method: 'GET' }).then(post =>
       this.setState(post[0]),
     );
   }

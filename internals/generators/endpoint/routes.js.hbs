@@ -16,3 +16,136 @@ router
 .delete(tokenAuth, isAdmin, controller.delete);
 
 module.exports = router;
+
+// //////////////////////////////////////////////
+//               PUT REQUEST                   //
+// //////////////////////////////////////////////
+
+/**
+* @api {put} /{{ lowerCase name }}/:id Change a new {{ properCase name }}
+* @apiName Put{{ properCase name }}
+* @apiGroup {{ properCase name }}
+* @apiPermission User
+*
+* @apiParam {String} token Access Token of the User.
+*
+* @apiParam {id} id ID of the {{ properCase name }}.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "_id": "12345tefwq234dfwavr431rt4g",
+*       "updated": "true",
+*     }
+*
+*
+* @apiError 404 The id of the {{ properCase name }} was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+*       "error": "{{ properCase name }} Not Found"
+*     }
+*/
+
+// //////////////////////////////////////////////
+//               POST REQUEST                  //
+// //////////////////////////////////////////////
+
+/**
+* @api {post} /{{ lowerCase name }} Create a new {{properCase name }}
+* @apiName Post{{ properCase name }}
+* @apiGroup {{ properCase name }}
+* @apiPermission Admin
+*
+*
+*{{#each fields}}
+* @apiParam {String} {{this}} {{properCase this}} of the {{properCase name}}.
+*{{/each}}
+*
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "_id": "12345tefwq234dfwavr431rt4g",
+*       {{#each fields}}"{{this}}": "value",
+*       {{/each}}
+*     }
+*
+* @apiError Error The user is not an admin.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 401 Not Found
+*     {
+*       "error": "User is not Admin."
+*     }
+*
+*/
+
+// //////////////////////////////////////////////
+//               GET ONE REQUEST               //
+// //////////////////////////////////////////////
+
+/**
+* @api {get} /{{ lowerCase name }}/:id Get {{ properCase name }} information
+* @apiName Get{{ properCase name }}
+* @apiGroup {{ properCase name }}
+* @apiPermission User
+*
+* @apiHeader (Headers) {String} X-Token API Access Token.
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*     {
+*       "_id": "12345tefwq234dfwavr431rt4g",
+*       {{#each fields}}"{{this}}": "value",
+*       {{/each}}
+*     }
+*
+* @apiError 404 The id of the User was not found.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 404 Not Found
+*     {
+*       "error": "User Not Found"
+*     }
+*/
+
+// //////////////////////////////////////////////
+//               GET REQUEST                   //
+// //////////////////////////////////////////////
+
+/**
+* @api {get} /user Get {{ properCase name }}s information
+* @apiName Get{{ properCase name }}s
+* @apiGroup {{ properCase name }}
+* @apiPermission Admin
+*
+* @apiHeader (Headers) {String} X-Token API Acess Token.
+*
+*
+* @apiSuccessExample Success-Response:
+*     HTTP/1.1 200 OK
+*    [
+*     {
+*       "_id": "12345tefwq234dfwavr431rt4g",
+*       {{#each fields}}"{{this}}": "value",
+*       {{/each}}
+*     },
+*     {
+*       "_id": "12345tefwq2rewwe34dfwavr431rt4g",
+*       {{#each fields}}"{{this}}": "value",
+*       {{/each}}
+*     }
+*     ....
+*    ]
+*
+* @apiError Error The user is not an admin.
+*
+* @apiErrorExample Error-Response:
+*     HTTP/1.1 401 Not Found
+*     {
+*       "error": "User is not Admin."
+*     }
+*
+*/
