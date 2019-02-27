@@ -15,7 +15,7 @@ class CreatePost extends React.Component {
   handleCancel = () => {
     const { dispatch } = this.props;
 
-    dispatch(push('/admin/posts'));
+    dispatch(push('/app/posts'));
   };
 
   render() {

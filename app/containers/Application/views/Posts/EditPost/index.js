@@ -46,8 +46,7 @@ class EditPost extends React.Component {
   componentDidMount() {
     const { location } = this.props;
     const id =
-      location.state ||
-      window.location.pathname.replace('/admin/posts/edit', '');
+      location.state || window.location.pathname.replace('/app/posts/edit', '');
     this.setState({ id });
     request(`/post/${id}`, { method: 'GET' }).then(post =>
       this.setState(post[0]),

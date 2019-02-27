@@ -17,7 +17,7 @@ import DataTable from '../../../../components/DataTable';
 class Categories extends React.Component {
   handleNavigation = (type, id) => () => {
     const { dispatch } = this.props;
-    dispatch(push(`/admin/categories/${id}/${type}`));
+    dispatch(push(`/app/categories/${id}/${type}`));
   };
 
   render() {

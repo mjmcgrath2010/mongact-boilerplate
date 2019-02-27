@@ -103,7 +103,7 @@ export function* deletePost(action) {
     yield all([
       put(postDeleted(deletedPost)),
       put({ type: FETCH_USER_DATA }),
-      put(push('/admin/posts')),
+      put(push('/app/posts')),
     ]);
   } catch (e) {
     console.error(e);

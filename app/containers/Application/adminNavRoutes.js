@@ -7,19 +7,19 @@ const adminRoutes = {
         {
           text: 'All Posts',
           icon: 'posts',
-          path: '/admin/posts',
+          path: '/app/posts',
         },
         {
           text: 'New Post',
           icon: 'new-post',
-          path: '/admin/posts/create',
+          path: '/app/posts/create',
         },
       ],
     },
     {
       text: 'Categories',
       icon: 'categories',
-      path: '/admin/categories',
+      path: '/app/categories',
     },
   ],
   adminRoutes: [
@@ -30,12 +30,12 @@ const adminRoutes = {
         {
           text: 'All Users',
           icon: 'users',
-          path: '/admin/users',
+          path: '/app/users',
         },
         {
           text: 'Invite User',
           icon: 'invite',
-          path: '/admin/invite-user',
+          path: '/app/invite-user',
         },
       ],
     },

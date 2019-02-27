@@ -99,32 +99,32 @@ export class Application extends React.PureComponent {
         <FlashMessages />
         <Route
           exact
-          path="/admin/posts"
+          path="/app/posts"
           render={() => <Posts dispatch={dispatch} posts={application.posts} />}
         />
         <Route
           exact
-          path="/admin/posts/create"
+          path="/app/posts/create"
           render={() => <CreatePost dispatch={dispatch} />}
         />
         <Route
           exact
-          path="/admin/posts/edit/:id"
+          path="/app/posts/edit/:id"
           render={() => <EditPost location={location} dispatch={dispatch} />}
         />
         <Route
           exact
-          path="/admin/users"
+          path="/app/users"
           render={() => <Users dispatch={dispatch} users={application.users} />}
         />
         <Route
           exact
-          path="/admin/invite-user"
+          path="/app/invite-user"
           render={() => <InviteUser dispatch={dispatch} />}
         />
         <Route
           exact
-          path="/admin/categories"
+          path="/app/categories"
           render={() => (
             <Categories
               dispatch={dispatch}

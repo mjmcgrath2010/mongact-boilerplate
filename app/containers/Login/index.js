@@ -55,7 +55,7 @@ export class Login extends React.PureComponent {
       if (val && location.state) {
         dispatch(push(location.state));
       } else if (val) {
-        dispatch(push('/admin'));
+        dispatch(push('/app'));
       }
     });
   };
