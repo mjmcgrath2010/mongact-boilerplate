@@ -17,9 +17,8 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectCreateRecord from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import Input from '../../components/ui/Input';
-import TextEditor from '../../components/TextEditor';
 import Button from '../../components/ui/Button';
+import { RenderInputs } from './utils';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -49,7 +48,6 @@ export class CreateRecord extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     this.setup();
   }
 
@@ -77,24 +75,18 @@ export class CreateRecord extends React.Component {
   };
 
   render() {
-    const { handleCancel } = this.props;
+    const { handleCancel, fields } = this.props;
     return (
       <div>
         <Wrapper>
           <Typography variant="subtitle1">Create a new Post</Typography>
-          <Input
-            name="title"
-            label="Title"
-            onChange={this.handleChange('title')}
-            value={this.state.title}
-          />
         </Wrapper>
-        <Wrapper>
-          <TextEditor
-            handleChange={this.handleEditorChange}
-            value={this.state.content}
-          />
-        </Wrapper>
+        <RenderInputs
+          fields={fields}
+          onInputChange={this.handleChange}
+          onEditorChange={this.handleEditorChange}
+          state={this.state}
+        />
         <Footer>
           <ButtonContainer>
             <Button

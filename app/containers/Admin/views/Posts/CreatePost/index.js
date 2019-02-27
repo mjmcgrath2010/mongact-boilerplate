@@ -21,7 +21,10 @@ class CreatePost extends React.Component {
   render() {
     return (
       <CreateRecord
-        fields={['content', 'title']}
+        fields={[
+          { name: 'title', type: 'input', label: 'Title' },
+          { name: 'content', type: 'editor' },
+        ]}
         action={createPost}
         handleCancel={this.handleCancel}
       />
