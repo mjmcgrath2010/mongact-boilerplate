@@ -125,7 +125,7 @@ define({
           {
             title: 'Error-Response:',
             content:
-              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
+              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Application."\n}',
             type: 'json',
           },
         ],
@@ -199,7 +199,7 @@ define({
           {
             title: 'Error-Response:',
             content:
-              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
+              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Application."\n}',
             type: 'json',
           },
         ],

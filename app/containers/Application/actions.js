@@ -1,6 +1,6 @@
 /*
  *
- * Admin actions
+ * Application actions
  *
  */
 

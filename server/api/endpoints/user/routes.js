@@ -59,7 +59,7 @@ module.exports = router;
  * @api {post} /user Create a new User
  * @apiName PostUser
  * @apiGroup User
- * @apiPermission Admin
+ * @apiPermission Application
  *
  * @apiDescription In this case "apiUse" is defined and used.
  * Define blocks with params that will be used in several functions, so you dont have to rewrite them.
@@ -80,7 +80,7 @@ module.exports = router;
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 401 Not Found
  *     {
- *       "error": "User is not Admin."
+ *       "error": "User is not Application."
  *     }
  *
  */
@@ -124,7 +124,7 @@ module.exports = router;
  * @api {get} /user Get Users information
  * @apiName GetUsers
  * @apiGroup User
- * @apiPermission Admin
+ * @apiPermission Application
  *
  * @apiHeader (Headers) {String} X-Token API Acess Token.
  *
@@ -148,7 +148,7 @@ module.exports = router;
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 401 Not Found
  *     {
- *       "error": "User is not Admin."
+ *       "error": "User is not Application."
  *     }
  *
  */

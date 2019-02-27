@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Admin
+ * Asynchronously loads the component for Application
  *
  */
 

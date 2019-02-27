@@ -1,6 +1,6 @@
 /*
  *
- * Admin reducer
+ * Application reducer
  *
  */
 

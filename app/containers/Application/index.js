@@ -1,6 +1,6 @@
 /**
  *
- * Admin
+ * Application
  *
  */
 
@@ -14,7 +14,7 @@ import { Route } from 'react-router-dom';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectAdmin from './selectors';
+import makeSelectApplication from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import NavBar from '../../components/NavBar';
@@ -34,7 +34,7 @@ import { makeSelectLocation } from '../App/selectors';
 import Dialog from '../../components/ui/Dialog';
 
 /* eslint-disable react/prefer-stateless-function */
-export class Admin extends React.PureComponent {
+export class Application extends React.PureComponent {
   componentDidMount() {
     const { auth, dispatch, fetchUserData } = this.props;
     const token = auth.user && auth.user.token;
@@ -68,19 +68,21 @@ export class Admin extends React.PureComponent {
   };
 
   render() {
-    const { dispatch, auth, admin, location } = this.props;
+    const { dispatch, auth, application, location } = this.props;
     const FlashMessages = () => {
-      if (admin.successMessage) {
+      if (application.successMessage) {
         setTimeout(() => {
           dispatch(clearMessages());
         }, 5000);
-        return <Dialog variant="success" message={admin.successMessage} />;
+        return (
+          <Dialog variant="success" message={application.successMessage} />
+        );
       }
-      if (admin.errorMessage) {
+      if (application.errorMessage) {
         setTimeout(() => {
           dispatch(clearMessages());
         }, 5000);
-        return <Dialog variant="error" message={admin.errorMessage} />;
+        return <Dialog variant="error" message={application.errorMessage} />;
       }
       return null;
     };
@@ -98,7 +100,7 @@ export class Admin extends React.PureComponent {
         <Route
           exact
           path="/admin/posts"
-          render={() => <Posts dispatch={dispatch} posts={admin.posts} />}
+          render={() => <Posts dispatch={dispatch} posts={application.posts} />}
         />
         <Route
           exact
@@ -113,7 +115,7 @@ export class Admin extends React.PureComponent {
         <Route
           exact
           path="/admin/users"
-          render={() => <Users dispatch={dispatch} users={admin.users} />}
+          render={() => <Users dispatch={dispatch} users={application.users} />}
         />
         <Route
           exact
@@ -124,7 +126,10 @@ export class Admin extends React.PureComponent {
           exact
           path="/admin/categories"
           render={() => (
-            <Categories dispatch={dispatch} categories={admin.categories} />
+            <Categories
+              dispatch={dispatch}
+              categories={application.categories}
+            />
           )}
         />
       </div>
@@ -132,16 +137,16 @@ export class Admin extends React.PureComponent {
   }
 }
 
-Admin.propTypes = {
+Application.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   fetchUserData: PropTypes.func.isRequired,
-  admin: PropTypes.object.isRequired,
+  application: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  admin: makeSelectAdmin(),
+  application: makeSelectApplication(),
   auth: makeSelectLogin(),
   location: makeSelectLocation(),
 });
@@ -158,11 +163,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'admin', reducer });
-const withSaga = injectSaga({ key: 'admin', saga });
+const withReducer = injectReducer({ key: 'application', reducer });
+const withSaga = injectSaga({ key: 'application', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Admin);
+)(Application);
