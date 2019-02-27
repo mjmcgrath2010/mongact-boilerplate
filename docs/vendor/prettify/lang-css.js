@@ -21,20 +21,40 @@ PR.registerLangHandler(
       ['str', /^\"(?:[^\n\r\f\\\"]|\\(?:\r\n?|\n|\f)|\\[\s\S])*\"/, null],
       ['str', /^\'(?:[^\n\r\f\\\']|\\(?:\r\n?|\n|\f)|\\[\s\S])*\'/, null],
       ['lang-css-str', /^url\(([^\)\"\']+)\)/i],
-      ['kwd', /^(?:url|rgb|\!important|@import|@page|@media|@charset|inherit)(?=[^\-\w]|$)/i, null],
-      ['lang-css-kw', /^(-?(?:[_a-z]|(?:\\[0-9a-f]+ ?))(?:[_a-z0-9\-]|\\(?:\\[0-9a-f]+ ?))*)\s*:/i],
+      [
+        'kwd',
+        /^(?:url|rgb|\!important|@import|@page|@media|@charset|inherit)(?=[^\-\w]|$)/i,
+        null,
+      ],
+      [
+        'lang-css-kw',
+        /^(-?(?:[_a-z]|(?:\\[0-9a-f]+ ?))(?:[_a-z0-9\-]|\\(?:\\[0-9a-f]+ ?))*)\s*:/i,
+      ],
       ['com', /^\/\*[^*]*\*+(?:[^\/*][^*]*\*+)*\//],
       ['com', /^(?:\x3c!--|--\x3e)/],
       ['lit', /^(?:\d+|\d*\.\d+)(?:%|[a-z]+)?/i],
       ['lit', /^#(?:[0-9a-f]{3}){1,2}\b/i],
-      ['pln', /^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i],
+      [
+        'pln',
+        /^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i,
+      ],
       ['pun', /^[^\s\w\'\"]+/],
-    ]
+    ],
   ),
-  ['css']
+  ['css'],
 );
 PR.registerLangHandler(
-  PR.createSimpleLexer([], [['kwd', /^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i]]),
-  ['css-kw']
+  PR.createSimpleLexer(
+    [],
+    [
+      [
+        'kwd',
+        /^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i,
+      ],
+    ],
+  ),
+  ['css-kw'],
 );
-PR.registerLangHandler(PR.createSimpleLexer([], [['str', /^[^\)\"\']+/]]), ['css-str']);
+PR.registerLangHandler(PR.createSimpleLexer([], [['str', /^[^\)\"\']+/]]), [
+  'css-str',
+]);

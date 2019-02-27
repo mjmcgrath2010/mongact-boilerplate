@@ -25,7 +25,10 @@ PR.registerLangHandler(
       ['atn', /^#\d+|[#$][a-z_][\w.]*|#![ \S]+lasso9\b/i, null, '#$'],
     ],
     [
-      ['tag', /^[[\]]|<\?(?:lasso(?:script)?|=)|\?>|noprocess\b|no_square_brackets\b/i],
+      [
+        'tag',
+        /^[[\]]|<\?(?:lasso(?:script)?|=)|\?>|noprocess\b|no_square_brackets\b/i,
+      ],
       ['com', /^\/\/[^\r\n]*|\/\*[\s\S]*?\*\//],
       ['atn', /^-(?!infinity)[a-z_][\w.]*|\.\s*'[a-z_][\w.]*'/i],
       ['lit', /^\d*\.\d+(?:e[-+]?\d+)?|infinity\b|NaN\b/i],
@@ -44,7 +47,7 @@ PR.registerLangHandler(
       ],
       ['pln', /^[a-z_][\w.]*(?:=\s*(?=\())?/i],
       ['pun', /^:=|[-+*\/%=<>&|!?\\]/],
-    ]
+    ],
   ),
-  ['lasso', 'ls', 'lassoscript']
+  ['lasso', 'ls', 'lassoscript'],
 );

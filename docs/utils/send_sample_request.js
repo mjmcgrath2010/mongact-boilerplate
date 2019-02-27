@@ -8,7 +8,12 @@ define(['jquery', 'lodash'], function($, _) {
       var group = $root.data('group');
       var name = $root.data('name');
       var version = $root.data('version');
-      sendSampleRequest(group, name, version, $(this).data('sample-request-type'));
+      sendSampleRequest(
+        group,
+        name,
+        version,
+        $(this).data('sample-request-type'),
+      );
     });
 
     // Button clear
@@ -24,20 +29,30 @@ define(['jquery', 'lodash'], function($, _) {
   }; // initDynamic
 
   function sendSampleRequest(group, name, version, type) {
-    var $root = $('article[data-group="' + group + '"][data-name="' + name + '"][data-version="' + version + '"]');
+    var $root = $(
+      'article[data-group="' +
+        group +
+        '"][data-name="' +
+        name +
+        '"][data-version="' +
+        version +
+        '"]',
+    );
 
     // Optional header
     var header = {};
     $root.find('.sample-request-header:checked').each(function(i, element) {
       var group = $(element).data('sample-request-header-group-id');
-      $root.find('[data-sample-request-header-group="' + group + '"]').each(function(i, element) {
-        var key = $(element).data('sample-request-header-name');
-        var value = element.value;
-        if (!element.optional && element.defaultValue !== '') {
-          value = element.defaultValue;
-        }
-        header[key] = value;
-      });
+      $root
+        .find('[data-sample-request-header-group="' + group + '"]')
+        .each(function(i, element) {
+          var key = $(element).data('sample-request-header-name');
+          var value = element.value;
+          if (!element.optional && element.defaultValue !== '') {
+            value = element.defaultValue;
+          }
+          header[key] = value;
+        });
     });
 
     // create JSON dictionary of parameters
@@ -48,7 +63,10 @@ define(['jquery', 'lodash'], function($, _) {
       $root
         .find('[data-sample-request-param-group="' + group + '"]')
         .not(function() {
-          return $(this).val() == '' && $(this).is("[data-sample-request-param-optional='true']");
+          return (
+            $(this).val() == '' &&
+            $(this).is("[data-sample-request-param-optional='true']")
+          );
         })
         .each(function(i, element) {
           var key = $(element).data('sample-request-param-name');
@@ -129,7 +147,8 @@ define(['jquery', 'lodash'], function($, _) {
       if (jsonResponse) message += '<br>' + jsonResponse;
 
       // flicker on previous error to make clear that there is a new response
-      if ($root.find('.sample-request-response').is(':visible')) $root.find('.sample-request-response').fadeTo(1, 0.1);
+      if ($root.find('.sample-request-response').is(':visible'))
+        $root.find('.sample-request-response').fadeTo(1, 0.1);
 
       $root.find('.sample-request-response').fadeTo(250, 1);
       $root.find('.sample-request-response-json').html(message);
@@ -138,7 +157,15 @@ define(['jquery', 'lodash'], function($, _) {
   }
 
   function clearSampleRequest(group, name, version) {
-    var $root = $('article[data-group="' + group + '"][data-name="' + name + '"][data-version="' + version + '"]');
+    var $root = $(
+      'article[data-group="' +
+        group +
+        '"][data-name="' +
+        name +
+        '"][data-version="' +
+        version +
+        '"]',
+    );
 
     // hide sample response
     $root.find('.sample-request-response-json').html('');

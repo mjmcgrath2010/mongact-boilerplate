@@ -50,7 +50,18 @@ require([
   'bootstrap',
   'pathToRegexp',
   'list',
-], function($, _, locale, Handlebars, apiProject, apiData, prettyPrint, sampleRequest, semver, WebFont) {
+], function(
+  $,
+  _,
+  locale,
+  Handlebars,
+  apiProject,
+  apiData,
+  prettyPrint,
+  sampleRequest,
+  semver,
+  WebFont,
+) {
   // load google web fonts
   loadGoogleFontCss();
 
@@ -62,7 +73,9 @@ require([
   var templateHeader = Handlebars.compile($('#template-header').html());
   var templateFooter = Handlebars.compile($('#template-footer').html());
   var templateArticle = Handlebars.compile($('#template-article').html());
-  var templateCompareArticle = Handlebars.compile($('#template-compare-article').html());
+  var templateCompareArticle = Handlebars.compile(
+    $('#template-compare-article').html(),
+  );
   var templateGenerator = Handlebars.compile($('#template-generator').html());
   var templateProject = Handlebars.compile($('#template-project').html());
   var templateSections = Handlebars.compile($('#template-sections').html());
@@ -73,11 +86,14 @@ require([
   //
   if (!apiProject.template) apiProject.template = {};
 
-  if (apiProject.template.withCompare == null) apiProject.template.withCompare = true;
+  if (apiProject.template.withCompare == null)
+    apiProject.template.withCompare = true;
 
-  if (apiProject.template.withGenerator == null) apiProject.template.withGenerator = true;
+  if (apiProject.template.withGenerator == null)
+    apiProject.template.withGenerator = true;
 
-  if (apiProject.template.forceLanguage) locale.setLanguage(apiProject.template.forceLanguage);
+  if (apiProject.template.forceLanguage)
+    locale.setLanguage(apiProject.template.forceLanguage);
 
   // Setup jQuery Ajax
   $.ajaxSetup(apiProject.template.jQueryAjaxSetup);
@@ -252,7 +268,10 @@ require([
       nav.unshift({
         group: '_',
         isHeader: true,
-        title: apiProject.header.title == null ? locale.__('General') : apiProject.header.title,
+        title:
+          apiProject.header.title == null
+            ? locale.__('General')
+            : apiProject.header.title,
         isFixed: true,
       });
     }
@@ -274,7 +293,9 @@ require([
   }
 
   // render pagetitle
-  var title = apiProject.title ? apiProject.title : 'apiDoc: ' + apiProject.name + ' - ' + apiProject.version;
+  var title = apiProject.title
+    ? apiProject.title
+    : 'apiDoc: ' + apiProject.name + ' - ' + apiProject.version;
   $(document).attr('title', title);
 
   // remove loader
@@ -317,11 +338,16 @@ require([
         if (oldName !== entry.name) {
           // determine versions
           api.forEach(function(versionEntry) {
-            if (groupEntry === versionEntry.group && entry.name === versionEntry.name) {
+            if (
+              groupEntry === versionEntry.group &&
+              entry.name === versionEntry.name
+            ) {
               if (!articleVersions[entry.group].hasOwnProperty(entry.name)) {
                 articleVersions[entry.group][entry.name] = [];
               }
-              articleVersions[entry.group][entry.name].push(versionEntry.version);
+              articleVersions[entry.group][entry.name].push(
+                versionEntry.version,
+              );
             }
           });
           fields = {
@@ -337,7 +363,8 @@ require([
         }
 
         // add prefix URL for endpoint
-        if (apiProject.url) fields.article.url = apiProject.url + fields.article.url;
+        if (apiProject.url)
+          fields.article.url = apiProject.url + fields.article.url;
 
         addArticleSettings(fields, entry);
 
@@ -375,14 +402,19 @@ require([
     .on('click', function(e) {
       e.preventDefault();
       var id = $(this).attr('href');
-      if ($(id).length > 0) $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);
+      if ($(id).length > 0)
+        $('html,body').animate(
+          { scrollTop: parseInt($(id).offset().top) },
+          400,
+        );
       window.location.hash = $(this).attr('href');
     });
 
   // Quickjump on Pageload to hash position.
   if (window.location.hash) {
     var id = window.location.hash;
-    if ($(id).length > 0) $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 0);
+    if ($(id).length > 0)
+      $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 0);
   }
 
   /**
@@ -421,8 +453,12 @@ require([
       $("#sidenav li[data-version='" + version + "']").each(function() {
         var group = $(this).data('group');
         var name = $(this).data('name');
-        var length = $("#sidenav li[data-group='" + group + "'][data-name='" + name + "']").length;
-        var index = $("#sidenav li[data-group='" + group + "'][data-name='" + name + "']").index($(this));
+        var length = $(
+          "#sidenav li[data-group='" + group + "'][data-name='" + name + "']",
+        ).length;
+        var index = $(
+          "#sidenav li[data-group='" + group + "'][data-name='" + name + "']",
+        ).index($(this));
         if (length === 1 || index === length - 1) $(this).addClass('is-new');
       });
     }
@@ -478,16 +514,38 @@ require([
       var version = $(this).data('version');
 
       if (semver.lte(version, selectedVersion)) {
-        if ($("article[data-group='" + group + "'][data-name='" + name + "']:visible").length === 0) {
+        if (
+          $(
+            "article[data-group='" +
+              group +
+              "'][data-name='" +
+              name +
+              "']:visible",
+          ).length === 0
+        ) {
           // enable Article
           $(
-            "article[data-group='" + group + "'][data-name='" + name + "'][data-version='" + version + "']"
+            "article[data-group='" +
+              group +
+              "'][data-name='" +
+              name +
+              "'][data-version='" +
+              version +
+              "']",
           ).removeClass('hide');
           // enable Navigation
           $(
-            "#sidenav li[data-group='" + group + "'][data-name='" + name + "'][data-version='" + version + "']"
+            "#sidenav li[data-group='" +
+              group +
+              "'][data-name='" +
+              name +
+              "'][data-version='" +
+              version +
+              "']",
           ).removeClass('hide');
-          $("#sidenav li.nav-header[data-group='" + group + "']").removeClass('hide');
+          $("#sidenav li.nav-header[data-group='" + group + "']").removeClass(
+            'hide',
+          );
         }
       }
     });
@@ -515,7 +573,9 @@ require([
 
   // compare url-parameter
   $.urlParam = function(name) {
-    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(
+      window.location.href,
+    );
     return results && results[1] ? results[1] : null;
   };
 
@@ -525,7 +585,10 @@ require([
 
     if (window.location.hash) {
       var id = window.location.hash;
-      $('html,body').animate({ scrollTop: parseInt($(id).offset().top) - 18 }, 0);
+      $('html,body').animate(
+        { scrollTop: parseInt($(id).offset().top) - 18 },
+        0,
+      );
     }
   }
 
@@ -581,12 +644,21 @@ require([
 
     if (!compareVersion && version == selectedVersion) return;
 
-    if ((compareVersion && articleVersions[group][name][0] === selectedVersion) || version === selectedVersion) {
+    if (
+      (compareVersion && articleVersions[group][name][0] === selectedVersion) ||
+      version === selectedVersion
+    ) {
       // the version of the entry is set to the highest version (reset)
       resetArticle(group, name, version);
     } else {
       var $compareToArticle = $(
-        "article[data-group='" + group + "'][data-name='" + name + "'][data-version='" + selectedVersion + "']"
+        "article[data-group='" +
+          group +
+          "'][data-name='" +
+          name +
+          "'][data-version='" +
+          selectedVersion +
+          "']",
       );
 
       var sourceEntry = {};
@@ -604,34 +676,66 @@ require([
 
       // add unique id
       // TODO: replace all group-name-version in template with id.
-      fields.article.id = fields.article.group + '-' + fields.article.name + '-' + fields.article.version;
+      fields.article.id =
+        fields.article.group +
+        '-' +
+        fields.article.name +
+        '-' +
+        fields.article.version;
       fields.article.id = fields.article.id.replace(/\./g, '_');
 
-      fields.compare.id = fields.compare.group + '-' + fields.compare.name + '-' + fields.compare.version;
+      fields.compare.id =
+        fields.compare.group +
+        '-' +
+        fields.compare.name +
+        '-' +
+        fields.compare.version;
       fields.compare.id = fields.compare.id.replace(/\./g, '_');
 
       var entry = sourceEntry;
       if (entry.parameter && entry.parameter.fields)
-        fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);
+        fields._hasTypeInParameterFields = _hasTypeInFields(
+          entry.parameter.fields,
+        );
 
-      if (entry.error && entry.error.fields) fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);
+      if (entry.error && entry.error.fields)
+        fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);
 
       if (entry.success && entry.success.fields)
         fields._hasTypeInSuccessFields = _hasTypeInFields(entry.success.fields);
 
-      if (entry.info && entry.info.fields) fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);
+      if (entry.info && entry.info.fields)
+        fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);
 
       var entry = compareEntry;
-      if (fields._hasTypeInParameterFields !== true && entry.parameter && entry.parameter.fields)
-        fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);
+      if (
+        fields._hasTypeInParameterFields !== true &&
+        entry.parameter &&
+        entry.parameter.fields
+      )
+        fields._hasTypeInParameterFields = _hasTypeInFields(
+          entry.parameter.fields,
+        );
 
-      if (fields._hasTypeInErrorFields !== true && entry.error && entry.error.fields)
+      if (
+        fields._hasTypeInErrorFields !== true &&
+        entry.error &&
+        entry.error.fields
+      )
         fields._hasTypeInErrorFields = _hasTypeInFields(entry.error.fields);
 
-      if (fields._hasTypeInSuccessFields !== true && entry.success && entry.success.fields)
+      if (
+        fields._hasTypeInSuccessFields !== true &&
+        entry.success &&
+        entry.success.fields
+      )
         fields._hasTypeInSuccessFields = _hasTypeInFields(entry.success.fields);
 
-      if (fields._hasTypeInInfoFields !== true && entry.info && entry.info.fields)
+      if (
+        fields._hasTypeInInfoFields !== true &&
+        entry.info &&
+        entry.info.fields
+      )
         fields._hasTypeInInfoFields = _hasTypeInFields(entry.info.fields);
 
       var content = templateCompareArticle(fields);
@@ -639,11 +743,19 @@ require([
       var $content = $root.next();
 
       // Event on.click re-assign
-      $content.find('.versions li.version a').on('click', changeVersionCompareTo);
+      $content
+        .find('.versions li.version a')
+        .on('click', changeVersionCompareTo);
 
       // select navigation
       $(
-        "#sidenav li[data-group='" + group + "'][data-name='" + name + "'][data-version='" + currentVersion + "']"
+        "#sidenav li[data-group='" +
+          group +
+          "'][data-name='" +
+          name +
+          "'][data-version='" +
+          currentVersion +
+          "']",
       ).addClass('has-modifications');
 
       $root.remove();
@@ -666,7 +778,8 @@ require([
         .find('li.version a')
         .each(function() {
           var selectVersion = $(this).html();
-          if (selectVersion < currentVersion && !$foundElement) $foundElement = $(this);
+          if (selectVersion < currentVersion && !$foundElement)
+            $foundElement = $(this);
         });
 
       if ($foundElement) $foundElement.trigger('click');
@@ -685,7 +798,7 @@ require([
         null,
         reversed.map(function(item) {
           return item.field.split('.').length - 1;
-        })
+        }),
       );
 
       for (var dot_count = 1; dot_count <= max_dot_count; dot_count++) {
@@ -715,7 +828,12 @@ require([
   function addArticleSettings(fields, entry) {
     // add unique id
     // TODO: replace all group-name-version in template with id.
-    fields.id = fields.article.group + '-' + fields.article.name + '-' + fields.article.version;
+    fields.id =
+      fields.article.group +
+      '-' +
+      fields.article.name +
+      '-' +
+      fields.article.version;
     fields.id = fields.id.replace(/\./g, '_');
 
     if (entry.header && entry.header.fields) {
@@ -725,7 +843,9 @@ require([
 
     if (entry.parameter && entry.parameter.fields) {
       sortFields(entry.parameter.fields);
-      fields._hasTypeInParameterFields = _hasTypeInFields(entry.parameter.fields);
+      fields._hasTypeInParameterFields = _hasTypeInFields(
+        entry.parameter.fields,
+      );
     }
 
     if (entry.error && entry.error.fields) {
@@ -769,7 +889,9 @@ require([
    * Render original Article and remove the current visible Article.
    */
   function resetArticle(group, name, version) {
-    var $root = $("article[data-group='" + group + "'][data-name='" + name + "']:visible");
+    var $root = $(
+      "article[data-group='" + group + "'][data-name='" + name + "']:visible",
+    );
     var content = renderArticle(group, name, version);
 
     $root.after(content);
@@ -778,9 +900,15 @@ require([
     // Event on.click muss neu zugewiesen werden (sollte eigentlich mit on automatisch funktionieren... sollte)
     $content.find('.versions li.version a').on('click', changeVersionCompareTo);
 
-    $("#sidenav li[data-group='" + group + "'][data-name='" + name + "'][data-version='" + version + "']").removeClass(
-      'has-modifications'
-    );
+    $(
+      "#sidenav li[data-group='" +
+        group +
+        "'][data-name='" +
+        name +
+        "'][data-version='" +
+        version +
+        "']",
+    ).removeClass('has-modifications');
 
     $root.remove();
     return;

@@ -1,4 +1,8 @@
-define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars, DiffMatchPatch) {
+define(['locales', 'handlebars', 'diffMatchPatch'], function(
+  locale,
+  Handlebars,
+  DiffMatchPatch,
+) {
   /**
    * Return a text as markdown.
    * Currently only a little helper to replace apidoc-inline Links (#Group:Name).
@@ -9,7 +13,15 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
     if (!text) {
       return text;
     }
-    text = text.replace(/((\[(.*?)\])?\(#)((.+?):(.+?))(\))/gm, function(match, p1, p2, p3, p4, p5, p6) {
+    text = text.replace(/((\[(.*?)\])?\(#)((.+?):(.+?))(\))/gm, function(
+      match,
+      p1,
+      p2,
+      p3,
+      p4,
+      p5,
+      p6,
+    ) {
       var link = p3 || p5 + '/' + p6;
       return '<a href="#api-' + p5 + '-' + p6 + '">' + link + '</a>';
     });
@@ -62,7 +74,8 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
     if (arguments.length > 0) {
       var type = typeof arguments[1];
       var arg = null;
-      if (type === 'string' || type === 'number' || type === 'boolean') arg = arguments[1];
+      if (type === 'string' || type === 'number' || type === 'boolean')
+        arg = arguments[1];
       Handlebars.registerHelper(name, function() {
         return arg;
       });
@@ -83,7 +96,8 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
   Handlebars.registerHelper('if_eq', function(context, options) {
     var compare = context;
     // Get length if context is an object
-    if (context instanceof Object && !(options.hash.compare instanceof Object)) compare = Object.keys(context).length;
+    if (context instanceof Object && !(options.hash.compare instanceof Object))
+      compare = Object.keys(context).length;
 
     if (compare === options.hash.compare) return options.fn(this);
 
@@ -96,7 +110,8 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
   Handlebars.registerHelper('if_gt', function(context, options) {
     var compare = context;
     // Get length if context is an object
-    if (context instanceof Object && !(options.hash.compare instanceof Object)) compare = Object.keys(context).length;
+    if (context instanceof Object && !(options.hash.compare instanceof Object))
+      compare = Object.keys(context).length;
 
     if (compare > options.hash.compare) return options.fn(this);
 
@@ -108,7 +123,8 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
    */
   var templateCache = {};
   Handlebars.registerHelper('subTemplate', function(name, sourceContext) {
-    if (!templateCache[name]) templateCache[name] = Handlebars.compile($('#template-' + name).html());
+    if (!templateCache[name])
+      templateCache[name] = Handlebars.compile($('#template-' + name).html());
 
     var template = templateCache[name];
     var templateContext = $.extend({}, this, sourceContext.hash);
@@ -137,13 +153,20 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
    * @returns {String}
    */
   function _handlebarsNewlineToBreak(text) {
-    return ('' + text).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br>' + '$2');
+    return ('' + text).replace(
+      /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
+      '$1' + '<br>' + '$2',
+    );
   }
 
   /**
    *
    */
-  Handlebars.registerHelper('each_compare_list_field', function(source, compare, options) {
+  Handlebars.registerHelper('each_compare_list_field', function(
+    source,
+    compare,
+    options,
+  ) {
     var fieldName = options.hash.field;
     var newSource = [];
     if (source) {
@@ -168,7 +191,11 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
   /**
    *
    */
-  Handlebars.registerHelper('each_compare_keys', function(source, compare, options) {
+  Handlebars.registerHelper('each_compare_keys', function(
+    source,
+    compare,
+    options,
+  ) {
     var newSource = [];
     if (source) {
       var sourceFields = Object.keys(source);
@@ -196,14 +223,22 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
   /**
    *
    */
-  Handlebars.registerHelper('each_compare_field', function(source, compare, options) {
+  Handlebars.registerHelper('each_compare_field', function(
+    source,
+    compare,
+    options,
+  ) {
     return _handlebarsEachCompared('field', source, compare, options);
   });
 
   /**
    *
    */
-  Handlebars.registerHelper('each_compare_title', function(source, compare, options) {
+  Handlebars.registerHelper('each_compare_title', function(
+    source,
+    compare,
+    options,
+  ) {
     return _handlebarsEachCompared('title', source, compare, options);
   });
 
@@ -281,7 +316,8 @@ define(['locales', 'handlebars', 'diffMatchPatch'], function(locale, Handlebars,
         var found = false;
         if (source) {
           source.forEach(function(sourceEntry) {
-            if (sourceEntry[fieldname] === compareEntry[fieldname]) found = true;
+            if (sourceEntry[fieldname] === compareEntry[fieldname])
+              found = true;
           });
         }
         if (!found) {

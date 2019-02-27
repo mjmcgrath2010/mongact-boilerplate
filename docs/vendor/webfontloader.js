@@ -18,7 +18,11 @@
     };
   }
   function p(a, b, d) {
-    p = Function.prototype.bind && -1 != Function.prototype.bind.toString().indexOf('native code') ? aa : ba;
+    p =
+      Function.prototype.bind &&
+      -1 != Function.prototype.bind.toString().indexOf('native code')
+        ? aa
+        : ba;
     return p.apply(null, arguments);
   }
   var q =
@@ -34,7 +38,10 @@
   var da = !!window.FontFace;
   function t(a, b, d, c) {
     b = a.c.createElement(b);
-    if (d) for (var e in d) d.hasOwnProperty(e) && ('style' == e ? (b.style.cssText = d[e]) : b.setAttribute(e, d[e]));
+    if (d)
+      for (var e in d)
+        d.hasOwnProperty(e) &&
+          ('style' == e ? (b.style.cssText = d[e]) : b.setAttribute(e, d[e]));
     c && b.appendChild(a.c.createTextNode(c));
     return b;
   }
@@ -73,7 +80,8 @@
       .replace(/^\s+|\s+$/, '');
   }
   function y(a, b) {
-    for (var d = a.className.split(/\s+/), c = 0, e = d.length; c < e; c++) if (d[c] == b) return !0;
+    for (var d = a.className.split(/\s+/), c = 0, e = d.length; c < e; c++)
+      if (d[c] == b) return !0;
     return !1;
   }
   function z(a) {
@@ -117,7 +125,9 @@
         g = !1;
       f.onload = f.onreadystatechange = function() {
         g ||
-          (this.readyState && 'loaded' != this.readyState && 'complete' != this.readyState) ||
+          (this.readyState &&
+            'loaded' != this.readyState &&
+            'complete' != this.readyState) ||
           ((g = !0),
           d && d(null),
           (f.onload = f.onreadystatechange = null),
@@ -153,7 +163,8 @@
     this.a = a || '-';
   }
   G.prototype.c = function(a) {
-    for (var b = [], d = 0; d < arguments.length; d++) b.push(arguments[d].replace(/[\W_]+/g, '').toLowerCase());
+    for (var b = [], d = 0; d < arguments.length; d++)
+      b.push(arguments[d].replace(/[\W_]+/g, '').toLowerCase());
     return b.join(this.a);
   };
   function H(a, b) {
@@ -188,10 +199,14 @@
       d = 'n',
       c = null;
     a &&
-      ((c = a.match(/(normal|oblique|italic)/i)) && c[1] && (d = c[1].substr(0, 1).toLowerCase()),
+      ((c = a.match(/(normal|oblique|italic)/i)) &&
+        c[1] &&
+        (d = c[1].substr(0, 1).toLowerCase()),
       (c = a.match(/([1-9]00|normal|bold)/i)) &&
         c[1] &&
-        (/bold/i.test(c[1]) ? (b = 7) : /[1-9]00/.test(c[1]) && (b = parseInt(c[1].substr(0, 1), 10))));
+        (/bold/i.test(c[1])
+          ? (b = 7)
+          : /[1-9]00/.test(c[1]) && (b = parseInt(c[1].substr(0, 1), 10))));
     return d + b;
   }
   function ha(a, b) {
@@ -272,7 +287,7 @@
                 },
                 function() {
                   e();
-                }
+                },
               );
         }
         k();
@@ -286,7 +301,7 @@
       },
       function() {
         b.j(b.a);
-      }
+      },
     );
   };
   function R(a, b, d, c, e, f, g) {
@@ -324,8 +339,13 @@
     T = null;
   function U() {
     if (null === T) {
-      var a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);
-      T = !!a && (536 > parseInt(a[1], 10) || (536 === parseInt(a[1], 10) && 11 >= parseInt(a[2], 10)));
+      var a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(
+        window.navigator.userAgent,
+      );
+      T =
+        !!a &&
+        (536 > parseInt(a[1], 10) ||
+          (536 === parseInt(a[1], 10) && 11 >= parseInt(a[2], 10)));
     }
     return T;
   }
@@ -336,14 +356,16 @@
     la(this);
   };
   function ma(a, b, d) {
-    for (var c in S) if (S.hasOwnProperty(c) && b === a.f[S[c]] && d === a.f[S[c]]) return !0;
+    for (var c in S)
+      if (S.hasOwnProperty(c) && b === a.f[S[c]] && d === a.f[S[c]]) return !0;
     return !1;
   }
   function la(a) {
     var b = a.g.a.offsetWidth,
       d = a.h.a.offsetWidth,
       c;
-    (c = b === a.f.serif && d === a.f['sans-serif']) || (c = U() && ma(a, b, d));
+    (c = b === a.f.serif && d === a.f['sans-serif']) ||
+      (c = U() && ma(a, b, d));
     c
       ? q() - a.A >= a.w
         ? U() && ma(a, b, d) && (null === a.u || a.u.hasOwnProperty(a.a.c))
@@ -357,7 +379,7 @@
       p(function() {
         la(this);
       }, a),
-      50
+      50,
     );
   }
   function V(a, b) {
@@ -369,7 +391,7 @@
         v(this.o.a);
         b(this.a);
       }, a),
-      0
+      0,
     );
   }
   function W(a, b, d) {
@@ -386,7 +408,10 @@
       w(
         b.f,
         [b.a.c('wf', a.c, K(a).toString(), 'active')],
-        [b.a.c('wf', a.c, K(a).toString(), 'loading'), b.a.c('wf', a.c, K(a).toString(), 'inactive')]
+        [
+          b.a.c('wf', a.c, K(a).toString(), 'loading'),
+          b.a.c('wf', a.c, K(a).toString(), 'inactive'),
+        ],
       );
     L(b, 'fontactive', a);
     this.o = !0;
@@ -409,7 +434,12 @@
       a.j &&
       (a.o
         ? ((a = a.a),
-          a.g && w(a.f, [a.a.c('wf', 'active')], [a.a.c('wf', 'loading'), a.a.c('wf', 'inactive')]),
+          a.g &&
+            w(
+              a.f,
+              [a.a.c('wf', 'active')],
+              [a.a.c('wf', 'loading'), a.a.c('wf', 'inactive')],
+            ),
           L(a, 'active'))
         : M(a.a));
   }
@@ -527,7 +557,8 @@
     b = 0;
     for (d = e.length; b < d; b++)
       if (((c = e[b].split(':')), c[1]))
-        for (var h = c[1].split(','), m = 0; m < h.length; m += 1) k.push(new H(c[0], h[m]));
+        for (var h = c[1].split(','), m = 0; m < h.length; m += 1)
+          k.push(new H(c[0], h[m]));
       else k.push(new H(c[0]));
     F(g, function() {
       a(k, f);
@@ -552,7 +583,8 @@
   function ya(a) {
     if (0 == a.a.length) throw Error('No fonts to load!');
     if (-1 != a.c.indexOf('kit=')) return a.c;
-    for (var b = a.a.length, d = [], c = 0; c < b; c++) d.push(a.a[c].replace(/ /g, '+'));
+    for (var b = a.a.length, d = [], c = 0; c < b; c++)
+      d.push(a.a[c].replace(/ /g, '+'));
     b = a.c + '?family=' + d.join('%7C');
     0 < a.f.length && (b += '&subset=' + a.f.join(','));
     0 < a.g.length && (b += '&text=' + encodeURIComponent(a.g));
@@ -628,7 +660,10 @@
           }
         0 < g.length && (f = g);
         3 == c.length &&
-          ((c = c[2]), (g = []), (c = c ? c.split(',') : g), 0 < c.length && (c = Aa[c[0]]) && (a.c[e] = c));
+          ((c = c[2]),
+          (g = []),
+          (c = c ? c.split(',') : g),
+          0 < c.length && (c = Aa[c[0]]) && (a.c[e] = c));
       }
       a.c[e] || ((c = Aa[e]) && (a.c[e] = c));
       for (c = 0; c < f.length; c += 1) a.a.push(new H(e, f[c]));
@@ -668,14 +703,15 @@
             else if (d.Typekit && d.Typekit.config && d.Typekit.config.fn) {
               b = d.Typekit.config.fn;
               for (var e = [], f = 0; f < b.length; f += 2)
-                for (var g = b[f], k = b[f + 1], h = 0; h < k.length; h++) e.push(new H(g, k[h]));
+                for (var g = b[f], k = b[f + 1], h = 0; h < k.length; h++)
+                  e.push(new H(g, k[h]));
               try {
                 d.Typekit.load({ events: !1, classes: !1, async: !0 });
               } catch (m) {}
               a(e);
             }
           },
-          2e3
+          2e3,
         )
       : a([]);
   };
@@ -693,13 +729,27 @@
         (d.__webfontfontdeckmodule__[b] = function(b, d) {
           for (var g = 0, k = d.fonts.length; g < k; ++g) {
             var h = d.fonts[g];
-            c.a.push(new H(h.name, ga('font-weight:' + h.weight + ';font-style:' + h.style)));
+            c.a.push(
+              new H(
+                h.name,
+                ga('font-weight:' + h.weight + ';font-style:' + h.style),
+              ),
+            );
           }
           a(c.a);
         }),
-        B(this.c, z(this.c) + (this.f.api || '//f.fontdeck.com/s/css/js/') + ea(this.c) + '/' + b + '.js', function(b) {
-          b && a([]);
-        }))
+        B(
+          this.c,
+          z(this.c) +
+            (this.f.api || '//f.fontdeck.com/s/css/js/') +
+            ea(this.c) +
+            '/' +
+            b +
+            '.js',
+          function(b) {
+            b && a([]);
+          },
+        ))
       : a([]);
   };
   var Y = new pa(window);
@@ -725,5 +775,6 @@
       })
     : 'undefined' !== typeof module && module.exports
     ? (module.exports = Z)
-    : ((window.WebFont = Z), window.WebFontConfig && Y.load(window.WebFontConfig));
+    : ((window.WebFont = Z),
+      window.WebFontConfig && Y.load(window.WebFontConfig));
 })();

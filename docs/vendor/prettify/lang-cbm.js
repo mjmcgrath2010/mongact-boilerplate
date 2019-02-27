@@ -16,7 +16,10 @@
 */
 PR.registerLangHandler(
   PR.createSimpleLexer(
-    [['str', /^(?:"(?:[^\\"\r\n]|\\.)*(?:"|$))/, null, '"'], ['pln', /^\s+/, null, ' \r\n\t\u00a0']],
+    [
+      ['str', /^(?:"(?:[^\\"\r\n]|\\.)*(?:"|$))/, null, '"'],
+      ['pln', /^\s+/, null, ' \r\n\t\u00a0'],
+    ],
     [
       ['com', /^REM[^\r\n]*/, null],
       [
@@ -27,7 +30,7 @@ PR.registerLangHandler(
       ['pln', /^[A-Z][A-Z0-9]?(?:\$|%)?/i, null],
       ['lit', /^(?:\d+(?:\.\d*)?|\.\d+)(?:e[+\-]?\d+)?/i, null, '0123456789'],
       ['pun', /^.[^\s\w\.$%"]*/, null],
-    ]
+    ],
   ),
-  ['basic', 'cbm']
+  ['basic', 'cbm'],
 );

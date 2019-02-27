@@ -24,7 +24,11 @@ PR.registerLangHandler(
         /^(?:(?:0x[\da-fA-F][\da-fA-F_]*\.[\da-fA-F][\da-fA-F_]*[pP]?)|(?:\d[\d_]*\.\d[\d_]*[eE]?))[+-]?\d[\d_]*/,
         null,
       ],
-      ['lit', /^-?(?:(?:0(?:(?:b[01][01_]*)|(?:o[0-7][0-7_]*)|(?:x[\da-fA-F][\da-fA-F_]*)))|(?:\d[\d_]*))/, null],
+      [
+        'lit',
+        /^-?(?:(?:0(?:(?:b[01][01_]*)|(?:o[0-7][0-7_]*)|(?:x[\da-fA-F][\da-fA-F_]*)))|(?:\d[\d_]*))/,
+        null,
+      ],
       ['lit', /^(?:true|false|nil)\b/, null],
       [
         'kwd',
@@ -39,7 +43,7 @@ PR.registerLangHandler(
         null,
       ],
       ['typ', /^\b(?:[@_]?[A-Z]+[a-z][A-Za-z_$@0-9]*|\w+_t\b)/, null],
-    ]
+    ],
   ),
-  ['swift']
+  ['swift'],
 );

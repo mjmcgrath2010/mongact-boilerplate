@@ -21,5 +21,5 @@ PR.registerLangHandler(
     types: /^(bool|(double|s?fixed|[su]?int)(32|64)|float|string)\b/,
     cStyleComments: !0,
   }),
-  ['proto']
+  ['proto'],
 );

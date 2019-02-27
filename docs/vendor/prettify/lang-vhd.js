@@ -35,10 +35,13 @@ PR.registerLangHandler(
         /^\'(?:ACTIVE|ASCENDING|BASE|DELAYED|DRIVING|DRIVING_VALUE|EVENT|HIGH|IMAGE|INSTANCE_NAME|LAST_ACTIVE|LAST_EVENT|LAST_VALUE|LEFT|LEFTOF|LENGTH|LOW|PATH_NAME|POS|PRED|QUIET|RANGE|REVERSE_RANGE|RIGHT|RIGHTOF|SIMPLE_NAME|STABLE|SUCC|TRANSACTION|VAL|VALUE)(?=[^\w-]|$)/i,
         null,
       ],
-      ['lit', /^\d+(?:_\d+)*(?:#[\w\\.]+#(?:[+\-]?\d+(?:_\d+)*)?|(?:\.\d+(?:_\d+)*)?(?:E[+\-]?\d+(?:_\d+)*)?)/i],
+      [
+        'lit',
+        /^\d+(?:_\d+)*(?:#[\w\\.]+#(?:[+\-]?\d+(?:_\d+)*)?|(?:\.\d+(?:_\d+)*)?(?:E[+\-]?\d+(?:_\d+)*)?)/i,
+      ],
       ['pln', /^(?:[a-z]\w*|\\[^\\]*\\)/i],
       ['pun', /^[^\w\t\n\r \xA0\"\'][^\w\t\n\r \xA0\-\"\']*/],
-    ]
+    ],
   ),
-  ['vhdl', 'vhd']
+  ['vhdl', 'vhd'],
 );

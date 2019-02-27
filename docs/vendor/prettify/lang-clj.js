@@ -29,7 +29,7 @@ PR.registerLangHandler(
         null,
       ],
       ['typ', /^:[0-9a-zA-Z\-]+/],
-    ]
+    ],
   ),
-  ['clj']
+  ['clj'],
 );

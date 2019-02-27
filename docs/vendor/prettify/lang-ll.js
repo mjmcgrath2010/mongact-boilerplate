@@ -27,7 +27,7 @@ PR.registerLangHandler(
       ['lit', /^\d+\.\d+/],
       ['lit', /^(?:\d+|0[xX][a-fA-F0-9]+)/],
       ['pun', /^[()\[\]{},=*<>:]|\.\.\.$/],
-    ]
+    ],
   ),
-  ['llvm', 'll']
+  ['llvm', 'll'],
 );

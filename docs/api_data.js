@@ -46,7 +46,8 @@ define({
         examples: [
           {
             title: 'Success-Response:',
-            content: 'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "username": "joe@example.com",\n}',
+            content:
+              'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "username": "joe@example.com",\n}',
             type: 'json',
           },
         ],
@@ -65,7 +66,8 @@ define({
         examples: [
           {
             title: 'Error-Response:',
-            content: 'HTTP/1.1 404 Not Found\n{\n  "error": "User Not Found"\n}',
+            content:
+              'HTTP/1.1 404 Not Found\n{\n  "error": "User Not Found"\n}',
             type: 'json',
           },
         ],
@@ -122,7 +124,8 @@ define({
         examples: [
           {
             title: 'Error-Response:',
-            content: 'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
+            content:
+              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
             type: 'json',
           },
         ],
@@ -175,7 +178,8 @@ define({
         examples: [
           {
             title: 'Success-Response:',
-            content: 'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "username": "joe@example.com",\n}',
+            content:
+              'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "username": "joe@example.com",\n}',
             type: 'json',
           },
         ],
@@ -194,7 +198,8 @@ define({
         examples: [
           {
             title: 'Error-Response:',
-            content: 'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
+            content:
+              'HTTP/1.1 401 Not Found\n{\n  "error": "User is not Admin."\n}',
             type: 'json',
           },
         ],
@@ -240,7 +245,8 @@ define({
         examples: [
           {
             title: 'Success-Response:',
-            content: 'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "updated": "true",\n}',
+            content:
+              'HTTP/1.1 200 OK\n{\n  "_id": "12345tefwq234dfwavr431rt4g",\n  "updated": "true",\n}',
             type: 'json',
           },
         ],
@@ -259,7 +265,8 @@ define({
         examples: [
           {
             title: 'Error-Response:',
-            content: 'HTTP/1.1 404 Not Found\n{\n  "error": "User Not Found"\n}',
+            content:
+              'HTTP/1.1 404 Not Found\n{\n  "error": "User Not Found"\n}',
             type: 'json',
           },
         ],
