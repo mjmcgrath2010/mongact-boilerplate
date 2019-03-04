@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { deletePost, updatePost } from '../../../actions';
-import { Document } from '../../../Document';
+import Document from '../../../Document/Loadable';
 // import styled from 'styled-components';
 
 /* eslint-disable react/prefer-stateless-function */
