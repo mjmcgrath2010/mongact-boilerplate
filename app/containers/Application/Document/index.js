@@ -21,6 +21,7 @@ import Button from '../../../components/ui/Button';
 import { RenderInputs } from './utils';
 import request from '../../../utils/request';
 import { createDocument, updateDocument } from './actions';
+import { CREATE_RECORD_REQUEST, UPDATE_RECORD_REQUEST } from './constants';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -75,7 +76,6 @@ export class Document extends React.Component {
 
   handleSave = () => {
     const {
-      dispatch,
       action,
       fields,
       update,
@@ -87,9 +87,9 @@ export class Document extends React.Component {
     fields.map(field => (payload[field.name] = this.state[field.name]));
 
     if (update) {
-      return dispatch(updateDocumentAction(action, payload));
+      return updateDocumentAction(action, payload);
     }
-    return dispatch(createDocumentAction(action, payload));
+    return createDocumentAction(action, payload);
   };
 
   render() {
@@ -130,7 +130,6 @@ export class Document extends React.Component {
 
 Document.propTypes = {
   action: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
   fields: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
@@ -148,10 +147,14 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    createDocumentAction: (action, payload) =>
-      dispatch(createDocument(action, payload)),
-    updateDocumentAction: (action, payload) =>
-      dispatch(updateDocument(action, payload)),
+    createDocumentAction: (action, payload) => {
+      dispatch({ type: CREATE_RECORD_REQUEST });
+      return dispatch(createDocument(action, payload));
+    },
+    updateDocumentAction: (action, payload) => {
+      dispatch({ type: UPDATE_RECORD_REQUEST });
+      return dispatch(updateDocument(action, payload));
+    },
   };
 }
 
