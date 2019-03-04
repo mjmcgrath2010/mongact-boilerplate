@@ -4,7 +4,11 @@
  *
  */
 
-export function createRecord(action, payload) {
+export function createDocument(action, payload) {
+  return action(payload);
+}
+
+export function updateDocument(action, payload) {
   return action(payload);
 }
 

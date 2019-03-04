@@ -14,12 +14,13 @@ import Typography from '@material-ui/core/es/Typography/Typography';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectCreateRecord from './selectors';
+import makeSelectDoument from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import Button from '../../../components/ui/Button';
 import { RenderInputs } from './utils';
 import request from '../../../utils/request';
+import { createDocument, updateDocument } from './actions';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -73,12 +74,22 @@ export class Document extends React.Component {
   };
 
   handleSave = () => {
-    const { dispatch, action, fields } = this.props;
+    const {
+      dispatch,
+      action,
+      fields,
+      update,
+      updateDocumentAction,
+      createDocumentAction,
+    } = this.props;
     const payload = {};
     // eslint-disable-next-line no-return-assign
     fields.map(field => (payload[field.name] = this.state[field.name]));
 
-    dispatch(action(payload));
+    if (update) {
+      return dispatch(updateDocumentAction(action, payload));
+    }
+    return dispatch(createDocumentAction(action, payload));
   };
 
   render() {
@@ -124,17 +135,23 @@ Document.propTypes = {
   fields: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   cancelText: PropTypes.string.isRequired,
+  createDocumentAction: PropTypes.func.isRequired,
+  updateDocumentAction: PropTypes.func.isRequired,
   update: PropTypes.object,
   saveText: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
-  createRecord: makeSelectCreateRecord(),
+  document: makeSelectDoument(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    createDocumentAction: (action, payload) =>
+      dispatch(createDocument(action, payload)),
+    updateDocumentAction: (action, payload) =>
+      dispatch(updateDocument(action, payload)),
   };
 }
 

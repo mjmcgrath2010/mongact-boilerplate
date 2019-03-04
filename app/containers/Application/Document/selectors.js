@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the createRecord state domain
  */
 
-const selectCreateRecordDomain = state =>
-  state.get('createRecord', initialState);
+const selectDoumentDomain = state => state.get('createRecord', initialState);
 
 /**
  * Other specific selectors
@@ -16,8 +15,8 @@ const selectCreateRecordDomain = state =>
  * Default selector used by Document
  */
 
-const makeSelectCreateRecord = () =>
-  createSelector(selectCreateRecordDomain, substate => substate.toJS());
+const makeSelectDoument = () =>
+  createSelector(selectDoumentDomain, substate => substate.toJS());
 
-export default makeSelectCreateRecord;
-export { selectCreateRecordDomain };
+export default makeSelectDoument;
+export { selectDoumentDomain };
