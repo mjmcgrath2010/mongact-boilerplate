@@ -1,6 +1,6 @@
 /*
  *
- * CreateRecord reducer
+ * Document reducer
  *
  */
 
@@ -9,7 +9,7 @@ import { DEFAULT_ACTION } from './constants';
 
 export const initialState = fromJS({});
 
-function createRecordReducer(state = initialState, action) {
+function documentReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -18,4 +18,4 @@ function createRecordReducer(state = initialState, action) {
   }
 }
 
-export default createRecordReducer;
+export default documentReducer;

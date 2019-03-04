@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for CreateRecord
+ * Asynchronously loads the component for Document
  *
  */
 

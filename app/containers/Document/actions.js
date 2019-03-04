@@ -1,6 +1,6 @@
 /*
  *
- * CreateRecord actions
+ * Document actions
  *
  */
 

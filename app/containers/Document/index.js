@@ -1,6 +1,6 @@
 /**
  *
- * CreateRecord
+ * Document
  *
  */
 
@@ -41,7 +41,7 @@ const ButtonContainer = styled.div`
 `;
 
 /* eslint-disable react/prefer-stateless-function */
-export class CreateRecord extends React.Component {
+export class Document extends React.Component {
   state = {
     content: '',
     title: '',
@@ -110,7 +110,7 @@ export class CreateRecord extends React.Component {
   }
 }
 
-CreateRecord.propTypes = {
+Document.propTypes = {
   action: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
@@ -132,11 +132,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'createRecord', reducer });
-const withSaga = injectSaga({ key: 'createRecord', saga });
+const withReducer = injectReducer({ key: 'document', reducer });
+const withSaga = injectSaga({ key: 'document', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(CreateRecord);
+)(Document);

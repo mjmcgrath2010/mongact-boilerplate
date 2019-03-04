@@ -13,7 +13,7 @@ const selectCreateRecordDomain = state =>
  */
 
 /**
- * Default selector used by CreateRecord
+ * Default selector used by Document
  */
 
 const makeSelectCreateRecord = () =>
