@@ -21,12 +21,14 @@ class CreatePost extends React.Component {
   render() {
     return (
       <Document
+        title="Create a Post"
         fields={[
           { name: 'title', type: 'input', label: 'Title' },
           { name: 'content', type: 'editor' },
         ]}
         action={createPost}
         handleCancel={this.handleCancel}
+        cancelText="Go Back"
       />
     );
   }

@@ -19,6 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import Button from '../../../components/ui/Button';
 import { RenderInputs } from './utils';
+import request from '../../../utils/request';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -52,9 +53,15 @@ export class Document extends React.Component {
   }
 
   setup() {
-    const { fields } = this.props;
+    const { fields, update } = this.props;
 
     fields.map(field => this.setState({ [field.name]: '' }));
+    if (update) {
+      const { path, id } = update;
+      request(`/${path}/${id}`, { method: 'GET' }).then(doc =>
+        this.setState(doc[0]),
+      );
+    }
   }
 
   handleEditorChange = value => {
@@ -75,11 +82,11 @@ export class Document extends React.Component {
   };
 
   render() {
-    const { handleCancel, fields } = this.props;
+    const { handleCancel, fields, title, cancelText, saveText } = this.props;
     return (
       <div>
         <Wrapper>
-          <Typography variant="subtitle1">Create a new Post</Typography>
+          <Typography variant="subtitle1">{title}</Typography>
         </Wrapper>
         <RenderInputs
           fields={fields}
@@ -92,7 +99,7 @@ export class Document extends React.Component {
             <Button
               color="secondary"
               variant="outlined"
-              text="Cancel"
+              text={cancelText}
               onClick={handleCancel}
             />
           </ButtonContainer>
@@ -100,7 +107,7 @@ export class Document extends React.Component {
             <Button
               color="primary"
               variant="outlined"
-              text="Save"
+              text={saveText || 'Save'}
               onClick={this.handleSave}
             />
           </ButtonContainer>
@@ -115,6 +122,10 @@ Document.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired,
   fields: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  cancelText: PropTypes.string.isRequired,
+  update: PropTypes.object,
+  saveText: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
