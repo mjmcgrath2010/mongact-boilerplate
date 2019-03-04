@@ -17,7 +17,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectCreateRecord from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import Button from '../../components/ui/Button';
+import Button from '../../../components/ui/Button';
 import { RenderInputs } from './utils';
 
 const Wrapper = styled.div`
@@ -54,7 +54,7 @@ export class Document extends React.Component {
   setup() {
     const { fields } = this.props;
 
-    fields.map(field => this.setState({ [field]: '' }));
+    fields.map(field => this.setState({ [field.name]: '' }));
   }
 
   handleEditorChange = value => {
@@ -69,7 +69,7 @@ export class Document extends React.Component {
     const { dispatch, action, fields } = this.props;
     const payload = {};
     // eslint-disable-next-line no-return-assign
-    fields.map(field => (payload[field] = this.state[field]));
+    fields.map(field => (payload[field.name] = this.state[field.name]));
 
     dispatch(action(payload));
   };

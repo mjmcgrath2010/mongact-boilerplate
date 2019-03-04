@@ -23,19 +23,21 @@ class Categories extends React.Component {
   render() {
     const { categories } = this.props;
     const data = [];
-    categories.map(category => {
-      const { _id, name, description } = category;
-      return data.push([
-        name,
-        description,
-        <IconButton
-          color="primary"
-          onClick={this.handleNavigation('edit', _id)}
-        >
-          <Icon>edit</Icon>
-        </IconButton>,
-      ]);
-    });
+    if (categories) {
+      categories.map(category => {
+        const { _id, name, description } = category;
+        return data.push([
+          name,
+          description,
+          <IconButton
+            color="primary"
+            onClick={this.handleNavigation('edit', _id)}
+          >
+            <Icon>edit</Icon>
+          </IconButton>,
+        ]);
+      });
+    }
     return (
       <div>
         <DataTable

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../../../components/ui/Input';
-import TextEditor from '../../../components/TextEditor';
+import Input from '../../../../components/ui/Input';
+import TextEditor from '../../../../components/TextEditor';
 
 const Wrapper = styled.div`
   width: 80%;
