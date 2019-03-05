@@ -11,10 +11,12 @@ const componentGenerator = require('./component/index.js');
 const containerGenerator = require('./container/index.js');
 const languageGenerator = require('./language/index.js');
 const endpointGenerator = require('./endpoint/index.js');
+const viewGenerator = require('./view/index.js');
 
 module.exports = plop => {
   plop.setGenerator('component', componentGenerator);
   plop.setGenerator('container', containerGenerator);
+  plop.setGenerator('view', viewGenerator);
   plop.setGenerator('endpoint', endpointGenerator);
   plop.setGenerator('language', languageGenerator);
   plop.addHelper('directory', comp => {
