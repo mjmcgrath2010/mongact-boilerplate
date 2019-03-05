@@ -4,10 +4,71 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import {
+FETCH_{{ constantCase name }},
+{{ constantCase name }}_RECEIVED,
+CREATE_{{ constantCase name }},
+{{ constantCase name }}_CREATED,
+UPDATE_{{ constantCase name }},
+{{ constantCase name }}_UPDATED,
+DELETE_{{ constantCase name }},
+{{ constantCase name }}_DELETED,
+} from './constants';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
+
+export function fetch{{ properCase name }}(payload) {
+return {
+type: FETCH_{{ constantCase name }},
+payload,
+};
+}
+
+export function {{ lowerCase name }}Received(payload) {
+return {
+type: {{ constantCase name }}_RECEIVED,
+payload,
+};
+}
+
+
+export function create{{ properCase name }}(payload) {
+return {
+type: CREATE_{{ constantCase name }},
+payload,
+};
+}
+
+export function {{ lowerCase name }}Created(payload) {
+return {
+type: {{ constantCase name }}_CREATED,
+payload,
+};
+}
+
+export function update{{ properCase name }}(payload) {
+return {
+type: UPDATE_{{ constantCase name }},
+payload,
+};
+}
+
+export function {{ lowerCase name }}Updated(payload) {
+return {
+type: {{ constantCase name }}_UPDATED,
+payload,
+};
+}
+
+export function delete{{ properCase name }}(id) {
+return {
+type: DELETE_{{ constantCase name }},
+id,
+};
+}
+
+export function {{ lowerCase name }}Deleted(payload) {
+return {
+type: {{ constantCase name }}_DELETED,
+payload,
+};
 }

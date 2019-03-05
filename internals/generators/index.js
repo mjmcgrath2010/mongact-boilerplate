@@ -48,6 +48,8 @@ module.exports = plop => {
       pathName,
       config.path,
       plop.getHelper('properCase')(answers.name),
+      plop.getHelper('camelCase')(answers.name),
+      plop.getHelper('constantCase')(answers.name),
       '**.js',
     )}`;
     exec(`npm run prettify -- "${folderPath}"`);
