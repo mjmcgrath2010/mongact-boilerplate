@@ -34,6 +34,18 @@ module.exports = {
       },
     },
     {
+      type: 'input',
+      name: 'fields',
+      message: 'What fields are present in the data model? (enter comma separated list)',
+      default: 'name, description',
+    },
+    {
+      type: 'input',
+      name: 'endpoint',
+      message: 'What endpoint will the data be retrieved from?',
+      default: 'project',
+    },
+    {
       type: 'confirm',
       name: 'wantHeaders',
       default: false,

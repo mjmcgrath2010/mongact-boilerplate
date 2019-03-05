@@ -14,7 +14,7 @@ import {
 import Api from '../../../../api';
 
 export function* fetch{{ properCase name }}s() {
-  const {{ lowerCase name }}s = yield call(Api.get, `/{{ lowerCase name }}`);
+  const {{ lowerCase name }}s = yield call(Api.get, `/{{ lowerCase endpoint }}`);
   const data = {
     {{ lowerCase name }}s,
   };
@@ -26,7 +26,7 @@ export function* fetch{{ properCase name }}s() {
 }
 
 export function* create{{ properCase name }}(action) {
-  const new{{ properCase name }} = yield call(Api.post, `/{{ lowerCase name }}`, action.payload);
+  const new{{ properCase name }} = yield call(Api.post, `/{{ dashCase endpoint }}`, action.payload);
   const data = {
     new{{ properCase name }},
   };
@@ -38,7 +38,7 @@ export function* create{{ properCase name }}(action) {
 }
 
 export function* update{{ properCase name }}(action) {
-  const new{{ properCase name }} = yield call(Api.update, `/{{ lowerCase name }}/${action.id}`, action.payload);
+  const new{{ properCase name }} = yield call(Api.update, `/{{ dashCase endpoint }}/${action.id}`, action.payload);
   const data = {
     new{{ properCase name }},
   };
@@ -50,7 +50,7 @@ export function* update{{ properCase name }}(action) {
 }
 
 export function* delete{{ properCase name }}(action) {
-  const deleted{{ properCase name }} = yield call(Api.delete, `/{{ lowerCase name }}/${action.id}`);
+  const deleted{{ properCase name }} = yield call(Api.delete, `/{{ dashCase endpoint }}/${action.id}`);
   const data = {
     deleted{{ properCase name }},
   };
