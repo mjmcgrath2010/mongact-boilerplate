@@ -28,6 +28,12 @@ import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
+import {
+fetch{{ properCase name }}s,
+create{{ properCase name }},
+update{{ properCase name }},
+delete{{ properCase name }}
+} from './actions';
 {{/if}}
 {{#if wantMessages}}
 import messages from './messages';
@@ -65,6 +71,10 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    fetchAll: () => dispatch(fetch{{ properCase name }}s),
+    create: (data) => dispatch(create{{ properCase name }}(data)),
+    update: (data) => dispatch(update{{ properCase name }}(data)),
+    remove: (data) => delete{{ properCase name }}(data),
   };
 }
 
