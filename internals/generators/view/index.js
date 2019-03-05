@@ -186,7 +186,7 @@ module.exports = {
 
     actions.push({
       type: 'prettify',
-      path: '/containers/',
+      path: '/containers/Application/views/',
     });
 
     return actions;

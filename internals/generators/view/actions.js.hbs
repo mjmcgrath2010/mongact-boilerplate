@@ -5,8 +5,8 @@
  */
 
 import {
-FETCH_{{ constantCase name }},
-{{ constantCase name }}_RECEIVED,
+FETCH_{{ constantCase name }}S,
+{{ constantCase name }}S_RECEIVED,
 CREATE_{{ constantCase name }},
 {{ constantCase name }}_CREATED,
 UPDATE_{{ constantCase name }},
@@ -16,16 +16,16 @@ DELETE_{{ constantCase name }},
 } from './constants';
 
 
-export function fetch{{ properCase name }}(payload) {
+export function fetch{{ properCase name }}s(payload) {
 return {
-type: FETCH_{{ constantCase name }},
+type: FETCH_{{ constantCase name }}S,
 payload,
 };
 }
 
-export function {{ lowerCase name }}Received(payload) {
+export function {{ lowerCase name }}sReceived(payload) {
 return {
-type: {{ constantCase name }}_RECEIVED,
+type: {{ constantCase name }}S_RECEIVED,
 payload,
 };
 }

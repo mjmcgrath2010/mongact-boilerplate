@@ -42,14 +42,12 @@ module.exports = plop => {
   });
   plop.setActionType('prettify', (answers, config) => {
     const pathName =
-      answers.type === 'Endpoint' ? '/../../app/' : '/../../server/';
+      answers.type === 'endpoint' ? '/../../server/' : '/../../app/';
     const folderPath = `${path.join(
       __dirname,
       pathName,
       config.path,
       plop.getHelper('properCase')(answers.name),
-      plop.getHelper('camelCase')(answers.name),
-      plop.getHelper('constantCase')(answers.name),
       '**.js',
     )}`;
     exec(`npm run prettify -- "${folderPath}"`);

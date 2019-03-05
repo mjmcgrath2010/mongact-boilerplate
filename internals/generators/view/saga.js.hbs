@@ -1,6 +1,72 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeEvery, call, all, put } from 'redux-saga/effects';
+import {
+FETCH_{{ constantCase name }}S,
+CREATE_{{ constantCase name }},
+UPDATE_{{ constantCase name }},
+DELETE_{{ constantCase name }},
+} from './constants';
+import {
+{{ lowerCase name }}sReceived,
+{{ lowerCase name }}Created,
+{{ lowerCase name }}Updated,
+{{ lowerCase name }}Deleted,
+} from './actions';
+import Api from '../../../../api';
+
+export function* fetch{{ properCase name }}s() {
+  const {{ lowerCase name }}s = yield call(Api.get, `/{{ lowerCase name }}`);
+  const data = {
+    {{ lowerCase name }}s,
+  };
+  try {
+    yield put({{ lowerCase name }}sReceived(data));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* create{{ properCase name }}(action) {
+  const new{{ properCase name }} = yield call(Api.post, `/{{ lowerCase name }}`, action.payload);
+  const data = {
+    new{{ properCase name }},
+  };
+  try {
+    yield put({{ lowerCase name }}Created(data));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* update{{ properCase name }}(action) {
+  const new{{ properCase name }} = yield call(Api.update, `/{{ lowerCase name }}/${action.id}`, action.payload);
+  const data = {
+    new{{ properCase name }},
+  };
+  try {
+    yield put({{ lowerCase name }}Updated(data));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* delete{{ properCase name }}(action) {
+  const deleted{{ properCase name }} = yield call(Api.delete, `/{{ lowerCase name }}/${action.id}`);
+  const data = {
+    deleted{{ properCase name }},
+  };
+  try {
+    yield put({{ lowerCase name }}Deleted(data))
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 // Individual exports for testing
 export default function* {{ camelCase name }}Saga() {
-  // See example in containers/HomePage/saga.js
+  yield all([
+    takeEvery(FETCH_{{ constantCase name }}S, fetch{{ properCase name }}s),
+    takeEvery(CREATE_{{ constantCase name }}, create{{ properCase name }}),
+    takeEvery(UPDATE_{{ constantCase name }}, update{{ properCase name }}),
+    takeEvery(DELETE_{{ constantCase name }}, delete{{ properCase name }}),
+  ]);
 }
