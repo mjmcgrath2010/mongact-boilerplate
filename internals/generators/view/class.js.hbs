@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 {{#if wantHeaders}}
 import { Helmet } from 'react-helmet';
 {{/if}}
+{{#if createView}}
+import { Route } from 'react-router-dom';
+{{/if}}
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
@@ -52,6 +55,31 @@ export class {{ properCase name }} extends {{{ type }}} {
       {{/if}}
       {{#if wantMessages}}
         <FormattedMessage {...messages.header} />
+      {{/if}}
+      {{#if createView}}
+        <Route
+          exact
+          path="/app/{{dashCase name}}"
+          render={() => {
+            return (
+              <div>
+                 <h1>Index Route</h1>
+              </div>
+            );
+        }}
+        />
+        <Route
+          exact
+          path="/app/{{dashCase name}}/create"
+          render={() => <h1>Create Route</h1>}
+        />
+      {{/if}}
+      {{#if editView}}
+        <Route
+          exact
+          path="/app/{{dashCase name}}/edit/:id"
+          render={() => <h1>Edit Route</h1>}
+        />
       {{/if}}
       </div>
     );
