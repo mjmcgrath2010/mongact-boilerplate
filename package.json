@@ -44,7 +44,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "docs": " apidoc -i server/api/endpoints/ -o docs/",
+    "docs": " apidoc -i server/api/endpoints/ -o docs/"
   },
   "lint-staged": {
     "*.js": [
