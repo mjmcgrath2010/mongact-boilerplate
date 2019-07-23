@@ -40,11 +40,11 @@
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest && codecov",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "docs": " apidoc -i server/api/endpoints/ -o docs/"
+    "docs": " apidoc -i server/api/endpoints/ -o docs/",
   },
   "lint-staged": {
     "*.js": [
@@ -59,6 +59,10 @@
   "pre-commit": "lint:staged",
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "dependencies": {
     "@babel/polyfill": "7.0.0",

@@ -16,7 +16,10 @@ const selectDoumentDomain = state => state.get('createRecord', initialState);
  */
 
 const makeSelectDoument = () =>
-  createSelector(selectDoumentDomain, substate => substate.toJS());
+  createSelector(
+    selectDoumentDomain,
+    substate => substate.toJS(),
+  );
 
 export default makeSelectDoument;
 export { selectDoumentDomain };

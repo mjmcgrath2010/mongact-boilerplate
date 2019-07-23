@@ -16,7 +16,10 @@ const selectApplicationDomain = state => state.get('application', initialState);
  */
 
 const makeSelectApplication = () =>
-  createSelector(selectApplicationDomain, substate => substate.toJS());
+  createSelector(
+    selectApplicationDomain,
+    substate => substate.toJS(),
+  );
 
 export default makeSelectApplication;
 export { selectApplicationDomain };

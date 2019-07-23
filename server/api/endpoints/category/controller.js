@@ -31,9 +31,8 @@ exports.getOne = (req, res) => {
 exports.post = (req, res, next) => {
   const { name, description } = req.body;
   const { _id } = req.user;
-  Category.create(
-    { author: _id, name, description },
-    (err, doc) => (err ? next(err) : res.send(doc)),
+  Category.create({ author: _id, name, description }, (err, doc) =>
+    err ? next(err) : res.send(doc),
   );
 };
 

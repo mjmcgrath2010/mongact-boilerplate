@@ -42,9 +42,8 @@ exports.getOne = (req, res) => {
 exports.post = (req, res, next) => {
   const { title, content, categories } = req.body;
   const { _id } = req.user;
-  Post.create(
-    { title, content, categories, author: _id },
-    (err, doc) => (err ? next(err) : res.send(doc)),
+  Post.create({ title, content, categories, author: _id }, (err, doc) =>
+    err ? next(err) : res.send(doc),
   );
 };
 
