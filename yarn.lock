@@ -6208,9 +6208,9 @@ jest-snapshot@^23.6.0:
     pretty-format "^23.6.0"
     semver "^5.5.0"
 
-jest-styled-components@6.2.2:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-6.2.2.tgz#8d69a95ca9d26b9ceab2fcccdee3795d041a1f3b"
+jest-styled-components@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-7.0.3.tgz#cc0b031f910484e68f175568682f3969ff774b2c"
   dependencies:
     css "^2.2.4"
 
